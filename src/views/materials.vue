@@ -341,7 +341,7 @@ onBeforeUnmount(() => {
             </button>
             <div v-if="searchState">
               <el-row :gutter="10">
-                <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
+                <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb-4">
                   <div class="supplierClassText">所在省份</div>
                   <el-select v-model="searchForm.province_id" placeholder="Select" size="large" clearable
                     @change="provinceChange">
@@ -349,7 +349,7 @@ onBeforeUnmount(() => {
                       :value="item.id" />
                   </el-select>
                 </el-col>
-                <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
+                <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb-4">
                   <div class="supplierClassText">所在城市</div>
                   <el-select v-model="searchForm.city_id" placeholder="Select" size="large" clearable>
                     <el-option v-for="(item, index) in citiesList" :key="index" :label="item.name" :value="item.id" />
@@ -357,34 +357,34 @@ onBeforeUnmount(() => {
                 </el-col>
               </el-row>
               <el-row :gutter="10">
-                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb10">
+                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb-4">
                   <div class="supplierClassText">材料名称</div>
                   <el-input v-model="searchForm.product_name" style="width: 100%; height: 40px" placeholder="请输入材料名称..."
                     clearable />
                 </el-col>
-                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb10">
+                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb-4">
                   <div class="supplierClassText">规格型号</div>
                   <el-input v-model="searchForm.specification" style="width: 100%; height: 40px"
                     placeholder="请输入规格型号..." clearable />
                 </el-col>
-                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb10">
+                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb-4">
                   <div class="supplierClassText">品牌名称</div>
                   <el-input v-model="searchForm.brand" style="width: 100%; height: 40px" placeholder="请输入品牌名称..."
                     clearable />
                 </el-col>
               </el-row>
               <el-row :gutter="10">
-                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb10">
+                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb-4">
                   <div class="supplierClassText">报价开始日期</div>
                   <el-date-picker v-model="searchForm.quote_time_start" type="date" placeholder="yyyy/mm/dd"
                     value-format="x" style="width: 100%; height: 40px" />
                 </el-col>
-                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb10">
+                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb-4">
                   <div class="supplierClassText">报价结束日期</div>
                   <el-date-picker v-model="searchForm.quote_time_end" type="date" placeholder="yyyy/mm/dd"
                     value-format="x" style="width: 100%; height: 40px" />
                 </el-col>
-                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb10">
+                <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="mb-4">
                   <div class="supplierClassText">价格区间</div>
                   <div class="frbc">
                     <el-input-number v-model="searchForm.price_min" :min="0"

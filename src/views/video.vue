@@ -184,7 +184,7 @@ function convertSecondsToHMS(seconds: any) {
       <div class="containerLeft">
         <!-- 筛选视频 -->
         <div class="containerClass">
-          <div class="frbc mb15">
+          <div class="frbc mb-6">
             <div class="containerClassTitle">筛选视频</div>
             <div class="containerClassNumber"><span>128</span>个视频</div>
           </div>

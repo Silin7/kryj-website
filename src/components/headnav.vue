@@ -115,7 +115,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <div class="headPositon">
+    <div :class="[windowScrollY === 0 ? 'headNoMove' : 'headMoved', 'headPositon']">
       <div class="headFlex">
         <img src="@/assets/logo/logo-21.jpg" alt="logo" class="headLogo" @click="pageJump('home')" />
         <template v-if="windowWidth > 1200">
@@ -180,16 +180,24 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss" scoped>
+.headNoMove {
+  background-image: linear-gradient(to bottom, rgba(235, 240, 251, 1) 50%, rgba(235, 240, 251, 0));
+}
+
+.headMoved {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .headPositon {
   width: 100vw;
   position: fixed;
   top: 0;
   z-index: 999;
-  background-image: linear-gradient(to bottom, rgba(235, 240, 251, 1) 50%, rgba(235, 240, 251, 0));
 
   .headFlex {
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 1.25rem;
     max-width: 1400px;
     height: 100px;
     display: flex;
@@ -216,12 +224,12 @@ onBeforeUnmount(() => {
         .menuTitle {
           color: #1f3e85;
           opacity: 0.6;
-          line-height: 26px;
+          line-height: 1.625rem;
         }
 
         .menuYanhua {
-          width: 32px;
-          height: 26px;
+          width: 2rem;
+          height: 1.625rem;
           opacity: 0;
         }
 
@@ -237,7 +245,7 @@ onBeforeUnmount(() => {
 
     .userName {
       cursor: pointer;
-      height: 26px;
+      height: 1.625rem;
       display: flex;
       align-items: center;
       color: #1f3e85;
@@ -245,7 +253,7 @@ onBeforeUnmount(() => {
 
     .headLogin {
       cursor: pointer;
-      line-height: 26px;
+      line-height: 1.625rem;
       color: #1f3e85;
       opacity: 0.6;
 
@@ -255,7 +263,7 @@ onBeforeUnmount(() => {
     }
 
     .drawerIcon {
-      font-size: 30px;
+      font-size: 1.875rem;
       color: #1f3e85;
     }
   }
@@ -263,13 +271,13 @@ onBeforeUnmount(() => {
 
 .mobiledrawer {
   .drawerTitle {
-    padding: 10px;
+    padding: 0.75rem;
     border-bottom: 1px solid #ebf0fb;
 
     p {
-      padding: 5px 10px;
-      font-size: 24px;
-      line-height: 30px;
+      padding: 0.375rem 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.875rem;
       font-weight: 700;
       color: #1f3e85;
 
@@ -280,41 +288,41 @@ onBeforeUnmount(() => {
   }
 
   .mobilecollapse {
-    padding: 10px;
+    padding: 0.75rem;
 
     .collapseItem {
-      margin-bottom: 10px;
-      padding: 10px 20px;
-      line-height: 24px;
+      margin-bottom: 0.75rem;
+      padding: 0.75rem 1.25rem;
+      line-height: 1.5rem;
       color: #1f3e85;
       opacity: 0.6;
     }
 
     .collapseActive {
       opacity: 1;
-      border-radius: 10px;
+      border-radius: 0.75rem;
       background-color: #ebf0fb;
     }
   }
 
   .mobileBtns {
-    margin-bottom: 10px;
-    padding: 10px 20px;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 1.25rem;
     display: flex;
     align-items: center;
     color: #1f3e85;
     background-color: #ebf0fb;
-    border-radius: 10px;
+    border-radius: 0.75rem;
 
     i {
-      margin-left: 10px;
+      margin-left: 0.75rem;
     }
   }
 }
 
 .popoverItem {
   cursor: pointer;
-  line-height: 40px;
+  line-height: 2.5rem;
   color: #1f3e85;
   text-align: center;
   opacity: 0.6;
@@ -365,7 +373,7 @@ onBeforeUnmount(() => {
   }
 }
 
-.el-message-box__btns > .el-button--primary {
+.el-message-box__btns>.el-button--primary {
   background-color: #1f3e85 !important;
 }
 </style>

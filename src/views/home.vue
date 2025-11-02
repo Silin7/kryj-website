@@ -40,7 +40,7 @@ function getSecpositions() {
           positionid.value = item.id
           getBannerlist()
         }
-        // 首页-系统简介banner	home-xtjj-banner
+        // 首页-公司信息banner	home-xtjj-banner
         if (item.url === 'home-xtjj-banner') {
           getSeccontentlist0(item.id)
         }
@@ -60,7 +60,7 @@ function getSecpositions() {
         if (item.url === 'home-xtcj') {
           getSeccontentlist4(item.id)
         }
-        // 首页-人材机信价格库	home-rcjx
+        // 首页-委托开发	home-rcjx
         if (item.url === 'home-rcjx') {
           getSeccontentlist5(item.id)
         }
@@ -184,7 +184,7 @@ function solutionCchange(item: any) {
   solutionCform.value = item
 }
 
-// 人材机信价格库
+// 委托开发
 const pcatePactive: any = ref(0)
 const pcateZhu: any = ref([])
 const pcateAll: any = ref([])
@@ -216,7 +216,7 @@ function pcatePchange(id: any) {
   pcateChild.value = levelone
 }
 
-// 人工智能应用
+// 产品中心
 const businessAi: any = ref([])
 const bidcostAi: any = ref([])
 
@@ -266,265 +266,116 @@ onBeforeUnmount(() => {
 <template>
   <div>
     <div class="homePage">
-      <!-- BANNER -->
-      <div class="bannerBox" @click="windowOpen(bannerData.url, bannerData.istourl)">
-        <div class="bannerAnchor">
-          <img v-if="windowWidth > 1140" :src="fileURL + bannerData.imgurl" alt="banner" class="bannerImage" />
-          <div class="bannerAbsolute">
-            <div class="bannerContent">
-              <div class="bannerTitle">聚焦新型城市基础设施建设再起航</div>
-              <div class="bannerSubtitle">
-                <span>绿色化</span>
-                <span>数字化</span>
-                <span>智能化</span>
-              </div>
-              <!-- <div class="frsc">
-              <button class="bannerJgkbtn">价格库</button>
-              <button class="bannerJjfabtn">
-                解决方案 <i class="fa fa-arrow-right" style="margin-left: 0.5rem"></i>
-              </button>
-            </div> -->
-              <div class="bannerCompany">杭州三才工程信息科技有限公司</div>
-              <div class="bannerGridbox">
-                <div class="bannerGriditem" @click.stop="pageJump('scheme')">
-                  <div class="bannerFabox frcc">
-                    <i class="fa fa-database" style="font-size: 1.25rem; color: #fff"></i>
-                  </div>
-                  <div class="bannerGridright">
-                    <div class="bannerGridtitle">人材机信价格库</div>
-                    <!-- <div class="bannerGridinfo">精准数据，助力成本管控</div> -->
-                  </div>
-                </div>
-                <div v-if="windowWidth > 768" class="bannerGridshu" />
-                <div class="bannerGriditem" @click.stop="pageJump('datasolution')">
-                  <div class="bannerFabox frcc">
-                    <i class="fa fa-calculator" style="font-size: 1.25rem; color: #fff"></i>
-                  </div>
-                  <div class="bannerGridright">
-                    <div class="bannerGridtitle">数据方案组价</div>
-                    <!-- <div class="bannerGridinfo">智能组价，优化方案设计</div> -->
-                  </div>
-                </div>
-                <div v-if="windowWidth > 768" class="bannerGridshu" />
-                <div class="bannerGriditem" @click.stop="pageJump('ai')">
-                  <div class="bannerFabox frcc">
-                    <i class="fa fa-android" style="font-size: 1.25rem; color: #fff"></i>
-                  </div>
-                  <div class="bannerGridright">
-                    <div class="bannerGridtitle">人工智能应用</div>
-                    <!-- <div class="bannerGridinfo">AI赋能，提升运行效率</div> -->
-                  </div>
-                </div>
-                <div v-if="windowWidth > 768" class="bannerGridshu" />
-                <div class="bannerGriditem" @click.stop="pageJump('video')">
-                  <div class="bannerFabox frcc">
-                    <i class="fa fa-play-circle" style="font-size: 1.25rem; color: #fff"></i>
-                  </div>
-                  <div class="bannerGridright">
-                    <div class="bannerGridtitle">视频演示</div>
-                    <!-- <div class="bannerGridinfo">直观教学，掌握核心技能</div> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- 系统简介 -->
+      <!-- homeBanner -->
+      <div class="homeBanner"></div>
+      <!-- 公司信息 -->
       <div class="featuresBox">
-        <div class="featuresImgTitleBox">
-          <!--  -->
-          <img :src="fileURL + homextjjbanner.secimg" class="featuresImg" />
-          <div class="featuresImgTitle">
-            <div class="featuresImgTitleCentent">系统简介</div>
+        <div class="featuresImgTitle">公司信息</div>
+        <div class="featuresRounded">
+          <div class="featuresRoundedItem">
+            <div class="featuresRoundedTop">
+              <div class="featuresRoundedShu"></div>
+              <div class="featuresRoundedTitle">创建背景</div>
+            </div>
+            <div class="featuresRoundedInfo">
+              公司成立于2022年，总部位于济南，聚焦医学人工智能技术研发。核心团队由临床医学、合成化学、生物信息工程、AI算法等多领域专家组成，实现跨学科技术融合。核心团队由临床医学、合成化学、生物信息工程、AI算法等多领域专家组成，实现跨学科技术融合。
+            </div>
           </div>
-        </div>
-        <div class="featuresContent">
-          <div class="featuresRounded">
-            <div class="featuresRoundedItem">
-              <div class="featuresRoundedTop">
-                <div class="featuresRoundedShu"></div>
-                <div class="featuresRoundedTitle">{{ homecjbj.title }}</div>
-              </div>
-              <div class="featuresRoundedInfo2">
-                {{ homecjbj.descriptioncontent }}
-              </div>
-              <!-- <div class="featuresRoundedInfo1">
-                当前，建筑行业正在以科技创新推动现代化转型，新一代绿色化智能化建筑材料构筑新质生产力，逐步成为推动建筑业高质量发展的重要力量之一。
-              </div>
-              <div class="featuresRoundedInfo2">
-                尤其在 “双碳背景和新型工业化建筑”
-                发展模式下，需求拉动供给的同时，创新供给也创造了新需求，市场供需将发生显著变化，具有绿色化、集成化和智能化特征的新材料新产品与新服务，已逐步迈向市场，将极大地影响生产方式、建造成本和运行管理模式的创新。
-              </div> -->
+          <div class="featuresRoundedItem">
+            <div class="featuresRoundedTop">
+              <div class="featuresRoundedShu"></div>
+              <div class="featuresRoundedTitle">涵盖范围</div>
             </div>
-            <div class="featuresRoundedItem">
-              <div class="featuresRoundedTop">
-                <div class="featuresRoundedShu"></div>
-                <div class="featuresRoundedTitle">{{ homehgfw.title }}</div>
-              </div>
-              <div class="featuresRoundedInfo2">
-                {{ homehgfw.descriptioncontent }}
-              </div>
-              <!-- <div class="featuresRoundedInfo1">
-                价格查询系统信息涵盖新技术、新材料、新工艺、新服务和造价新型要素（例如，AI、BIM、IoT、GIS、DT、VR/AR、倾斜摄影和三维扫描融合应用）。
-              </div>
-              <div class="featuresRoundedInfo2">
-                适用于绿色低碳、数字智能等高科技含量的新兴业态，以及持续提升城市基础设施韧性和既有建筑更新改造新时代
-                "好房子" 的建造需求。
-              </div> -->
+            <div class="featuresRoundedInfo">
+              技术领域‌：医学人工智能、类器官技术、多组学分析、智能药物模拟。
             </div>
-            <div class="featuresRoundedItem">
-              <div class="featuresRoundedTop">
-                <div class="featuresRoundedShu"></div>
-                <div class="featuresRoundedTitle">{{ homeyydx.title }}</div>
-              </div>
-              <div class="featuresRoundedInfo2">
-                {{ homeyydx.descriptioncontent }}
-              </div>
-              <!-- <div class="featuresRoundedInfo2">
-                新材网价格查询系统，竭诚为货物采购单位和其他有关单位提供丰富的
-                "原料"信息及其市场价格，供有关单位实施货物采购和预测工程费用参考。
-              </div> -->
+          </div>
+          <div class="featuresRoundedItem">
+            <div class="featuresRoundedTop">
+              <div class="featuresRoundedShu"></div>
+              <div class="featuresRoundedTitle">应用对象‌</div>
             </div>
-            <div class="featuresRoundedItem" style="margin-bottom: 0">
-              <div class="featuresRoundedTop">
-                <div class="featuresRoundedShu"></div>
-                <div class="featuresRoundedTitle">{{ homextcj.title }}</div>
-              </div>
-              <div class="featuresRoundedInfo2">
-                {{ homextcj.descriptioncontent }}
-              </div>
-              <!-- <div class="featuresRoundedInfo2">
-                本系统由 “杭州三才工程信息科技有限公司”
-                创建，应用过程中如有建议，请联系我们，以便进行完善。
-              </div> -->
+            <div class="featuresRoundedInfo">
+              医药企业‌：为创新药研发提供高效、精准的AI驱动解决方案；
+              科研机构‌：辅助缩短实验周期，降低研发成本；
+              临床研究团队‌：通过类器官与AI结合，提升药物验证的可靠性。
+            </div>
+          </div>
+          <div class="featuresRoundedItem">
+            <div class="featuresRoundedTop">
+              <div class="featuresRoundedShu"></div>
+              <div class="featuresRoundedTitle">系统创建‌</div>
+            </div>
+            <div class="featuresRoundedInfo">
+              医学AI药物筛选数据库‌：整合多源数据，加速靶点发现;
+              AI辅助药物验证模拟系统‌：预测药物活性与安全性，减少实验试错;
+              智能分子对接与体内模拟分析‌：优化药物设计，提升成药性;
+              将AI与类器官技术深度绑定，构建“多组学-AI-类器官”四位一体体系;
+              通过人工降噪技术提升数据质量，增强模型可靠性。
             </div>
           </div>
         </div>
       </div>
-      <!-- 人材机信价格库 -->
-      <div class="containerBox">
-        <div class="containerTitle">人材机信价格库</div>
-        <div class="containerHeng"></div>
-        <div class="containerSubBoxOut">
-          <div class="containerSubBox">
-            <div :class="pcatePactive === 0 ? 'containerSubItem containerActive' : 'containerSubItem'"
-              @click="pcatePchange(0)">
-              数字技术应用论证/数字实施方案论证
-            </div>
-            <div :class="pcatePactive === 1 ? 'containerSubItem containerActive' : 'containerSubItem'"
-              @click="pcatePchange(1)">
-              材料/设备
-            </div>
-            <div :class="pcatePactive === 2 ? 'containerSubItem containerActive' : 'containerSubItem'"
-              @click="pcatePchange(2)">
-              智能建造装备
-            </div>
-            <div :class="pcatePactive === 3 ? 'containerSubItem containerActive' : 'containerSubItem'"
-              @click="pcatePchange(3)">
-              信息化产品/服务
-            </div>
-          </div>
+      <!-- 委托开发 AI平台 -->
+      <div class="wtkfaiBox">
+        <div class="wtkfaiItem">
+          <div class="wtkfaiTitle">委托开发</div>
+          <img src="@/assets/home/wtkf.png" alt="">
         </div>
-        <div class="containerGridbox">
-          <template v-for="(item, index) in pcateZhu" :key="index">
-            <img v-if="pcatePactive === 0 && item.title === '数字技术应用论证/数字实施方案论证'" :src="fileURL + item.secimg" />
-            <img v-if="pcatePactive === 1 && item.title === '材料/设备'" :src="fileURL + item.secimg" />
-            <img v-if="pcatePactive === 2 && item.title === '智能建造装备'" :src="fileURL + item.secimg" />
-            <img v-if="pcatePactive === 3 && item.title === '信息化产品/服务'" :src="fileURL + item.secimg" />
-          </template>
-          <div class="containerGridMaod">
-            <div class="containerGridContent">
-              <div v-for="(item, index) in pcateChild" :key="index" class="containerGridItem">
-                <i :class="['fa', item.theicon]"></i>
-                <div class="containerGridimginfo">{{ item.name }}</div>
+        <div class="wtkfaiItem">
+          <img src="@/assets/home/aipt.png" alt="">
+          <div class="wtkfaiTitle">AI平台</div>
+        </div>
+      </div>
+      <!-- 产品中心 -->
+      <div class="cpzxBox">
+        <div class="cpzxContent">
+          <div class="cpzxTitle">产品中心</div>
+          <div class="cpzxHeng"></div>
+          <div class="cpzxClassbox">
+            <div class="cpzxClassitem">
+              <div class="cpzxClassitemfa frcc">
+                <i class=" fa fa-github-alt"></i>
               </div>
+              <div class="cpzxClassitemtext">AI 驱动药物靶点发现数据库</div>
+            </div>
+            <div class="cpzxClassitem">
+              <div class="cpzxClassitemfa frcc">
+                <i class=" fa fa-medkit"></i>
+              </div>
+              <div class="cpzxClassitemtext">小分子创新药研发</div>
+            </div>
+            <div class="cpzxClassitem">
+              <div class="cpzxClassitemfa frcc">
+                <i class=" fa fa-subscript"></i>
+              </div>
+              <div class="cpzxClassitemtext">生物制剂研发辅助系统</div>
+            </div>
+            <div class="cpzxClassitem">
+              <div class="cpzxClassitemfa frcc">
+                <i class=" fa fa-heartbeat"></i>
+              </div>
+              <div class="cpzxClassitemtext">老药新用筛选平台</div>
+            </div>
+            <div class="cpzxClassitem">
+              <div class="cpzxClassitemfa frcc">
+                <i class=" fa fa-contao"></i>
+              </div>
+              <div class="cpzxClassitemtext">药物晶型预测与筛选系统</div>
+            </div>
+            <div class="cpzxClassitem">
+              <div class="cpzxClassitemfa frcc">
+                <i class=" fa fa-h-square"></i>
+              </div>
+              <div class="cpzxClassitemtext">类器官多组学数据 AI 整合分析工具</div>
             </div>
           </div>
         </div>
       </div>
-      <!-- 数字化解决方案 -->
-      <div class="solutionsBox">
-        <div class="solutionsCotent">
-          <div class="solutionsTitle">数字化解决方案</div>
-          <div class="solutionsHeng"></div>
-          <div class="solutionsSubBoxOut">
-            <div class="solutionsSubBox">
-              <div v-for="(item, index) in solutionParent" :key="index"
-                :class="['solutionsSubItem', item.id === solutionPactive ? 'solutionsActive' : '']"
-                @click="solutionPchange(item)">
-                {{ item.name }}
-              </div>
-            </div>
-          </div>
-          <div class="solutionsSubBoxOut">
-            <div class="solutionsSubBox">
-              <template v-for="(item, index) in solutionChild" :key="index">
-                <div v-if="item.parent_id === solutionPactive" :class="[
-                  'solutionsSubItem',
-                  item.id === solutionCactive ? 'solutionsActive' : '',
-                ]" @click="solutionCchange(item)">
-                  {{ item.name }}
-                </div>
-              </template>
-            </div>
-          </div>
-          <div class="solutionsImg">
-            <img :src="solutionCform.img" alt="" style="width: 100%; height: 44rem" />
-            <div class="solutionsImgTitleMoud">
-              <div class="solutionsImgTitle1">{{ solutionCform.description1 }}</div>
-              <div class="solutionsImgTitle2">{{ solutionCform.name }}</div>
-              <div class="solutionsImgTitle3">{{ solutionCform.description2 }}</div>
-            </div>
-            <div class="solutionsImgInfo">
-              <p>{{ solutionCform.description3 }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- 人工智能应用 -->
-      <div class="aiBox">
-        <div class="aiContent">
-          <div class="aiTitle">人工智能应用</div>
-          <div class="aiHeng"></div>
-          <div class="aiSubbox">
-            <div class="aiFabox frcc">
-              <i class="fa fa-cogs"></i>
-            </div>
-            <div class="aiSubtitle">业务管理+AI赋能组价</div>
-          </div>
-          <div class="aiClassbox">
-            <div v-for="(item, index) in businessAi" :key="index" class="aiClassitem" @click="pageJump('ai_detail', {
-              aixqid: item.id
-            })">
-              <div class="aiClassitemfa frcc">
-                <i class="fa fa-paint-brush"></i>
-              </div>
-              <div class="aiClassitemtext">{{ item.name }}</div>
-            </div>
-          </div>
-          <div class="aiSubbox">
-            <div class="aiFabox2 frcc">
-              <i class="fa fa-calculator"></i>
-            </div>
-            <div class="aiSubtitle">招标造价+AI应用服务</div>
-          </div>
-          <div class="aiClassbox">
-            <div v-for="(item, index) in bidcostAi" :key="index" class="aiClassitem" @click="pageJump('ai_detail', {
-              aixqid: item.id
-            })">
-              <div class="aiClassitemfa2 frcc">
-                <i class="fa fa-check-circle"></i>
-              </div>
-              <div class="aiClassitemtext">{{ item.name }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- 鸣谢单位  -->
+      <!-- 合作单位  -->
       <div class="mxBox">
         <div class="mxContent">
-          <div class="mxTitle">鸣谢单位</div>
+          <div class="mxTitle">合作单位</div>
           <div class="mxHeng"></div>
           <div class="mxInfo">感谢以下单位对本平台的大力支持与合作</div>
           <div class="mxClassbox">
@@ -557,615 +408,157 @@ onBeforeUnmount(() => {
   background-color: #f9fafb;
   overflow-x: hidden;
 
-  .bannerBox {
+  .homeBanner {
     width: 100vw;
-    height: 100%;
-    background-color: #012060;
-
-    .bannerAnchor {
-      margin: 0 auto;
-      position: relative;
-      width: 100%;
-      max-width: 1400px;
-
-      @media (min-width: 992px) {
-        height: 25.5rem;
-      }
-
-      @media (max-width: 992px) and (min-width: 768px) {
-        height: 30.75rem;
-      }
-
-      @media (max-width: 768px) {
-        height: 36.25rem;
-      }
-
-      .bannerImage {
-        position: absolute;
-        right: 2rem;
-        top: 0;
-        z-index: 0;
-        width: auto;
-        max-width: 80%;
-        height: 80%;
-
-        @media (max-width: 768px) {
-          height: auto;
-          right: 0;
-          top: 8rem;
-        }
-      }
-
-      .bannerAbsolute {
-        position: absolute;
-        z-index: 1;
-        width: 100%;
-
-        .bannerContent {
-          margin: 0 auto;
-          padding: 2rem;
-          width: 100%;
-          max-width: 1400px;
-
-          @media (max-width: 768px) {
-            padding: 1rem;
-          }
-
-          .bannerTitle {
-            margin-bottom: 2rem;
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: #fff;
-            font-weight: 700;
-
-            @media (max-width: 768px) {
-              margin-bottom: 1.5rem;
-            }
-          }
-
-          .bannerSubtitle {
-            margin-bottom: 4rem;
-            font-size: clamp(1.5rem, 4vw, 1.8rem);
-            line-height: 3rem;
-            font-weight: 500;
-            color: rgb(255 255 255 / 0.9);
-
-            @media (max-width: 768px) {
-              margin-bottom: 2rem;
-            }
-
-            span {
-              margin-right: 2rem;
-
-              @media (max-width: 768px) {
-                margin-right: 1rem;
-              }
-            }
-
-            span:last-child {
-              margin-right: 0;
-            }
-          }
-
-          // .bannerJgkbtn {
-          //   padding: 0.75rem 2rem;
-          //   color: #fff;
-          //   background-color: rgb(22 93 255);
-          //   border-radius: 9999px;
-          //   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-          // }
-
-          // .bannerJjfabtn {
-          //   margin-left: 20px;
-          //   padding: 0.75rem 2rem;
-          //   color: #fff;
-          //   background-color: rgba(255 255 255 / 0.1);
-          //   border: 1px solid rgba(255 255 255 / 0.3);
-          //   border-radius: 9999px;
-          // }
-
-          .bannerCompany {
-            margin-bottom: 1.5rem;
-            font-size: clamp(1.125rem, 4vw, 1.25rem);
-            line-height: 1.25rem;
-            color: rgba(255 255 255 / 0.7);
-          }
-
-          .bannerGridbox {
-            overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(103, 188, 255, 0.3);
-            border-radius: 1rem;
-
-            .bannerGriditem {
-              padding: 1.5rem;
-              display: flex;
-              align-items: center;
-
-              @media (min-width: 992px) {
-                width: calc(25% - 1px);
-              }
-
-              @media (max-width: 992px) and (min-width: 768px) {
-                width: calc(50% - 1px);
-              }
-
-              @media (max-width: 768px) {
-                padding: 1rem;
-                width: 100%;
-              }
-
-              .bannerFabox {
-                width: 3rem;
-                height: 3rem;
-                background-color: rgb(22 93 255 / 0.1);
-                border-radius: 0.5rem;
-                --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-                --tw-shadow-colored:
-                  0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-                box-shadow:
-                  var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
-                  var(--tw-shadow);
-              }
-
-              .bannerGridright {
-                margin-left: 1rem;
-
-                .bannerGridtitle {
-                  font-size: clamp(1.125rem, 4vw, 1.25rem);
-                  // font-size: 1.25rem;
-                  line-height: 1.75rem;
-                  font-weight: 700;
-                  color: #fff;
-                }
-
-                .bannerGridinfo {
-                  font-size: 1rem;
-                  line-height: 1.5rem;
-                  color: rgba(255 255 255 / 0.8);
-                }
-              }
-            }
-
-            .bannerGriditem:hover {
-              @media (min-width: 768px) {
-                cursor: pointer;
-                box-shadow:
-                  0 10px 15px -3px rgb(0 0 0 / 0.1),
-                  0 4px 6px -4px rgb(0 0 0 / 0.1);
-                animation: jumpUpwards 300ms ease-in-out forwards;
-              }
-            }
-
-            .bannerGridshu {
-              width: 1px;
-              height: 5rem;
-              background-image: linear-gradient(to bottom, #1627ff30);
-            }
-          }
-        }
-      }
-    }
+    height: 100vh;
+    background: url(@/assets/home/dexbanner.png) no-repeat center top;
+    background-size: auto;
+    background-size: cover;
   }
 
   .featuresBox {
-    margin: 1rem auto 0;
-    width: 100%;
-
-    .featuresImgTitleBox {
-      position: relative;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-
-      .featuresImg {
-        width: 100%;
-        height: 200px;
-      }
-
-      .featuresImgTitle {
-        position: absolute;
-        bottom: 0;
-        padding: 0 2rem;
-        width: 100%;
-        max-width: 1400px;
-        height: 120px;
-
-        @media (max-width: 768px) {
-          padding: 0;
-        }
-
-        .featuresImgTitleCentent {
-          margin: 0 auto;
-          padding-left: 1.5rem;
-          width: 90%;
-          height: 120px;
-          font-size: clamp(1.5rem, 4vw, 2.5rem);
-          line-height: 120px;
-          font-weight: 700;
-          color: #fff;
-          background-color: rgba(1, 98, 105, 0.5);
-
-          @media (max-width: 768px) {
-            width: calc(100% - 2rem);
-          }
-        }
-      }
-    }
-
-    .featuresContent {
-      margin: 0 auto;
-      position: relative;
-      padding: 0 2rem;
-      width: 100%;
-      max-width: 1400px;
-
-      @media (max-width: 768px) {
-        padding: 0;
-      }
-
-      .featuresRounded {
-        margin: 0 auto;
-        padding: 2.5rem;
-        width: 90%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        border-radius: 0 0 1rem 1rem;
-        box-sizing:
-          0 10px 15px -3px rgb(0 0 0 / 0.1),
-          0 4px 6px -4px rgb(0 0 0 / 0.1);
-        background-color: rgba(230, 250, 250, 0.5);
-
-        @media (max-width: 768px) {
-          padding: 1rem;
-          width: calc(100% - 2rem);
-        }
-
-        .featuresRoundedItem {
-          margin-bottom: 2.5rem;
-          width: 100%;
-
-          .featuresRoundedTop {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-
-            .featuresRoundedShu {
-              width: 0.5rem;
-              height: 2rem;
-              background-color: #165dff;
-              border-radius: 0.25rem;
-
-              @media (max-width: 768px) {
-                height: 1.5rem;
-              }
-            }
-
-            .featuresRoundedTitle {
-              padding-left: 1rem;
-              font-size: clamp(1.25rem, 4vw, 1.5rem);
-              line-height: 2rem;
-              font-weight: 700;
-              color: rgb(1 32 96);
-            }
-          }
-
-          .featuresRoundedInfo1 {
-            margin-bottom: 1rem;
-            font-size: clamp(1rem, 4vw, 1.25rem);
-            color: rgb(75 85 99);
-          }
-
-          .featuresRoundedInfo2 {
-            font-size: clamp(1rem, 4vw, 1.25rem);
-            color: rgb(75 85 99);
-          }
-        }
-      }
-    }
-  }
-
-  .containerBox {
-    position: relative;
-    margin: 6rem auto 0;
-    padding: 0 2rem;
+    margin: 0 auto;
     width: 100%;
     max-width: 1400px;
 
+
+    .featuresImgTitle {
+      margin: 0 auto;
+      padding-left: 1.5rem;
+      width: 100%;
+      height: 8rem;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      line-height: 8rem;
+      font-weight: 700;
+      color: #1f3e85;
+      background-color: #ebf0fb;
+
+      @media (max-width: 768px) {
+        padding-left: 1rem;
+        height: 5rem;
+        line-height: 5rem;
+      }
+    }
+
+    .featuresRounded {
+      margin: 0 auto;
+      padding: 2.5rem;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      border-radius: 0 0 1rem 1rem;
+      box-sizing:
+        0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
+      background-color: #f1f4f9;
+
+      @media (max-width: 768px) {
+        padding: 1rem 1.5rem;
+      }
+
+      .featuresRoundedItem {
+        margin-bottom: 2.5rem;
+        width: 100%;
+
+        .featuresRoundedTop {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1.5rem;
+
+          .featuresRoundedShu {
+            width: 0.5rem;
+            height: 2rem;
+            background-color: #1f3e85;
+            border-radius: 0.25rem;
+
+            @media (max-width: 768px) {
+              height: 1.5rem;
+            }
+          }
+
+          .featuresRoundedTitle {
+            padding-left: 1rem;
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
+            line-height: 2rem;
+            font-weight: 700;
+            color: #1f3e85;
+          }
+        }
+
+        .featuresRoundedInfo {
+          font-size: clamp(1rem, 4vw, 1.25rem);
+          color: #4b5563;
+        }
+      }
+    }
+  }
+
+  .wtkfaiBox {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
     @media (max-width: 768px) {
-      margin: 4rem 0;
       padding: 0 1rem;
     }
 
-    .containerTitle {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-weight: 700;
-      text-align: center;
-      color: rgb(1 32 96);
-    }
-
-    .containerHeng {
-      margin: 1rem auto 2.5rem;
-      width: 5rem;
-      height: 0.25rem;
-      border-radius: 9999px;
-      background-color: rgb(22 93 255);
-    }
-
-    .containerSubBoxOut {
-      margin-bottom: 1.5rem;
+    .wtkfaiItem {
+      cursor: pointer;
+      width: calc(50% - 2rem);
+      background-color: #ebf0fb;
+      border-radius: 10px;
       display: flex;
-      justify-content: center;
-
-      .containerSubBox {
-        overflow-x: auto;
-        display: flex;
-        flex-wrap: nowrap;
-
-        .containerSubItem {
-          flex-shrink: 0;
-          margin: 0 0.5rem;
-          padding: 0.5rem 1rem;
-          line-height: 2rem;
-          color: rgb(1 32 96);
-          background-color: #fff;
-          border-radius: 0.5rem;
-          box-shadow:
-            0 10px 15px -3px rgb(0 0 0 / 0.1),
-            0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-          @media (max-width: 768px) {
-            margin: 0 0.25rem;
-          }
-        }
-
-        .containerSubItem:first-child {
-          margin-left: 0;
-        }
-
-        .containerSubItem:last-child {
-          margin-right: 0;
-        }
-
-        .containerSubItem:hover {
-          @media (min-width: 768px) {
-            cursor: pointer;
-            background-color: rgb(243 244 246);
-          }
-        }
-      }
-
-      .containerActive {
-        color: #fff !important;
-        background-color: #165dff !important;
-      }
-    }
-
-    .containerGridbox {
-      position: relative;
-
-      img {
-        width: 100%;
-        height: 700px;
-        border-radius: 1rem;
-      }
-
-      .containerGridMaod {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 2rem 2rem 1rem 2rem;
-        border-radius: 1rem 1rem 0 0;
-        background-color: rgb(1 32 96 / 0.4);
-
-        @media (max-width: 768px) {
-          padding: 1rem 1rem 0 1rem;
-        }
-
-        .containerGridContent {
-          display: flex;
-          flex-wrap: wrap;
-
-          .containerGridItem {
-            margin: 0 1rem 1rem 0;
-            display: flex;
-            align-items: center;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-
-            @media (max-width: 768px) {
-              margin-right: 0;
-              padding: 0.5rem;
-              width: 100%;
-            }
-
-            i {
-              font-size: 1.25rem;
-              color: #165dff;
-              margin-right: 0.75rem;
-            }
-
-            .containerGridimginfo {
-              font-size: clamp(1rem, 4vw, 1.25rem);
-              line-height: 2rem;
-              font-weight: 500;
-              color: #fff;
-            }
-          }
-
-          .containerGridItem:hover {
-            @media (min-width: 768px) {
-              cursor: pointer;
-              background-color: rgb(255 255 255 / 0.1);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .solutionsBox {
-    margin: 6rem auto 0;
-    padding: 2.5rem;
-    width: 100%;
-    background-color: rgb(240 247 255 / 1);
-
-    @media (max-width: 768px) {
-      margin: 4rem auto 0;
-      padding: 2.5rem 0;
-    }
-
-    .solutionsCotent {
-      margin: 0 auto;
-      position: relative;
-      padding: 0 2rem;
-      width: 100%;
-      max-width: 1400px;
+      flex-flow: column;
+      align-items: center;
 
       @media (max-width: 768px) {
-        padding: 0 1em;
-      }
-
-      .solutionsTitle {
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
-        font-weight: 700;
-        text-align: center;
-        color: rgb(1 32 96);
-      }
-
-      .solutionsHeng {
-        margin: 1rem auto 2.5rem;
-        width: 5rem;
-        height: 0.25rem;
-        border-radius: 9999px;
-        background-color: rgb(22 93 255);
-      }
-
-      .solutionsSubBoxOut {
-        margin-bottom: 2rem;
-        display: flex;
-        justify-content: center;
-
-        .solutionsSubBox {
-          overflow-x: auto;
-          display: flex;
-          flex-wrap: nowrap;
-
-          div {
-            flex-shrink: 0;
-          }
-
-          .solutionsSubItem {
-            margin: 0 0.5rem;
-            line-height: 2rem;
-            color: rgb(1 32 96);
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            background-color: #fff;
-            box-shadow:
-              0 10px 15px -3px rgb(0 0 0 / 0.1),
-              0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-            @media (max-width: 768px) {
-              margin: 0 0.25rem;
-            }
-          }
-
-          // .solutionsSubItem:first-child {
-          //   margin-left: 0;
-          // }
-
-          // .solutionsSubItem:last-child {
-          //   margin-right: 0;
-          // }
-
-          .solutionsSubItem:hover {
-            @media (min-width: 768px) {
-              cursor: pointer;
-              background-color: rgb(243 244 246);
-            }
-          }
-        }
-
-        .solutionsActive {
-          color: #fff !important;
-          background-color: #165dff !important;
-        }
-      }
-
-      .solutionsImg {
-        overflow: hidden;
-        position: relative;
         width: 100%;
-        height: 700px;
-        border-radius: 1rem;
-        box-shadow:
-          0 10px 15px -3px rgb(0 0 0 / 0.1),
-          0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-        .solutionsImgTitleMoud {
-          position: absolute;
-          top: 2rem;
-          left: 0;
-          z-index: 2;
-          width: 100%;
+        &:first-child {
+          margin-bottom: 1rem;
+        }
+      }
 
-          .solutionsImgTitle1 {
-            margin-bottom: 1rem;
-            font-size: clamp(1.25rem, 4vw, 1.5rem);
-            line-height: 2rem;
-            font-weight: 500;
-            text-align: center;
-            color: rgb(1 32 96);
-          }
+      @media (min-width: 768px) {
 
-          .solutionsImgTitle2 {
-            margin-bottom: 1rem;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            line-height: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            color: rgb(1 32 96);
-          }
+        &:first-child {
+          margin: 6rem 0 12rem;
 
-          .solutionsImgTitle3 {
-            margin-bottom: 1rem;
-            font-size: clamp(1rem, 4vw, 1.25rem);
-            line-height: 1.75rem;
-            text-align: center;
-            color: rgb(1 32 96);
+          .wtkfaiTitle {
+            border-bottom: 1px solid #fff;
           }
         }
 
-        .solutionsImgInfo {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          z-index: 2;
-          width: 100%;
-          padding: 2.5rem;
-          border-top: 1px solid rgb(229 231 235);
-          background-color: rgb(255 255 255 / 0.8);
+        &:last-child {
+          margin: 12rem 0 6rem;
 
-          @media (max-width: 768px) {
-            padding: 1.5rem 1rem;
-          }
-
-          p {
-            text-align: center;
-            line-height: 1.5rem;
-            color: rgb(1 32 96);
+          .wtkfaiTitle {
+            border-top: 1px solid #fff;
           }
         }
+      }
+
+      .wtkfaiTitle {
+        width: 100%;
+        padding: 1rem 0;
+        text-align: center;
+        color: #1f3e85;
+        font-weight: 700;
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+
+      img {
+        width: 60%;
       }
     }
   }
 
-  .aiBox {
+  .cpzxBox {
     padding: 4rem 2.5rem;
     width: 100%;
     background-color: rgba(255, 255, 255, 1);
@@ -1174,7 +567,7 @@ onBeforeUnmount(() => {
       padding: 4rem 0;
     }
 
-    .aiContent {
+    .cpzxContent {
       position: relative;
       margin: 0 auto;
       padding: 0 2rem;
@@ -1185,61 +578,22 @@ onBeforeUnmount(() => {
         padding: 0 1rem;
       }
 
-      .aiTitle {
+      .cpzxTitle {
         font-size: clamp(1.5rem, 4vw, 2.5rem);
         font-weight: 700;
         text-align: center;
         color: rgb(1 32 96);
       }
 
-      .aiHeng {
+      .cpzxHeng {
         margin: 1rem auto 2.5rem;
         width: 5rem;
         height: 0.25rem;
         border-radius: 9999px;
-        background-color: rgb(22 93 255);
+        background-color: #1f3e85;
       }
 
-      .aiSubbox {
-        margin-bottom: 2rem;
-        display: flex;
-        align-items: center;
-
-        .aiFabox {
-          margin-right: 1rem;
-          width: 3rem;
-          height: 3rem;
-          background-color: rgba(22 93 255 / 0.1);
-          border-radius: 9999px;
-
-          i {
-            font-size: 1.25rem;
-            color: #165dff;
-          }
-        }
-
-        .aiFabox2 {
-          margin-right: 1rem;
-          width: 3rem;
-          height: 3rem;
-          background-color: rgb(114 46 209 / 0.1);
-          border-radius: 9999px;
-
-          i {
-            font-size: 1.25rem;
-            color: #722ed1;
-          }
-        }
-
-        .aiSubtitle {
-          font-size: clamp(1.25rem, 4vw, 1.5rem);
-          line-height: 2rem;
-          font-weight: 700;
-          color: rgb(1 32 96);
-        }
-      }
-
-      .aiClassbox {
+      .cpzxClassbox {
         margin-bottom: 2.5rem;
         width: calc(100% + 1rem);
         display: flex;
@@ -1250,7 +604,7 @@ onBeforeUnmount(() => {
           margin-bottom: 1.5rem;
         }
 
-        .aiClassitem {
+        .cpzxClassitem {
           margin: 0 1rem 1rem 0;
           padding: 1.25rem;
           width: calc(33.3% - 1rem);
@@ -1266,7 +620,7 @@ onBeforeUnmount(() => {
             width: calc(50% - 1rem);
           }
 
-          .aiClassitemfa {
+          .cpzxClassitemfa {
             margin-bottom: 1rem;
             width: 4rem;
             height: 4rem;
@@ -1280,11 +634,11 @@ onBeforeUnmount(() => {
 
             i {
               font-size: 1.5rem;
-              color: #165dff;
+              color: #1f3e85;
             }
           }
 
-          .aiClassitemfa2 {
+          .cpzxClassitemfa2 {
             margin-bottom: 1rem;
             width: 4rem;
             height: 4rem;
@@ -1302,7 +656,7 @@ onBeforeUnmount(() => {
             }
           }
 
-          .aiClassitemtext {
+          .cpzxClassitemtext {
             line-height: 1.5rem;
             font-weight: 500;
             text-align: center;
@@ -1310,7 +664,7 @@ onBeforeUnmount(() => {
           }
         }
 
-        .aiClassitem:hover {
+        .cpzxClassitem:hover {
           @media (min-width: 768px) {
             cursor: pointer;
             box-shadow:
@@ -1321,7 +675,7 @@ onBeforeUnmount(() => {
         }
       }
 
-      .aiClassbox:last-child {
+      .cpzxClassbox:last-child {
         margin-bottom: 0rem;
       }
     }
@@ -1361,14 +715,14 @@ onBeforeUnmount(() => {
         width: 5rem;
         height: 0.25rem;
         border-radius: 9999px;
-        background-color: rgb(22 93 255);
+        background-color: #1f3e85;
       }
 
       .mxInfo {
         margin: 1rem auto 2.5rem;
         text-align: center;
         max-width: 42rem;
-        color: rgb(75 85 99);
+        color: #4b5563;
       }
 
       .mxClassbox {
@@ -1440,7 +794,7 @@ onBeforeUnmount(() => {
 
   .pyBox {
     position: relative;
-    margin: 6rem auto 0;
+    margin: 5rem auto 0;
     padding: 0 2rem 4rem;
     width: 100%;
     max-width: 1400px;
@@ -1462,7 +816,7 @@ onBeforeUnmount(() => {
       width: 5rem;
       height: 0.25rem;
       border-radius: 9999px;
-      background-color: rgb(22 93 255);
+      background-color: #1f3e85;
     }
 
     .pyClassbox {
