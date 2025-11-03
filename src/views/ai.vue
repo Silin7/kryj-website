@@ -100,41 +100,25 @@ onBeforeUnmount(() => {
   <div>
     <div class="aiPage">
       <!-- BANNER -->
-      <div class="bannerBox" @click="windowOpen(bannerData.url, bannerData.istourl)">
+      <div class="aibannerBox" @click="windowOpen(bannerData.url, bannerData.istourl)">
         <img :src="fileURL + bannerData.imgurl" alt="" />
-        <div class="bannerAbsolute">
-          <div class="bannerContent">
-            <div class="bannerTitle">{{ bannerData.maintitle }}</div>
-            <div v-if="bannerData.description" class="bannerSubtitle">
+        <div class="aibannerAbsolute">
+          <div class="aibannerContent">
+            <div class="aibannerTitle">{{ bannerData.maintitle }}</div>
+            <div v-if="bannerData.description" class="aibannerSubtitle">
               {{ bannerData.description }}
-            </div>
-            <div class="frsc">
-              <button v-if="bannerData.leftbtn && !bannerData.leftbtn_url" class="bannerLeftBtn">
-                {{ bannerData.leftbtn }}
-              </button>
-              <button v-if="bannerData.leftbtn && bannerData.leftbtn_url" class="bannerLeftBtn"
-                @click.stop="pageJump(bannerData.leftbtn_url)">
-                {{ bannerData.leftbtn }}
-              </button>
-              <button v-if="bannerData.rightbtn && !bannerData.rightbtn_url" class="bannerRightBtn">
-                {{ bannerData.rightbtn }}
-              </button>
-              <button v-if="bannerData.rightbtn && bannerData.rightbtn_url" class="bannerRightBtn"
-                @click.stop="pageJump(bannerData.rightbtn_url)">
-                {{ bannerData.rightbtn }}
-              </button>
             </div>
           </div>
         </div>
       </div>
       <!-- 介绍区域  -->
-      <!-- <div class="introaiOut">
+      <div class="introaiOut">
         <div class="introaiBox">
           <p class="introaiText">
             随着新一轮科技革命和产业变革深入发展，人工智能（AI）技术突飞猛进，已成为提升产业能级的重要引擎。目前，以DeepSeeK、通义千问为代表的国产大模型正在快速发展与商业应用，人工智能（AI）将逐步渗透到各类行业。建筑业探索应用也将是必由之路，以数据、算法和算力为核心要素，驱动工程设计、工程施工和运营维护多维度创新应用，可实现优化资源配置、提升生产效率和创新组织管理新范式，为产业转型发展注入新动能。
           </p>
         </div>
-      </div> -->
+      </div>
       <!-- 人工智能应用 -->
       <div class="applicationOut">
         <div class="applicationBox">
@@ -143,28 +127,13 @@ onBeforeUnmount(() => {
           <div class="applicationClassbox">
             <div v-for="(item, index) in businessAi" :key="index" class="applicationClassitem">
               <div class="applicationClassitemfa frcc">
-                <i :class="item.icon"></i>
+                <i class="fa fa-cog"></i>
+                <!-- <i :class="item.icon"></i> -->
               </div>
               <div class="applicationClassitemtext">{{ item.name }}</div>
               <!-- <div class="applicationClassiteminfo">
                 基于BIM模型实现工程量精准计算与动态成本管控
               </div> -->
-              <button @click="pageJump('ai_detail', {
-                aixqid: item.id
-              })">立即体验</button>
-            </div>
-          </div>
-        </div>
-        <div class="applicationBox" style="margin-top: 2.5rem">
-          <div class="applicationTitle">招标造价+AI应用服务</div>
-          <div class="applicationHeng"></div>
-          <div class="applicationClassbox">
-            <div v-for="(item, index) in bidcostAi" :key="index" class="applicationClassitem">
-              <div class="applicationClassitemfa frcc">
-                <i :class="item.icon"></i>
-              </div>
-              <div class="applicationClassitemtext">{{ item.name }}</div>
-              <!-- <div class="applicationClassiteminfo">AI自动复核工程文本，减少人为错误</div> -->
               <button @click="pageJump('ai_detail', {
                 aixqid: item.id
               })">立即体验</button>
@@ -211,32 +180,122 @@ onBeforeUnmount(() => {
   min-height: calc(100vh - 120px);
   background-color: #f9fafb;
 
+  .aibannerBox {
+    position: relative;
+    padding-top: 100px;
+    width: 100vw;
+    height: 550px;
+
+    @media (max-width: 768px) {
+      padding-top: 100px;
+    }
+
+    img {
+      width: 100vw;
+      height: 450px;
+    }
+
+    .aibannerAbsolute {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 100vw;
+
+      .aibannerContent {
+        margin: 0 auto;
+        padding: 100px 2rem 0;
+        width: 100%;
+        max-width: 1400px;
+        height: 550px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+
+        .aibannerTitle {
+          margin-bottom: 1.5rem;
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          line-height: 1.25;
+          color: rgb(255 255 255);
+        }
+
+        .aibannerSubtitle {
+          margin-bottom: 2rem;
+          max-width: 60rem;
+          font-size: clamp(1rem, 4vw, 1.25rem);
+          font-weight: 500;
+          color: rgb(255 255 255 / 0.9);
+        }
+
+        .aibannerLeftBtn {
+          padding: 0.75rem 2rem;
+          color: #fff;
+          background-color: #1f3e85;
+          border-radius: 9999px;
+          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+          @media (max-width: 768px) {
+            padding: 0.75rem 1.5rem;
+          }
+        }
+
+        .aibannerLeftBtn:hover {
+          @media (min-width: 768px) {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 10px 0 #1f3e85;
+          }
+        }
+
+        .aibannerRightBtn {
+          margin-left: 20px;
+          padding: 0.75rem 2rem;
+          color: #fff;
+          background-color: rgba(255 255 255 / 0.2);
+          border: 1px solid rgba(255 255 255 / 0.3);
+          border-radius: 9999px;
+
+          @media (max-width: 768px) {
+            padding: 0.75rem 1.5rem;
+          }
+        }
+
+        .aibannerRightBtn:hover {
+          @media (min-width: 768px) {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 10px 0 rgba(255 255 255 / 0.2);
+          }
+        }
+      }
+    }
+  }
+
   .introaiOut {
     padding: 6rem 1rem;
     width: 100%;
 
     @media (max-width: 768px) {
-      padding: 1rem;
+      padding: 2rem 1rem;
     }
 
     .introaiBox {
       position: relative;
       margin: 0 auto;
-      padding: 1rem;
+      padding: 2rem;
       width: 100%;
       max-width: 1400px;
       background-color: #fff;
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
       border-radius: 1rem;
 
-      @media (min-width: 992px) {
-        padding: 2.5rem;
+      @media (max-width: 768px) {
+        padding: 1rem;
       }
 
       .introaiText {
         font-size: clamp(1rem, 4vw, 1.25rem);
         line-height: 1.75rem;
-        color: rgb(75 85 99);
+        color: #4b5563;
       }
     }
   }
@@ -261,7 +320,7 @@ onBeforeUnmount(() => {
         font-size: clamp(1.5rem, 4vw, 2.5rem);
         font-weight: 700;
         text-align: center;
-        color: rgb(1 32 96);
+        color: #1f3e85;
       }
 
       .applicationHeng {
@@ -269,7 +328,7 @@ onBeforeUnmount(() => {
         width: 5rem;
         height: 0.25rem;
         border-radius: 9999px;
-        background-color: rgb(22 93 255);
+        background-color: #1f3e85;
       }
 
       .applicationClassbox {
@@ -299,6 +358,30 @@ onBeforeUnmount(() => {
             margin: 0 0 1rem 0;
           }
 
+          &:last-child {
+            @media (max-width: 768px) {
+              margin-bottom: 0;
+            }
+          }
+
+          &:hover {
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            animation: jumpUpwards 300ms ease-in-out forwards;
+
+            .applicationClassitemfa {
+              opacity: 1;
+            }
+
+            .applicationClassitemtext {
+              opacity: 1;
+            }
+
+            button {
+              opacity: 1;
+            }
+          }
+
           .applicationClassitemfa {
             margin-bottom: 1rem;
             width: 4rem;
@@ -307,7 +390,12 @@ onBeforeUnmount(() => {
             line-height: 2rem;
             border-radius: 0.75rem;
             color: #fff;
-            background-image: linear-gradient(to bottom right, #60a5fa, #4f46e5);
+            background-color: #1f3e85;
+            opacity: 0.6;
+
+            @media (max-width: 768px) {
+              opacity: 1;
+            }
           }
 
           .applicationClassitemtext {
@@ -315,10 +403,12 @@ onBeforeUnmount(() => {
             font-size: 1.25rem;
             line-height: 1.75rem;
             font-weight: 700;
-            color: rgb(1 32 96);
+            color: #1f3e85;
+            opacity: 0.6;
 
             @media (max-width: 768px) {
-              font-size: 1.125rem;
+              // font-size: 1.125rem;
+              opacity: 1;
             }
           }
 
@@ -326,32 +416,22 @@ onBeforeUnmount(() => {
             text-align: center;
             margin-bottom: 1rem;
             line-height: 1.5rem;
-            color: rgb(75 85 99);
+            color: #4c659d;
           }
 
           button {
             padding: 0.5rem 1.5rem;
             line-height: 1.5rem;
             color: #fff;
-            background-color: rgb(22 93 255);
+            background-color: #1f3e85;
             border-radius: 0.5rem;
+            opacity: 0.6;
+
+            @media (max-width: 768px) {
+              opacity: 1;
+            }
           }
         }
-
-        .applicationClassitem:last-child {
-          @media (max-width: 768px) {
-            margin-bottom: 0;
-          }
-        }
-
-        .applicationClassitem:hover {
-          @media (min-width: 768px) {
-            cursor: pointer;
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            animation: jumpUpwards 300ms ease-in-out forwards;
-          }
-        }
-
       }
     }
   }
@@ -372,7 +452,7 @@ onBeforeUnmount(() => {
       font-size: clamp(1.5rem, 4vw, 2.5rem);
       font-weight: 700;
       text-align: center;
-      color: rgb(1 32 96);
+      color: #1f3e85;
     }
 
     .caseHeng {
@@ -380,14 +460,14 @@ onBeforeUnmount(() => {
       width: 5rem;
       height: 0.25rem;
       border-radius: 9999px;
-      background-color: rgb(22 93 255);
+      background-color: #1f3e85;
     }
 
     .caseInfo {
       margin: 1rem auto 4rem;
       text-align: center;
       max-width: 42rem;
-      color: rgb(75 85 99);
+      color: #4c659d;
 
       @media (max-width: 768px) {
         margin: 1rem auto 2.5rem;
@@ -446,7 +526,7 @@ onBeforeUnmount(() => {
               font-size: 0.875rem;
               line-height: 1.25rem;
               font-weight: 500;
-              color: rgb(22 93 255);
+              color: #1f3e85;
               background-color: rgb(22 93 255 / 0.1);
               border-radius: 9999px;
             }
@@ -468,19 +548,19 @@ onBeforeUnmount(() => {
             font-size: 1.25rem;
             line-height: 1.75rem;
             font-weight: 700;
-            color: rgb(1 32 96);
+            color: #1f3e85;
           }
 
           .caseClassiteminfo {
             margin-bottom: 1rem;
             line-height: 1.5rem;
-            color: rgb(75 85 99);
+            color: #4c659d;
           }
 
           .caseClassitembtn {
             font-weight: 500;
             line-height: 1.5rem;
-            color: rgb(22 93 255);
+            color: #1f3e85;
 
             i {
               margin-left: 0.5rem;

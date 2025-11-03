@@ -58,11 +58,11 @@ p {
 // banner 样式
 .bannerBox {
   position: relative;
-  padding-top: 80px;
+  padding-top: 100px;
   width: 100vw;
 
   @media (max-width: 768px) {
-    padding-top: 64px;
+    padding-top: 100px;
   }
 
   img {
@@ -79,7 +79,7 @@ p {
 
     .bannerContent {
       margin: 0 auto;
-      padding: 10rem 2rem 0;
+      padding: 12.25em 2rem 0;
       width: 100%;
       max-width: 1400px;
 

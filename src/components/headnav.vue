@@ -34,10 +34,10 @@ function tabRouterPush(item: any) {
 
 const menuList: any = ref([
   { title: '系统首页', path: '/', name: 'home' },
-  { title: '公司信息', path: '/data-solution', name: 'datasolution' },
-  { title: '委托开发', path: '/ai', name: 'ai' },
-  { title: '产品出售', path: '/video', name: 'video' },
-  { title: 'AI平台', path: '/supplier', name: 'supplier' },
+  { title: '公司信息', path: '/about', name: 'about' },
+  { title: '委托开发', path: '/supplier', name: 'supplier' },
+  { title: '产品出售', path: '/data-solution', name: 'datasolution' },
+  { title: 'AI平台', path: '/ai', name: 'ai' },
 ])
 
 // menuChild show Mouseenter Mouseleave

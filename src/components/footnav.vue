@@ -81,7 +81,6 @@ onBeforeUnmount(() => {
 .footnav {
   padding: 1rem;
   background-color: #1f3e85;
-  border: 1px solid red;
 
   .footRow {
     margin: 0 auto;
