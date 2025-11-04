@@ -266,8 +266,18 @@ onBeforeUnmount(() => {
 <template>
   <div>
     <div class="homePage">
-      <!-- homeBanner -->
-      <div class="homeBanner"></div>
+      <!-- video -->
+      <video v-if="windowWidth > 768" loop muted preload="auto" autoplay
+        poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}" style="width: 100vw; height: auto;">
+        <source src="http://www.silin7.cn/media/banner-2m.mp4" type="video/mp4">
+      </video>
+      <video v-else loop muted preload="auto" autoplay poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}"
+        style="width: 100vw; height: 100vh">
+        <source src="http://www.silin7.cn/media/bannermb.mp4" type="video/mp4">
+      </video>
+      <!-- bannermb -->
+      <!-- <div class="homeBanner"></div> -->
+
       <!-- 公司信息 -->
       <div class="featuresBox">
         <div class="featuresImgTitle">公司信息</div>
@@ -316,6 +326,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
+
       <!-- 委托开发 AI平台 -->
       <div class="wtkfaiBox">
         <div class="wtkfaiItem">
@@ -327,6 +338,7 @@ onBeforeUnmount(() => {
           <div class="wtkfaiTitle">AI平台</div>
         </div>
       </div>
+
       <!-- 产品中心 -->
       <div class="cpzxBox">
         <div class="cpzxContent">
@@ -372,6 +384,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
+
       <!-- 合作单位  -->
       <div class="mxBox">
         <div class="mxContent">
@@ -386,6 +399,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
+
       <!-- 友情链接  -->
       <div class="pyBox">
         <div class="pyTitle">友情链接</div>
@@ -408,12 +422,9 @@ onBeforeUnmount(() => {
   background-color: #f9fafb;
   overflow-x: hidden;
 
-  .homeBanner {
-    width: 100vw;
-    height: 100vh;
-    background: url(@/assets/home/dexbanner.png) no-repeat center top;
-    background-size: auto;
-    background-size: cover;
+  video {
+    margin: 0;
+    padding: 0;
   }
 
   .featuresBox {
