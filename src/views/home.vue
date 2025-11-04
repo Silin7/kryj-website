@@ -12,12 +12,7 @@ import {
   syspseoApi,
   seccontentlistApi,
 } from '@/api/modules/basic'
-import {
-  solutioncateApi,
-  allpcateApi,
-  allaiappApi,
-  flinktopApi,
-} from '@/api/modules/common'
+import { solutioncateApi, allpcateApi, allaiappApi, flinktopApi } from '@/api/modules/common'
 import { productpcatechildrenApi } from '@/api/modules/product'
 
 // 可视窗口宽度
@@ -32,61 +27,61 @@ const positionid: any = ref('')
 const bannerData: any = ref([])
 
 function getSecpositions() {
-  secpositionsApi().then((res: any) => {
-    if (res && res.length > 0) {
-      for (let i = 0; i < res.length; i++) {
-        const item = res[i]
-        if (item.url === window.localStorage.getItem('selectedName')) {
-          positionid.value = item.id
-          getBannerlist()
-        }
-        // 首页-公司信息banner	home-xtjj-banner
-        if (item.url === 'home-xtjj-banner') {
-          getSeccontentlist0(item.id)
-        }
-        // 首页-创建背景	home-cjbj
-        if (item.url === 'home-cjbj') {
-          getSeccontentlist1(item.id)
-        }
-        // 首页-涵盖范围	home-hgfw
-        if (item.url === 'home-hgfw') {
-          getSeccontentlist2(item.id)
-        }
-        // 首页-应用对象	home-yydx
-        if (item.url === 'home-yydx') {
-          getSeccontentlist3(item.id)
-        }
-        // 首页-系统创建	home-xtcj
-        if (item.url === 'home-xtcj') {
-          getSeccontentlist4(item.id)
-        }
-        // 首页-委托开发	home-rcjx
-        if (item.url === 'home-rcjx') {
-          getSeccontentlist5(item.id)
-        }
-      }
-    }
-  })
+  // secpositionsApi().then((res: any) => {
+  //   if (res && res.length > 0) {
+  //     for (let i = 0; i < res.length; i++) {
+  //       const item = res[i]
+  //       if (item.url === window.localStorage.getItem('selectedName')) {
+  //         positionid.value = item.id
+  //         getBannerlist()
+  //       }
+  //       // 首页-公司信息banner	home-xtjj-banner
+  //       if (item.url === 'home-xtjj-banner') {
+  //         getSeccontentlist0(item.id)
+  //       }
+  //       // 首页-创建背景	home-cjbj
+  //       if (item.url === 'home-cjbj') {
+  //         getSeccontentlist1(item.id)
+  //       }
+  //       // 首页-涵盖范围	home-hgfw
+  //       if (item.url === 'home-hgfw') {
+  //         getSeccontentlist2(item.id)
+  //       }
+  //       // 首页-应用对象	home-yydx
+  //       if (item.url === 'home-yydx') {
+  //         getSeccontentlist3(item.id)
+  //       }
+  //       // 首页-系统创建	home-xtcj
+  //       if (item.url === 'home-xtcj') {
+  //         getSeccontentlist4(item.id)
+  //       }
+  //       // 首页-委托开发	home-rcjx
+  //       if (item.url === 'home-rcjx') {
+  //         getSeccontentlist5(item.id)
+  //       }
+  //     }
+  //   }
+  // })
 }
 
-function getBannerlist() {
-  // 用户端-按板块位置ID获取所有启用的Banner（含位置名称）
-  bannerlistApi(positionid.value).then((res: any) => {
-    bannerData.value = res[0]
-  })
-  // 用户端-根据页面ID（page_id）获取启用的SEO配置详情（含页面名称）
-  syspseoApi(positionid.value).then((res: any) => {
-    if (res) {
-      useHead({
-        title: res.page_name,
-        meta: [
-          { name: 'description', content: res.description },
-          { name: 'keywords', content: res.keywords },
-        ],
-      })
-    }
-  })
-}
+// function getBannerlist() {
+//   // 用户端-按板块位置ID获取所有启用的Banner（含位置名称）
+//   bannerlistApi(positionid.value).then((res: any) => {
+//     bannerData.value = res[0]
+//   })
+//   // 用户端-根据页面ID（page_id）获取启用的SEO配置详情（含页面名称）
+//   syspseoApi(positionid.value).then((res: any) => {
+//     if (res) {
+//       useHead({
+//         title: res.page_name,
+//         meta: [
+//           { name: 'description', content: res.description },
+//           { name: 'keywords', content: res.keywords },
+//         ],
+//       })
+//     }
+//   })
+// }
 
 // 创建背景
 const homextjjbanner: any = ref({})
@@ -137,124 +132,203 @@ function getSeccontentlist4(id: any) {
 const vippartners: any = ref([])
 
 function getVippartners() {
-  vippartnersApi().then((res: any) => {
-    vippartners.value = res
-  })
+  // vippartnersApi().then((res: any) => {
+  //   vippartners.value = res
+  // })
+  vippartners.value = [
+    {
+      company_name: '中粮集团',
+      logoimg: '/uploads/default/decc62b362c9440e856a726e2f94cc5e.png',
+      istourl: false,
+      url: null,
+      description: null,
+      remark: '',
+      sort: 0,
+      id: 7,
+      created_at: '2025-08-20T22:02:19',
+      updated_at: '2025-08-20T22:02:19',
+    },
+    {
+      company_name: '沃尔玛公司',
+      logoimg: '/uploads/default/45400411009740f8892e40610c704aea.png',
+      istourl: false,
+      url: null,
+      description: null,
+      remark: '',
+      sort: 0,
+      id: 6,
+      created_at: '2025-08-20T22:01:08',
+      updated_at: '2025-08-20T22:01:08',
+    },
+    {
+      company_name: '三星电子',
+      logoimg: '/uploads/default/aa5b299753694f03a97478a54a0ade2e.png',
+      istourl: false,
+      url: null,
+      description: null,
+      remark: '',
+      sort: 0,
+      id: 5,
+      created_at: '2025-08-20T22:00:12',
+      updated_at: '2025-08-20T22:00:12',
+    },
+    {
+      company_name: '大众汽车',
+      logoimg: '/uploads/default/99fa26b4247042dd88f003738a3024ff.png',
+      istourl: true,
+      url: 'https://www.vw.com.cn/',
+      description: null,
+      remark: '',
+      sort: 2,
+      id: 4,
+      created_at: '2025-08-20T16:25:48',
+      updated_at: '2025-08-20T16:27:37',
+    },
+    {
+      company_name: '苹果公司',
+      logoimg: '/uploads/default/70776a7a004149338907026d34922b90.png',
+      istourl: true,
+      url: 'https://www.apple.com.cn',
+      description: null,
+      remark: '',
+      sort: 2,
+      id: 3,
+      created_at: '2025-08-20T16:25:18',
+      updated_at: '2025-08-20T16:27:55',
+    },
+    {
+      company_name: '阿里巴巴集团',
+      logoimg: '/uploads/default/8c6afe3c96d8428997f827ee80ba3f81.jpg',
+      istourl: false,
+      url: null,
+      description:
+        '阿里巴巴集团控股有限公司（Alibaba Group Holding Limited）， 成立于1999年6月28日，总部位于中国浙江杭州。',
+      remark: '',
+      sort: 2,
+      id: 2,
+      created_at: '2025-08-18T12:34:51',
+      updated_at: '2025-08-20T16:24:31',
+    },
+  ]
 }
 
-// 数字化解决方案
-const solutionPactive: any = ref('')
-const solutionParent: any = ref([])
-const solutionCactive: any = ref('')
-const solutionCform: any = ref({})
-const solutionChild: any = ref([])
+// // 产品中心
+// const businessAi: any = ref([])
+// const bidcostAi: any = ref([])
 
-function getSolutioncate() {
-  solutioncateApi().then((res: any) => {
-    if (res && res.parent_cates && res.parent_cates.length > 0) {
-      solutionPactive.value = res.parent_cates[0].id
-      solutionParent.value = res.parent_cates
-    }
-    if (res && res.child_cates && res.child_cates.length > 0) {
-      solutionChild.value = res.child_cates
-      const child = solutionChild.value.find((el: any) => {
-        return el.parent_id === solutionPactive.value
-      })
-      if (child) {
-        solutionCactive.value = child.id
-        solutionCform.value = child
-      }
-    }
-  })
-}
-
-function solutionPchange(item: any) {
-  solutionPactive.value = item.id
-  const child = solutionChild.value.find((el: any) => {
-    return el.parent_id === item.id
-  })
-  if (child) {
-    solutionCactive.value = child.id
-    solutionCform.value = child
-  }
-}
-
-function solutionCchange(item: any) {
-  solutionCactive.value = item.id
-  solutionCform.value = item
-}
-
-// 委托开发
-const pcatePactive: any = ref(0)
-const pcateZhu: any = ref([])
-const pcateAll: any = ref([])
-const pcateChild: any = ref([])
-
-function getSeccontentlist5(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    pcateZhu.value = res
-  })
-}
-
-function getPcateOne(pid: any = 0) {
-  productpcatechildrenApi({
-    page: 1,
-    pageSize: 999,
-    parent_id: pid,
-  }).then((res: any) => {
-    if (res && res.items.length > 0) {
-      pcateAll.value = res.items
-      const levelone = pcateAll.value.filter((element: any) => element.item_id === pcatePactive.value)
-      pcateChild.value = levelone
-    }
-  })
-}
-
-function pcatePchange(id: any) {
-  pcatePactive.value = id
-  const levelone = pcateAll.value.filter((element: any) => element.item_id === pcatePactive.value)
-  pcateChild.value = levelone
-}
-
-// 产品中心
-const businessAi: any = ref([])
-const bidcostAi: any = ref([])
-
-function getAllaiapp() {
-  allaiappApi().then((res: any) => {
-    businessAi.value = []
-    bidcostAi.value = []
-    if (res && res.length > 0) {
-      res.forEach((item: any) => {
-        if (item.cate_id === 2) {
-          businessAi.value.push(item)
-        }
-        if (item.cate_id === 1) {
-          bidcostAi.value.push(item)
-        }
-      })
-    }
-  })
-}
+// function getAllaiapp() {
+//   allaiappApi().then((res: any) => {
+//     businessAi.value = []
+//   })
+// }
 
 // 友情链接
 const flinktop: any = ref([])
 
 function getFlinktop() {
-  flinktopApi().then((res: any) => {
-    if (res && res.length > 0) {
-      flinktop.value = res
-    }
-  })
+  // flinktopApi().then((res: any) => {
+  //   if (res && res.length > 0) {
+  //     flinktop.value = res
+  //   }
+  // })
+  flinktop.value = [
+    {
+      name: '建筑信息研究院',
+      logo: '/uploads/default/b04eb8e30b3c48beaf82aefd80430d7c.png',
+      link_url: 'http://xincai.duoqixin.com/v2/index.html',
+      remark: '建筑信息研究应用',
+      is_recommend: 0,
+      sort: 0,
+      status: 1,
+      id: 29,
+      is_recommend_name: '否',
+      status_name: '启用',
+      created_at: '2025-08-22T17:07:26',
+      updated_at: '2025-08-22T17:07:26',
+      deleted_at: null,
+    },
+    {
+      name: '智慧城市科技',
+      logo: '/uploads/default/ae25eb791ebf4bce98238448538b61c0.png',
+      link_url: 'http://xincai.duoqixin.com/v2/index.html',
+      remark: '智慧城市解决方案',
+      is_recommend: 0,
+      sort: 0,
+      status: 1,
+      id: 28,
+      is_recommend_name: '否',
+      status_name: '启用',
+      created_at: '2025-08-22T17:06:53',
+      updated_at: '2025-08-22T17:06:53',
+      deleted_at: null,
+    },
+    {
+      name: '数字工程设计院',
+      logo: '/uploads/default/7c82a4d37694426a819e859bebe2e46c.jpg',
+      link_url: 'http://xincai.duoqixin.com/v2/index.html',
+      remark: '数字化工程设计',
+      is_recommend: 0,
+      sort: 0,
+      status: 1,
+      id: 27,
+      is_recommend_name: '否',
+      status_name: '启用',
+      created_at: '2025-08-22T17:06:38',
+      updated_at: '2025-08-22T17:06:38',
+      deleted_at: null,
+    },
+    {
+      name: '绿色建材协会',
+      logo: '/uploads/default/bb3371da3896417a99906fb08877f752.jpg',
+      link_url: 'https://www.baidu.com/',
+      remark: '推广绿色建筑材料',
+      is_recommend: 0,
+      sort: 0,
+      status: 1,
+      id: 26,
+      is_recommend_name: '否',
+      status_name: '启用',
+      created_at: '2025-08-22T17:06:11',
+      updated_at: '2025-08-22T17:06:11',
+      deleted_at: null,
+    },
+    {
+      name: '建筑科技有限公司',
+      logo: '/uploads/default/defa3f33b03d46c2b91765fdbfd09d92.jpg',
+      link_url: 'http://www.abc.com/',
+      remark: '专注建筑科技创新',
+      is_recommend: 0,
+      sort: 0,
+      status: 1,
+      id: 25,
+      is_recommend_name: '否',
+      status_name: '启用',
+      created_at: '2025-08-18T15:39:38',
+      updated_at: '2025-08-22T17:08:07',
+      deleted_at: null,
+    },
+    {
+      name: '智能建造研究院',
+      logo: '/uploads/default/2907d6142d394b81b6bb0ae373a82137.jpg',
+      link_url: 'https://www.chanjet.com/',
+      remark: '建筑智能化研究',
+      is_recommend: 0,
+      sort: 0,
+      status: 1,
+      id: 24,
+      is_recommend_name: '否',
+      status_name: '启用',
+      created_at: '2025-08-18T11:39:22',
+      updated_at: '2025-08-22T17:08:16',
+      deleted_at: null,
+    },
+  ]
 }
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   getSecpositions()
   getVippartners()
-  getSolutioncate()
-  getPcateOne()
-  getAllaiapp()
   getFlinktop()
 })
 
@@ -268,12 +342,12 @@ onBeforeUnmount(() => {
     <div class="homePage">
       <!-- video -->
       <video v-if="windowWidth > 768" loop muted preload="auto" autoplay
-        poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}" style="width: 100vw; height: auto;">
-        <source src="http://www.silin7.cn/media/banner-2m.mp4" type="video/mp4">
+        poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}" style="width: 100vw; height: auto">
+        <source src="http://www.silin7.cn/media/banner-2m.mp4" type="video/mp4" />
       </video>
       <video v-else loop muted preload="auto" autoplay poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}"
         style="width: 100vw; height: 100vh">
-        <source src="http://www.silin7.cn/media/bannermb.mp4" type="video/mp4">
+        <source src="http://www.silin7.cn/media/bannermb.mp4" type="video/mp4" />
       </video>
       <!-- bannermb -->
       <!-- <div class="homeBanner"></div> -->
@@ -331,10 +405,10 @@ onBeforeUnmount(() => {
       <div class="wtkfaiBox">
         <div class="wtkfaiItem">
           <div class="wtkfaiTitle">委托开发</div>
-          <img src="@/assets/home/wtkf.png" alt="">
+          <img src="@/assets/home/wtkf.png" alt="" />
         </div>
         <div class="wtkfaiItem">
-          <img src="@/assets/home/aipt.png" alt="">
+          <img src="@/assets/home/aipt.png" alt="" />
           <div class="wtkfaiTitle">AI平台</div>
         </div>
       </div>
@@ -347,37 +421,37 @@ onBeforeUnmount(() => {
           <div class="cpzxClassbox">
             <div class="cpzxClassitem">
               <div class="cpzxClassitemfa frcc">
-                <i class=" fa fa-github-alt"></i>
+                <i class="fa fa-github-alt"></i>
               </div>
               <div class="cpzxClassitemtext">AI 驱动药物靶点发现数据库</div>
             </div>
             <div class="cpzxClassitem">
               <div class="cpzxClassitemfa frcc">
-                <i class=" fa fa-medkit"></i>
+                <i class="fa fa-medkit"></i>
               </div>
               <div class="cpzxClassitemtext">小分子创新药研发</div>
             </div>
             <div class="cpzxClassitem">
               <div class="cpzxClassitemfa frcc">
-                <i class=" fa fa-subscript"></i>
+                <i class="fa fa-subscript"></i>
               </div>
               <div class="cpzxClassitemtext">生物制剂研发辅助系统</div>
             </div>
             <div class="cpzxClassitem">
               <div class="cpzxClassitemfa frcc">
-                <i class=" fa fa-heartbeat"></i>
+                <i class="fa fa-heartbeat"></i>
               </div>
               <div class="cpzxClassitemtext">老药新用筛选平台</div>
             </div>
             <div class="cpzxClassitem">
               <div class="cpzxClassitemfa frcc">
-                <i class=" fa fa-contao"></i>
+                <i class="fa fa-contao"></i>
               </div>
               <div class="cpzxClassitemtext">药物晶型预测与筛选系统</div>
             </div>
             <div class="cpzxClassitem">
               <div class="cpzxClassitemfa frcc">
-                <i class=" fa fa-h-square"></i>
+                <i class="fa fa-h-square"></i>
               </div>
               <div class="cpzxClassitemtext">类器官多组学数据 AI 整合分析工具</div>
             </div>
@@ -428,10 +502,13 @@ onBeforeUnmount(() => {
   }
 
   .featuresBox {
-    margin: 0 auto;
+    margin: 6rem auto 0;
     width: 100%;
     max-width: 1400px;
 
+    @media (max-width: 768px) {
+      margin: 0 auto;
+    }
 
     .featuresImgTitle {
       margin: 0 auto;
@@ -515,6 +592,7 @@ onBeforeUnmount(() => {
     justify-content: space-between;
 
     @media (max-width: 768px) {
+      margin-top: 2rem;
       padding: 0 1rem;
     }
 
@@ -536,7 +614,6 @@ onBeforeUnmount(() => {
       }
 
       @media (min-width: 768px) {
-
         &:first-child {
           margin: 6rem 0 12rem;
 
@@ -570,7 +647,7 @@ onBeforeUnmount(() => {
   }
 
   .cpzxBox {
-    padding: 4rem 2.5rem;
+    padding: 6rem 2.5rem;
     width: 100%;
     background-color: rgba(255, 255, 255, 1);
 
@@ -805,8 +882,8 @@ onBeforeUnmount(() => {
 
   .pyBox {
     position: relative;
-    margin: 5rem auto 0;
-    padding: 0 2rem 4rem;
+    margin: 6rem auto 0;
+    padding: 0 2rem 6rem;
     width: 100%;
     max-width: 1400px;
 
@@ -893,7 +970,7 @@ onBeforeUnmount(() => {
       }
 
       .pyClassitem:hover {
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
           cursor: pointer;
           box-shadow:
             0 10px 15px -3px rgb(0 0 0 / 0.1),
