@@ -1,19 +1,9 @@
 <script setup lang="ts">
-import { useHead } from '@vueuse/head'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import pageJump from '@/hooks/pageJump'
 import backToTop from '@/hooks/backToTop'
 import windowOpen from '@/hooks/windowOpen'
 import { fileURL } from '@/api/baseConfig'
-import {
-  secpositionsApi,
-  bannerlistApi,
-  vippartnersApi,
-  syspseoApi,
-  seccontentlistApi,
-} from '@/api/modules/basic'
-import { solutioncateApi, allpcateApi, allaiappApi, flinktopApi } from '@/api/modules/common'
-import { productpcatechildrenApi } from '@/api/modules/product'
 
 // 可视窗口宽度
 const windowWidth = ref(window.innerWidth)
@@ -22,113 +12,7 @@ function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
-// 用户端-获取所有启用的板块位置（含完整字段，按排序升序、创建时间倒序）
-const positionid: any = ref('')
-const bannerData: any = ref([])
-
-function getSecpositions() {
-  // secpositionsApi().then((res: any) => {
-  //   if (res && res.length > 0) {
-  //     for (let i = 0; i < res.length; i++) {
-  //       const item = res[i]
-  //       if (item.url === window.localStorage.getItem('selectedName')) {
-  //         positionid.value = item.id
-  //         getBannerlist()
-  //       }
-  //       // 首页-公司信息banner	home-xtjj-banner
-  //       if (item.url === 'home-xtjj-banner') {
-  //         getSeccontentlist0(item.id)
-  //       }
-  //       // 首页-创建背景	home-cjbj
-  //       if (item.url === 'home-cjbj') {
-  //         getSeccontentlist1(item.id)
-  //       }
-  //       // 首页-涵盖范围	home-hgfw
-  //       if (item.url === 'home-hgfw') {
-  //         getSeccontentlist2(item.id)
-  //       }
-  //       // 首页-应用对象	home-yydx
-  //       if (item.url === 'home-yydx') {
-  //         getSeccontentlist3(item.id)
-  //       }
-  //       // 首页-系统创建	home-xtcj
-  //       if (item.url === 'home-xtcj') {
-  //         getSeccontentlist4(item.id)
-  //       }
-  //       // 首页-委托开发	home-rcjx
-  //       if (item.url === 'home-rcjx') {
-  //         getSeccontentlist5(item.id)
-  //       }
-  //     }
-  //   }
-  // })
-}
-
-// function getBannerlist() {
-//   // 用户端-按板块位置ID获取所有启用的Banner（含位置名称）
-//   bannerlistApi(positionid.value).then((res: any) => {
-//     bannerData.value = res[0]
-//   })
-//   // 用户端-根据页面ID（page_id）获取启用的SEO配置详情（含页面名称）
-//   syspseoApi(positionid.value).then((res: any) => {
-//     if (res) {
-//       useHead({
-//         title: res.page_name,
-//         meta: [
-//           { name: 'description', content: res.description },
-//           { name: 'keywords', content: res.keywords },
-//         ],
-//       })
-//     }
-//   })
-// }
-
-// 创建背景
-const homextjjbanner: any = ref({})
-
-function getSeccontentlist0(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    homextjjbanner.value = res[0]
-  })
-}
-
-// 创建背景
-const homecjbj: any = ref({})
-
-function getSeccontentlist1(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    homecjbj.value = res[0]
-  })
-}
-
-// 涵盖范围
-const homehgfw: any = ref({})
-
-function getSeccontentlist2(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    homehgfw.value = res[0]
-  })
-}
-
-// 应用对象
-const homeyydx: any = ref({})
-
-function getSeccontentlist3(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    homeyydx.value = res[0]
-  })
-}
-
-// 系统创建
-const homextcj: any = ref({})
-
-function getSeccontentlist4(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    homextcj.value = res[0]
-  })
-}
-
-// 用户端-获取所有有效合作单位（按排序升序、创建时间倒序）
+// 合作单位
 const vippartners: any = ref([])
 
 function getVippartners() {
@@ -212,15 +96,22 @@ function getVippartners() {
   ]
 }
 
-// // 产品中心
-// const businessAi: any = ref([])
-// const bidcostAi: any = ref([])
+// 产品中心
+const businessAi: any = ref([])
 
-// function getAllaiapp() {
-//   allaiappApi().then((res: any) => {
-//     businessAi.value = []
-//   })
-// }
+function getAllaiapp() {
+  // allaiappApi().then((res: any) => {
+  //   businessAi.value = []
+  // })
+  businessAi.value = [
+    { icon: 'fa fa-github-alt', title: 'AI 驱动药物靶点发现数据库' },
+    { icon: 'fa fa-medkit', title: '小分子创新药研发' },
+    { icon: 'fa fa-heartbeat', title: '老药新用筛选平台' },
+    { icon: 'fa fa-subscript', title: '生物制剂研发辅助系统' },
+    { icon: 'fa fa-contao', title: '药物晶型预测与筛选系统' },
+    { icon: 'fa fa-h-square', title: '类器官多组学数据 AI 整合分析工具' },
+  ]
+}
 
 // 友情链接
 const flinktop: any = ref([])
@@ -327,8 +218,8 @@ function getFlinktop() {
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
-  getSecpositions()
   getVippartners()
+  getAllaiapp()
   getFlinktop()
 })
 
@@ -349,8 +240,6 @@ onBeforeUnmount(() => {
         style="width: 100vw; height: 100vh">
         <source src="http://www.silin7.cn/media/bannermb.mp4" type="video/mp4" />
       </video>
-      <!-- bannermb -->
-      <!-- <div class="homeBanner"></div> -->
 
       <!-- 公司信息 -->
       <div class="featuresBox">
@@ -419,41 +308,11 @@ onBeforeUnmount(() => {
           <div class="cpzxTitle">产品中心</div>
           <div class="cpzxHeng"></div>
           <div class="cpzxClassbox">
-            <div class="cpzxClassitem">
+            <div class="cpzxClassitem" v-for="(item, index) in businessAi" :key="index">
               <div class="cpzxClassitemfa frcc">
-                <i class="fa fa-github-alt"></i>
+                <i :class="item.icon"></i>
               </div>
-              <div class="cpzxClassitemtext">AI 驱动药物靶点发现数据库</div>
-            </div>
-            <div class="cpzxClassitem">
-              <div class="cpzxClassitemfa frcc">
-                <i class="fa fa-medkit"></i>
-              </div>
-              <div class="cpzxClassitemtext">小分子创新药研发</div>
-            </div>
-            <div class="cpzxClassitem">
-              <div class="cpzxClassitemfa frcc">
-                <i class="fa fa-subscript"></i>
-              </div>
-              <div class="cpzxClassitemtext">生物制剂研发辅助系统</div>
-            </div>
-            <div class="cpzxClassitem">
-              <div class="cpzxClassitemfa frcc">
-                <i class="fa fa-heartbeat"></i>
-              </div>
-              <div class="cpzxClassitemtext">老药新用筛选平台</div>
-            </div>
-            <div class="cpzxClassitem">
-              <div class="cpzxClassitemfa frcc">
-                <i class="fa fa-contao"></i>
-              </div>
-              <div class="cpzxClassitemtext">药物晶型预测与筛选系统</div>
-            </div>
-            <div class="cpzxClassitem">
-              <div class="cpzxClassitemfa frcc">
-                <i class="fa fa-h-square"></i>
-              </div>
-              <div class="cpzxClassitemtext">类器官多组学数据 AI 整合分析工具</div>
+              <div class="cpzxClassitemtext">{{ item.title }}</div>
             </div>
           </div>
         </div>

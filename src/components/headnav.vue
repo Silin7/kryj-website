@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref, computed, watch, unref } from 'vue'
+import { onMounted, onBeforeUnmount, ref, computed, unref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
 import useHeaderStore from '@/store/modules/header'
