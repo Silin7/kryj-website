@@ -314,7 +314,7 @@ onBeforeUnmount(() => {
             <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="" class="mediaAvatal" />
             <div>
               <div class="mediaName">张记者</div>
-              <div class="mediaTv">浙江电视台经济频道</div>
+              <div class="mediaTv">山东电视台经济频道</div>
             </div>
           </div>
         </div>

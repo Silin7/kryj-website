@@ -288,7 +288,7 @@ onBeforeUnmount(() => {
               </div>
               <div>
                 <span>设计单位</span>
-                <span>浙江某建筑设计研究院</span>
+                <span>山东某建筑设计研究院</span>
               </div>
               <div>
                 <span>AI技术支持</span>

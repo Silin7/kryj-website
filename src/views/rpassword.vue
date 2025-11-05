@@ -171,7 +171,7 @@ onUnmounted(() => {
       <div class="gologin">已记起密码？<span @click="pageJump('login')">立即登录</span></div>
     </div>
     <div class="copyright">
-      Copyright ©2025 新材网 版权所有 浙ICP备123456789-1号浙公网安备37000000号
+      Copyright ©2025 科睿易晶 版权所有 鲁ICP备123456789-1号鲁公网安备37000000号
     </div>
   </div>
 </template>

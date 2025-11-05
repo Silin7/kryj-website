@@ -3,65 +3,43 @@ import { onUnmounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
 import {
-  sendverificationcodeApi,
-  verifyverificationcodeApi,
   baseregisterApi,
 } from '@/api/modules/login'
 
 const isreadRuler: any = ref(false)
-const phone: any = ref('')
+const userUnit: any = ref('')
+const userPost: any = ref('')
+const mobile: any = ref('')
 const password: any = ref('')
-const code: any = ref('')
+const captchaVerification: any = ref('')
 
 function getCode() {
-  if (!phone.value) {
-    ElMessage({
-      type: 'error',
-      message: '请输入手机号',
-    })
-    return
-  }
-  if (!/^(?:(?:\+|00)86)?1\d{10}$/.test(phone.value)) {
-    ElMessage({
-      type: 'error',
-      message: '手机号格式错误',
-    })
-    return
-  }
-  sendverificationcodeApi({
-    phone: phone.value,
-  }).then((res: any) => {
-    if (res) {
-      countdownChange()
-    }
-  })
-}
-
-// 验证码倒计时
-const countdown: any = ref(60)
-const verificationTimer: any = ref(null)
-
-function countdownChange() {
-  verificationTimer.value = setInterval(() => {
-    countdown.value -= 1
-    // 清除定时器
-    if (countdown.value === 0) {
-      clearInterval(verificationTimer.value)
-      countdown.value = 60
-    }
-  }, 1000)
 }
 
 // 创建账号
 function ceateAccount() {
-  if (!phone.value) {
+  if (!userUnit.value) {
+    ElMessage({
+      type: 'error',
+      message: '请输入单位',
+    })
+    return
+  }
+  if (!userPost.value) {
+    ElMessage({
+      type: 'error',
+      message: '请输入职务',
+    })
+    return
+  }
+  if (!mobile.value) {
     ElMessage({
       type: 'error',
       message: '请输入手机号',
     })
     return
   }
-  if (!/^(?:(?:\+|00)86)?1\d{10}$/.test(phone.value)) {
+  if (!/^(?:(?:\+|00)86)?1\d{10}$/.test(mobile.value)) {
     ElMessage({
       type: 'error',
       message: '手机号格式错误',
@@ -82,7 +60,7 @@ function ceateAccount() {
     })
     return
   }
-  if (!code.value) {
+  if (!captchaVerification.value) {
     ElMessage({
       type: 'error',
       message: '请输入验证码',
@@ -97,22 +75,14 @@ function ceateAccount() {
     return
   }
   getBaseregister()
-  // verifyverificationcodeApi({
-  //   phone: phone.value,
-  //   code: code.value,
-  // }).then((res: any) => {
-  //   if (res) {
-  //     getBaseregister()
-  //   }
-  // })
 }
 
 // 手机号注册
 function getBaseregister() {
   baseregisterApi({
-    phone: phone.value,
+    mobile: mobile.value,
     password: password.value,
-    code: code.value,
+    captchaVerification: captchaVerification.value,
   }).then((res: any) => {
     if (res) {
       ElMessage({
@@ -123,54 +93,60 @@ function getBaseregister() {
     }
   })
 }
-
-onUnmounted(() => {
-  clearInterval(verificationTimer.value)
-})
 </script>
 
 <template>
   <div class="registerPage">
-    <div class="registerbox">
-      <div class="hyzc">欢迎注册</div>
-      <div class="fromitem frsc">
-        <img src="@/assets/register/user.png" alt="" />
-        <el-input v-model="phone" style="width: 100%" placeholder="请输入手机号" clearable />
+    <div class="registerBox">
+      <div class="hyzc">
+        欢迎注册
+        <span>（新用户注册有3次免费机会）</span>
       </div>
-      <div class="fromitem frsc">
+      <div class="fromItem frsc">
+        <img src="@/assets/register/danwei.png" alt="" />
+        <el-input v-model="userUnit" placeholder="请输入单位" clearable />
+      </div>
+      <div class="fromItem frsc">
+        <img src="@/assets/register/zhiwu.png" alt="" />
+        <el-input v-model="userPost" placeholder="请输入职务" clearable />
+      </div>
+      <div class="fromItem frsc">
+        <img src="@/assets/register/shoujihao.png" alt="" />
+        <el-input v-model="mobile" placeholder="请输入手机号" clearable />
+      </div>
+      <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" alt="" />
-        <el-input type="password" show-password v-model="password" style="width: 100%" placeholder="请输入8-20位密码（含字母和数字）"
-          clearable />
+        <el-input type="password" show-password v-model="password" placeholder="请输入8-20位密码（含字母和数字）" clearable />
       </div>
-      <div class="fromitem frsc">
-        <img src="@/assets/register/yzm.png" alt="" />
-        <el-input v-model="code" style="width: calc(100% - 140px)" placeholder="短信验证码" clearable />
-        <div v-if="countdown < 60 && countdown > 0" class="djsTimeStyle">
-          已发送（{{ countdown }}）
+      <div class="fromItem frsc">
+        <img src="@/assets/register/pwd2.png" alt="" />
+        <el-input type="password" show-password v-model="password" placeholder="请再次输入密码" clearable />
+      </div>
+      <div class="frsc">
+        <div class="fromItem frsc" style="width: calc(100% - 130px)">
+          <img src="@/assets/register/yzm.png" alt="" />
+          <el-input v-model="captchaVerification" placeholder="请输入验证码" clearable />
         </div>
-        <button v-else @click="getCode">获取验证码</button>
+        <img src="@/assets/register/yzmdemo.png" alt="验证码" class="yzmStyle">
       </div>
-      <div class="statement">
+      <div class="stateMent">
         <img v-if="isreadRuler" src="@/assets/register/checked.png" alt="" @click="isreadRuler = !isreadRuler" />
         <img v-else src="@/assets/register/unchecked.png" alt="" @click="isreadRuler = !isreadRuler" />
         我已阅读并同意
         <span @click="
           pageJump('article_detail', {
             theurl: 'user-service-agreement',
-          })
-          ">《新材网用户服务协议》</span>
-        和
+          })">《科睿易晶用户服务协议》</span>和
         <span @click="
           pageJump('article_detail', {
             theurl: 'privacy-policy-statement',
-          })
-          ">《新材网隐私政策声明》</span>
+          })">《科睿易晶隐私政策声明》</span>
       </div>
       <button class="createAccount" @click="ceateAccount">创建账号</button>
       <div class="gologin">已有账号？<span @click="pageJump('login')">立即登录</span></div>
     </div>
     <div class="copyright">
-      Copyright ©2025 新材网 版权所有 浙ICP备123456789-1号浙公网安备37000000号
+      Copyright ©2025 科睿易晶 版权所有 鲁ICP备123456789-1号鲁公网安备37000000号
     </div>
   </div>
 </template>
@@ -188,10 +164,10 @@ onUnmounted(() => {
   background-attachment: fixed;
   background-position: right;
 
-  .registerbox {
+  .registerBox {
     margin-top: 4rem;
     padding: 2rem 1rem;
-    background: rgba(255, 255, 255, 1);
+    background: #fff;
     box-shadow:
       0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -210,9 +186,15 @@ onUnmounted(() => {
       font-weight: 700;
       letter-spacing: 0px;
       line-height: 30px;
-      color: rgba(0, 0, 0, 1);
+      color: #1f3e85;
       text-align: left;
       vertical-align: top;
+
+      span {
+        font-size: 14px;
+        line-height: 30px;
+        color: #4b5563;
+      }
     }
 
     .typebox {
@@ -243,11 +225,11 @@ onUnmounted(() => {
       }
     }
 
-    .fromitem {
-      margin-bottom: 40px;
+    .fromItem {
+      margin-bottom: 20px;
       padding: 0 18px;
-      height: 48px;
-      background: rgba(255, 255, 255, 1);
+      height: 40px;
+      background: #fff;
       border: 1px solid rgba(224, 224, 224, 1);
 
       img {
@@ -269,16 +251,23 @@ onUnmounted(() => {
         font-weight: 400;
         letter-spacing: 0px;
         line-height: 16px;
-        color: rgba(42, 130, 228, 1);
+        color: #1f3e85;
       }
 
       .djsTimeStyle {
         font-size: 0.85rem;
-        color: rgba(128, 128, 128, 1);
+        color: #4b5563;
       }
     }
 
-    .statement {
+    .yzmStyle {
+      margin-bottom: 20px;
+      margin-left: 10px;
+      width: 120px;
+      height: 40px;
+    }
+
+    .stateMent {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -286,16 +275,16 @@ onUnmounted(() => {
       font-weight: 400;
       letter-spacing: 0px;
       line-height: 24px;
-      color: rgba(128, 128, 128, 1);
+      color: #4b5563;
 
       img {
-        margin-right: 10px;
-        width: 18px;
-        height: 18px;
+        margin-right: 6px;
+        width: 14px;
+        height: 14px;
       }
 
       span {
-        color: rgba(42, 130, 228, 1);
+        color: #1f3e85;
       }
 
       span:hover {
@@ -308,13 +297,11 @@ onUnmounted(() => {
     .createAccount {
       margin-top: 24px;
       width: 100%;
-      height: 48px;
+      height: 40px;
       border-radius: 111px;
       color: #fff;
-      background:
-        linear-gradient(117.41deg, rgba(2, 93, 244, 1) 0%, rgba(7, 91, 237, 1) 100%),
-        rgba(204, 204, 204, 1);
-      box-shadow: -1px 4px 6px rgba(4, 71, 177, 0.29);
+      background: #1f3e85;
+      box-shadow: -1px 4px 6px rgba(31, 62, 133, 0.2);
     }
 
     .gologin {
@@ -324,10 +311,10 @@ onUnmounted(() => {
       font-weight: 400;
       letter-spacing: 0px;
       line-height: 24px;
-      color: rgba(128, 128, 128, 1);
+      color: #4b5563;
 
       span {
-        color: rgba(42, 130, 228, 1);
+        color: #1f3e85;
       }
 
       span:hover {
@@ -344,7 +331,7 @@ onUnmounted(() => {
     font-weight: 500;
     letter-spacing: 0px;
     line-height: 26px;
-    color: rgba(0, 0, 0, 1);
+    color: #000;
     text-align: center;
 
     @media (min-width: 768px) {
