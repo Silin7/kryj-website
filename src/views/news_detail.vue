@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
         <img src="@/assets/32.jpg" alt="" />
         <div class="zuozeInfo">
           <p>作者：李明</p>
-          <p>三才工程研究院 BIM技术专家</p>
+          <p>科睿易晶工程研究院 BIM技术专家</p>
         </div>
       </div> -->
       <div class="ndCFuwb">
@@ -105,7 +105,7 @@ onBeforeUnmount(() => {
         <img src="@/assets/32.jpg" alt="" />
         <div class="zuozeInfo">
           <p>作者：李明</p>
-          <p>三才工程研究院 BIM技术专家</p>
+          <p>科睿易晶工程研究院 BIM技术专家</p>
           <p>
             李明先生是国内知名的BIM技术专家，曾参与多个国家级重点工程的BIM技术应用，包括上海中心大厦、北京大兴国际机场等项目。在BIM技术研发、标准制定和工程应用方面有丰富经验。
           </p>

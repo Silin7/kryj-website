@@ -199,7 +199,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'about',
     component: () => import('@/views/about.vue'),
     meta: {
-      title: '关于三才',
+      title: '关于科睿易晶',
       stcode: 'about',
       website: true,
       hashead: true,
