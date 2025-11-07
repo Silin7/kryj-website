@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue';
+import pageJump from '@/hooks/pageJump'
 import { checkTimeApi } from '@/api/interface'
 
 const windowWidth = ref(window.innerWidth)
@@ -10,12 +11,14 @@ function updateWindowWidth() {
 
 // 免费体验剩余次数
 const checkTime: any = ref(0)
+const notLogin: any = ref(false)
 
 function getCheckTime() {
   checkTimeApi().then((res: any) => {
-    if (res.data?.code === 0) {
+    if (res?.code === 0) {
       checkTime.value = res.data
-    } else if (res.data?.code === 401) {
+    } else if (res?.code === 401) {
+      notLogin.value = true
     }
   })
 }
@@ -35,6 +38,16 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="aiPage">
+    <div v-if="notLogin" class="messageMask">
+      <div class="messageBox">
+        <div class="messageTitle">温馨提示</div>
+        <div class="messageContent">AI平台需要登录后才可以体验<br />是否前往登录</div>
+        <div class="massageBtns">
+          <button class="messageCancel" @click="notLogin = false">取消</button>
+          <button class="messageQuery" @click="pageJump('login')">去登录</button>
+        </div>
+      </div>
+    </div>
     <!-- BANNER -->
     <div class="aibannerBox">
       <img v-if="windowWidth <= 768" src="@/assets/ai/banner-ai-m.jpg" alt="">
@@ -84,6 +97,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .aiPage {
+  position: relative;
   overflow-x: hidden;
   min-height: calc(100vh - 88px);
   background-color: #f9fafb;

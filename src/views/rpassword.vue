@@ -310,7 +310,7 @@ onUnmounted(() => {
       margin-top: 24px;
       width: 100%;
       height: 48px;
-      border-radius: 111px;
+      border-radius: 999px;
       color: #fff;
       background:
         linear-gradient(117.41deg, rgba(2, 93, 244, 1) 0%, rgba(7, 91, 237, 1) 100%),

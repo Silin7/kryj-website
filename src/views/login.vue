@@ -55,7 +55,6 @@ function loginByCoode() {
     password: password.value,
     captchaVerification: captchaVerification.value,
   }).then((res: any) => {
-    window.localStorage.setItem('userId', res.data.userId)
     window.localStorage.setItem('accessToken', res.data.accessToken)
     window.localStorage.setItem('refreshToken', res.data.refreshToken)
     window.localStorage.setItem('expiresTime', res.data.expiresTime)
@@ -130,7 +129,7 @@ onMounted(() => {
   background-position: right;
 
   .loginBox {
-    margin-top: 4rem;
+    margin-top: 10rem;
     padding: 2rem 1rem;
     background: #fff;
     box-shadow:
@@ -139,7 +138,7 @@ onMounted(() => {
 
     @media (min-width: 768px) {
       position: absolute;
-      top: 20%;
+      top: 10%;
       right: 20%;
       padding: 30px 50px 50px;
       width: 30rem;

@@ -191,7 +191,7 @@ onMounted(() => {
   background-position: right;
 
   .registerBox {
-    margin-top: 4rem;
+    margin-top: 8rem;
     padding: 2rem 1rem;
     background: #fff;
     box-shadow:
@@ -200,7 +200,8 @@ onMounted(() => {
 
     @media (min-width: 768px) {
       position: absolute;
-      top: 20%;
+      z-index: 9999;
+      top: 10%;
       right: 20%;
       padding: 30px 50px 50px;
       width: 30rem;
@@ -324,7 +325,7 @@ onMounted(() => {
       margin-top: 24px;
       width: 100%;
       height: 40px;
-      border-radius: 111px;
+      border-radius: 999px;
       color: #fff;
       background: #1f3e85;
       box-shadow: -1px 4px 6px rgba(31, 62, 133, 0.2);

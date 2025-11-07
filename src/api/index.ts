@@ -29,13 +29,13 @@ api.interceptors.response.use(
     if (!response.data) {
       throw new Error()
     }
-    // // 401 登录失效
-    // else if (response.data && response.data.code === 401) {
-    //   ElMessage.error('登录信息失效，请重新登录')
-    //   router.push({
-    //     path: '/login',
-    //   })
-    // }
+    // 401 登录失效
+    if (response.data && response.data.code === 401) {
+      window.localStorage.removeItem('accessToken')
+      window.localStorage.removeItem('refreshToken')
+      window.localStorage.removeItem('expiresTime')
+      window.localStorage.removeItem('userInfo')
+    }
     // 其他错误
     else if (response.data?.code !== 0 && response.data?.code !== 401) {
       ElMessage.error(response.data.msg)

@@ -144,3 +144,67 @@ p {
     }
   }
 }
+
+// 消息弹框
+.messageMask {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .messageBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    max-width: 30rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    .messageTitle {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+      color: #1f3e85;
+    }
+
+    .messageContent {
+      padding: 2rem 1rem;
+      line-height: 2;
+      text-align: center;
+      color: #4b5563;
+    }
+
+    .massageBtns {
+      padding: 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .messageCancel {
+        width: 100px;
+        height: 40px;
+        border-radius: 999px;
+        color: #1f3e85;
+        background-color: rgb(22 93 255 / 0.1);
+      }
+
+      .messageQuery {
+        width: 100px;
+        height: 40px;
+        border-radius: 999px;
+        color: #fff;
+        background: #1f3e85;
+      }
+    }
+  }
+}
