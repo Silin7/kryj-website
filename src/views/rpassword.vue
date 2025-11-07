@@ -3,7 +3,7 @@ import { onUnmounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
 import {
-  sendverificationcodeApi,
+  // sendverificationcodeApi,
   // verifyverificationcodeApi,
   baseforgotdpwdApi,
   checkloinApi,
@@ -31,13 +31,13 @@ function getCode() {
     })
     return
   }
-  sendverificationcodeApi({
-    phone: phone.value,
-  }).then((res: any) => {
-    if (res) {
-      countdownChange()
-    }
-  })
+  // sendverificationcodeApi({
+  //   phone: phone.value,
+  // }).then((res: any) => {
+  //   if (res) {
+  //     countdownChange()
+  //   }
+  // })
 }
 
 // 验证码倒计时

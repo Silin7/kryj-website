@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import { authcodeApi, authregisterApi } from '@/api/modules/login'
+import { authcodeApi, authregisterApi } from '@/api/interface'
 
 const isreadRuler: any = ref(false)
 const userUnit: any = ref('')

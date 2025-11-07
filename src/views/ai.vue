@@ -1,12 +1,58 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, onBeforeUnmount, ref } from 'vue';
+import { checkTimeApi } from '@/api/interface'
 
+const windowWidth = ref(window.innerWidth)
+
+function updateWindowWidth() {
+  windowWidth.value = window.innerWidth
+}
+
+// 免费体验剩余次数
+const checkTime: any = ref(0)
+
+function getCheckTime() {
+  checkTimeApi().then((res: any) => {
+    if (res.data?.code === 0) {
+      checkTime.value = res.data
+    } else if (res.data?.code === 401) {
+    }
+  })
+}
+
+// 查询条件
 const searchForm: any = ref({})
+
+onMounted(() => {
+  window.addEventListener('resize', updateWindowWidth)
+  getCheckTime()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateWindowWidth)
+})
 </script>
 
 <template>
   <div class="aiPage">
-    <div class="aiTitle">AI预测基础版（精度约65%）</div>
+    <!-- BANNER -->
+    <div class="aibannerBox">
+      <img v-if="windowWidth <= 768" src="@/assets/ai/banner-ai-m.jpg" alt="">
+      <img v-else src="@/assets/ai/banner-ai.jpg" alt="">
+      <div class="aibannerAbsolute">
+        <div class="aibannerContent">
+          <div class="aibannerTitle">AI赋能医疗行业 开启智能建造新时代</div>
+          <div class="aibannerSubtitle">
+            以DeepSeek、通义千问等为代表的国产大模型加速发展，推动AI深度融入医疗行业，实现创新应用，助力优化资源配置、提升生产效率，加速行业智能化转型与产业升级。
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aiTbox">
+      <div></div>
+      <div class="aiTitle">AI预测基础版（精度约65%）</div>
+      <div class="aiTimes">免费体验剩余<span>{{ checkTime }}</span>次</div>
+    </div>
     <div class="aiContent">
       <div class="aiContentSr">
         <el-row :gutter="16">
@@ -39,28 +85,106 @@ const searchForm: any = ref({})
 <style lang="scss" scoped>
 .aiPage {
   overflow-x: hidden;
-  padding-top: 100px;
   min-height: calc(100vh - 88px);
   background-color: #f9fafb;
 
-  .aiTitle {
-    padding: 2rem 0;
-    text-align: center;
-    font-weight: 700;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    line-height: clamp(1.5rem, 4vw, 2.5rem);
-    color: #1f3e85;
+  .aibannerBox {
+    position: relative;
+    padding-top: 100px;
+    width: 100vw;
+    height: 550px;
+
+    img {
+      width: 100vw;
+      height: 450px;
+    }
+
+    .aibannerAbsolute {
+      position: absolute;
+      top: 100px;
+      left: 0;
+      z-index: 2;
+      width: 100vw;
+
+      .aibannerContent {
+        margin: 0 auto;
+        padding: 0 2rem;
+        width: 100%;
+        max-width: 1400px;
+        height: 450px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+
+        .aibannerTitle {
+          margin-bottom: 1rem;
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          line-height: 1.5;
+          color: rgb(255 255 255);
+        }
+
+        .aibannerSubtitle {
+          max-width: 1000px;
+          font-size: clamp(1rem, 4vw, 1.25rem);
+          font-weight: 500;
+          line-height: 1.5;
+          color: rgb(255 255 255 / 0.9);
+        }
+      }
+    }
+  }
+
+  .aiTbox {
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    @media (max-width: 768px) {
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .aiTitle {
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      line-height: clamp(1.5rem, 4vw, 2.5rem);
+      color: #1f3e85;
+    }
+
+    .aiTimes {
+      font-size: 0.875rem;
+      color: #4b5563;
+
+      @media (max-width: 768px) {
+        margin-top: 1rem;
+      }
+
+      span {
+        margin: 0 0.25rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1f3e85;
+      }
+    }
   }
 
   .aiContent {
     position: relative;
     margin: 0 auto;
+    padding: 0 1rem 1rem;
     width: 100%;
     max-width: 1400px;
 
     .aiContentSr {
       margin-bottom: 2rem;
-      padding:  2rem 1rem;
+      padding: 2rem 1rem;
       border-radius: 1rem;
       background-color: #fff;
       box-shadow:
@@ -92,11 +216,15 @@ const searchForm: any = ref({})
         i {
           margin-right: 0.5rem;
         }
+
+        @media (max-width: 768px) {
+          opacity: 1;
+        }
       }
     }
 
     .aiContentSc {
-      padding:  2rem 1rem;
+      padding: 2rem 1rem;
       border-radius: 1rem;
       background-color: #fff;
       box-shadow:
@@ -121,6 +249,12 @@ const searchForm: any = ref({})
         .aiCstImg {
           width: 30rem;
           height: 30rem;
+
+          @media (max-width: 768px) {
+            margin: 1rem 0;
+            width: 60%;
+            height: auto;
+          }
         }
       }
 
@@ -128,6 +262,10 @@ const searchForm: any = ref({})
         text-align: right;
         color: #a8abb2;
         font-size: 0.875rem;
+
+        @media (max-width: 768px) {
+          text-align: center;
+        }
       }
     }
   }

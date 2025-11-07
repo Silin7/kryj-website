@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import { authcodeApi, authloginApi, authinfoApi } from '@/api/modules/login'
+import { authcodeApi, authloginApi, authinfoApi } from '@/api/interface'
 
 const mobile: any = ref('')
 const password: any = ref('')
@@ -59,7 +59,6 @@ function loginByCoode() {
     window.localStorage.setItem('accessToken', res.data.accessToken)
     window.localStorage.setItem('refreshToken', res.data.refreshToken)
     window.localStorage.setItem('expiresTime', res.data.expiresTime)
-    window.localStorage.setItem('getCheckTime', res.data.getCheckTime)
     getAuthinfo()
   }).catch(() => {
     getCode()
@@ -74,7 +73,7 @@ function getAuthinfo() {
       message: '登录成功',
     })
     window.localStorage.setItem('userInfo', JSON.stringify(res.data))
-    pageJump('home')
+    pageJump(window.localStorage.getItem('redirectName') || 'home')
   })
 }
 

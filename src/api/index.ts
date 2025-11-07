@@ -29,18 +29,15 @@ api.interceptors.response.use(
     if (!response.data) {
       throw new Error()
     }
-    // 401 登录失效
-    else if (response.data && response.data.code === 401) {
-      ElMessage.error('登录信息失效，请重新登录')
-      router.push({
-        path: '/login',
-        query: {
-          redirect: router.currentRoute.value.path !== '/login' ? router.currentRoute.value.fullPath : undefined,
-        },
-      })
-    }
+    // // 401 登录失效
+    // else if (response.data && response.data.code === 401) {
+    //   ElMessage.error('登录信息失效，请重新登录')
+    //   router.push({
+    //     path: '/login',
+    //   })
+    // }
     // 其他错误
-    else if (response.data && response.data.code !== 0) {
+    else if (response.data?.code !== 0 && response.data?.code !== 401) {
       ElMessage.error(response.data.msg)
       return Promise.reject(response.data)
     }
