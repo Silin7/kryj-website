@@ -297,7 +297,7 @@ onBeforeUnmount(() => {
         span:hover {
           @media (min-width: 768px) {
             cursor: pointer;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -306,7 +306,7 @@ onBeforeUnmount(() => {
         }
 
         .aidNavigationSp {
-          color: rgb(22 93 255);
+          color: #1f3e85;
         }
       }
     }
@@ -367,7 +367,7 @@ onBeforeUnmount(() => {
           }
 
           .adictTag1 {
-            color: rgb(22 93 255);
+            color: #1f3e85;
             background-color: rgb(22 93 255 / 0.1);
           }
 
@@ -522,7 +522,7 @@ onBeforeUnmount(() => {
 
             i {
               font-size: 1.25rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
             }
           }
 
@@ -604,7 +604,7 @@ onBeforeUnmount(() => {
 
             i {
               font-size: 1.25rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
             }
           }
 
@@ -684,7 +684,7 @@ onBeforeUnmount(() => {
 
             i {
               font-size: 1.25rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
             }
           }
 
@@ -711,7 +711,7 @@ onBeforeUnmount(() => {
       padding: 2rem;
       border-radius: 1rem;
       color: #fff;
-      background-color: rgb(22 93 255);
+      background-color: #1f3e85;
 
       @media (max-width: 768px) {
         padding: 1rem;

@@ -390,7 +390,7 @@ const handleEnded = () => {
             }
 
             .resetBtn:hover {
-              background-color: rgb(22 93 255);
+              background-color: #1f3e85;
             }
           }
         }
@@ -502,7 +502,7 @@ const handleEnded = () => {
               margin-right: 0.75rem;
               width: 2rem;
               height: 2rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
               background-color: rgb(22 93 255 / 0.1);
               border-radius: 9999px;
             }
@@ -514,7 +514,7 @@ const handleEnded = () => {
               width: 2rem;
               height: 2rem;
               color: #fff;
-              background-color: rgb(22 93 255);
+              background-color: #1f3e85;
               border-radius: 9999px;
             }
 
@@ -660,13 +660,13 @@ const handleEnded = () => {
               .pdccgicPice {
                 line-height: 1.5rem;
                 font-weight: 700;
-                color: rgb(22 93 255);
+                color: #1f3e85;
               }
 
               button {
                 font-size: 0.875rem;
                 line-height: 1.25rem;
-                color: rgb(22 93 255);
+                color: #1f3e85;
               }
             }
           }

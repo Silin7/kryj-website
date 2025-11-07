@@ -173,7 +173,7 @@ onBeforeUnmount(() => {
 
       .more {
         font-weight: 500;
-        color: rgb(22 93 255);
+        color: #1f3e85;
 
         i {
           margin-left: 0.25rem;

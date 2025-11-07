@@ -177,7 +177,7 @@ onBeforeUnmount(() => {
         span:hover {
           @media (min-width: 768px) {
             cursor: pointer;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -186,7 +186,7 @@ onBeforeUnmount(() => {
         }
 
         .ndNavigationSp {
-          color: rgb(22 93 255);
+          color: #1f3e85;
         }
       }
     }
@@ -296,7 +296,7 @@ onBeforeUnmount(() => {
         @media (min-width: 768px) {
           cursor: pointer;
           color: #fff;
-          background-color: rgb(22 93 255);
+          background-color: #1f3e85;
         }
       }
     }
@@ -445,12 +445,12 @@ onBeforeUnmount(() => {
               font-weight: 500;
               line-height: 1.5rem;
               font-size: 0.875rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
 
               button {
                 margin-right: 0.5rem;
                 font-size: 0.875rem;
-                color: rgb(22 93 255);
+                color: #1f3e85;
               }
             }
           }

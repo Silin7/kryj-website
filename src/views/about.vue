@@ -403,7 +403,7 @@ onBeforeUnmount(() => {
         width: 5rem;
         height: 0.25rem;
         border-radius: 9999px;
-        background-color: rgb(22 93 255);
+        background-color: #1f3e85;
 
         @media (max-width: 768px) {
           margin: 1rem auto 2rem;
@@ -485,7 +485,7 @@ onBeforeUnmount(() => {
             margin-right: 1rem;
             font-size: 2.25rem;
             line-height: 2.5rem;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
 
           .introtLt {
@@ -527,7 +527,7 @@ onBeforeUnmount(() => {
             position: relative;
             padding-left: 2rem;
             padding-bottom: 2rem;
-            border-left: 2px solid rgb(22 93 255);
+            border-left: 2px solid #1f3e85;
 
             .introtRightItemD {
               position: absolute;
@@ -536,7 +536,7 @@ onBeforeUnmount(() => {
               height: 1rem;
               width: 1rem;
               border-radius: 9999px;
-              background-color: rgb(22 93 255);
+              background-color: #1f3e85;
             }
 
             .introtRightItemY {
@@ -580,7 +580,7 @@ onBeforeUnmount(() => {
       width: 5rem;
       height: 0.25rem;
       border-radius: 9999px;
-      background-color: rgb(22 93 255);
+      background-color: #1f3e85;
     }
 
     .achievementInfo {
@@ -723,7 +723,7 @@ onBeforeUnmount(() => {
         width: 5rem;
         height: 0.25rem;
         border-radius: 9999px;
-        background-color: rgb(22 93 255);
+        background-color: #1f3e85;
       }
 
       .businessInfo {
@@ -811,7 +811,7 @@ onBeforeUnmount(() => {
 
         button {
           font-weight: 500;
-          color: rgb(22 93 255);
+          color: #1f3e85;
 
           i {
             margin-left: 0.5rem;
@@ -930,7 +930,7 @@ onBeforeUnmount(() => {
       width: 6rem;
       height: 0.25rem;
       border-radius: 9999px;
-      background-color: rgb(22 93 255);
+      background-color: #1f3e85;
     }
 
     .mediaRow img {

@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
       //     padding: 2.5rem;
       //     // padding: 0.5rem 1rem;
       //     line-height: 1.5rem;
-      //     color: rgb(22 93 255);
+      //     color: #1f3e85;
       //     background-color: rgb(22 93 255 / 0.1);
       //     border-radius: 9999px;
 
@@ -257,7 +257,7 @@ onBeforeUnmount(() => {
             font-size: 1.5rem;
             line-height: 2rem;
             border-radius: 9999px;
-            color: rgb(22 93 255);
+            color: #1f3e85;
             background-color: rgb(22 93 255 / 0.1);
           }
 
@@ -288,7 +288,7 @@ onBeforeUnmount(() => {
             padding: 0.5rem 1.5rem;
             line-height: 1.5rem;
             color: #fff;
-            background-color: rgb(22 93 255);
+            background-color: #1f3e85;
             border-radius: 0.5rem;
           }
         }
@@ -334,7 +334,7 @@ onBeforeUnmount(() => {
       width: 5rem;
       height: 0.25rem;
       border-radius: 9999px;
-      background-color: rgb(22 93 255);
+      background-color: #1f3e85;
     }
 
     .gysInfo {

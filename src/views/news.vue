@@ -291,7 +291,7 @@ onBeforeUnmount(() => {
             margin: 0 0.75rem 0.75rem 0;
             padding: 0.5rem 1.25rem;
             color: #fff;
-            background-color: rgb(22 93 255);
+            background-color: #1f3e85;
             border: 1px solid rgb(243 244 246);
             border-radius: 9999px;
 
@@ -442,12 +442,12 @@ onBeforeUnmount(() => {
                   font-weight: 500;
                   line-height: 1.5rem;
                   font-size: 0.875rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
 
                   button {
                     margin-right: 0.5rem;
                     font-size: 0.875rem;
-                    color: rgb(22 93 255);
+                    color: #1f3e85;
                   }
                 }
               }

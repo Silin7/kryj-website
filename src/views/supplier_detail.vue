@@ -406,7 +406,7 @@ onBeforeUnmount(() => {
         span:hover {
           @media (min-width: 768px) {
             cursor: pointer;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -415,7 +415,7 @@ onBeforeUnmount(() => {
         }
 
         .sdNavigationSp {
-          color: rgb(22 93 255);
+          color: #1f3e85;
         }
       }
 
@@ -504,7 +504,7 @@ onBeforeUnmount(() => {
                 flex-shrink: 0;
                 font-size: 1rem;
                 width: 1rem;
-                color: rgb(22 93 255);
+                color: #1f3e85;
                 margin-right: 0.5rem;
               }
 
@@ -527,7 +527,7 @@ onBeforeUnmount(() => {
               padding: 0.25rem 0.75rem;
               background-color: rgb(22 93 255 / 0.1);
               border-radius: 9999px;
-              color: rgb(22 93 255);
+              color: #1f3e85;
             }
           }
         }
@@ -613,8 +613,8 @@ onBeforeUnmount(() => {
         }
 
         .sdclflAc {
-          color: rgb(22 93 255);
-          border-bottom: 2px solid rgb(22 93 255);
+          color: #1f3e85;
+          border-bottom: 2px solid #1f3e85;
         }
       }
 
@@ -680,7 +680,7 @@ onBeforeUnmount(() => {
               align-items: center;
               width: 3rem;
               height: 3rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
               background-color: rgb(22 93 255 / 0.1);
               border-radius: 0.5rem;
             }
@@ -761,7 +761,7 @@ onBeforeUnmount(() => {
               flex-shrink: 0;
               width: 3rem;
               height: 3rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
               background-color: rgb(22 93 255 / 0.1);
               border-radius: 0.5rem;
             }
@@ -804,7 +804,7 @@ onBeforeUnmount(() => {
                 flex-shrink: 0;
                 width: 2.5rem;
                 height: 2.5rem;
-                color: rgb(22 93 255);
+                color: #1f3e85;
                 background-color: rgb(22 93 255 / 0.1);
                 border-radius: 9999px;
               }
@@ -828,7 +828,7 @@ onBeforeUnmount(() => {
                   margin-bottom: 0.25rem;
                   font-weight: 500;
                   line-height: 1.5rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
                 }
               }
 
@@ -921,7 +921,7 @@ onBeforeUnmount(() => {
             margin: 0 0.75rem 0.75rem 0;
             padding: 0.5rem 1.25rem;
             color: #fff;
-            background-color: rgb(22 93 255);
+            background-color: #1f3e85;
             border: 1px solid rgb(243 244 246);
             border-radius: 9999px;
 
@@ -972,7 +972,7 @@ onBeforeUnmount(() => {
                 line-height: 1rem;
                 font-weight: 700;
                 color: #fff;
-                background-color: rgb(22 93 255);
+                background-color: #1f3e85;
               }
             }
 
@@ -1026,12 +1026,12 @@ onBeforeUnmount(() => {
                 font-weight: 500;
                 line-height: 1.5rem;
                 font-size: 0.875rem;
-                color: rgb(22 93 255);
+                color: #1f3e85;
 
                 button {
                   margin-right: 0.5rem;
                   font-size: 0.875rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
                 }
               }
             }
@@ -1088,7 +1088,7 @@ onBeforeUnmount(() => {
                 line-height: 1rem;
                 font-weight: 700;
                 color: #fff;
-                background-color: rgb(22 93 255);
+                background-color: #1f3e85;
               }
             }
 
@@ -1123,7 +1123,7 @@ onBeforeUnmount(() => {
 
                 .sdclCplbCprice {
                   font-weight: 700;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
                 }
 
                 .sdclCplbCright {
@@ -1132,12 +1132,12 @@ onBeforeUnmount(() => {
                   font-weight: 500;
                   line-height: 1.5rem;
                   font-size: 0.875rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
 
                   button {
                     margin-right: 0.5rem;
                     font-size: 0.875rem;
-                    color: rgb(22 93 255);
+                    color: #1f3e85;
                   }
                 }
               }
@@ -1161,7 +1161,7 @@ onBeforeUnmount(() => {
             }
 
             .sdclCplbTitle {
-              color: rgb(22 93 255);
+              color: #1f3e85;
             }
           }
         }

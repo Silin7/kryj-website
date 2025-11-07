@@ -401,7 +401,7 @@ onBeforeUnmount(() => {
         span:hover {
           @media (min-width: 768px) {
             cursor: pointer;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -410,7 +410,7 @@ onBeforeUnmount(() => {
         }
 
         .aidNavigationSp {
-          color: rgb(22 93 255);
+          color: #1f3e85;
         }
       }
     }
@@ -466,7 +466,7 @@ onBeforeUnmount(() => {
         }
 
         .adictTag1 {
-          color: rgb(22 93 255);
+          color: #1f3e85;
           background-color: rgb(22 93 255 / 0.1);
         }
 
@@ -544,7 +544,7 @@ onBeforeUnmount(() => {
 
           i {
             margin-right: 0.5rem;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -661,7 +661,7 @@ onBeforeUnmount(() => {
               margin-right: 0.75rem;
               width: 2rem;
               height: 2rem;
-              color: rgb(22 93 255);
+              color: #1f3e85;
               background-color: rgb(22 93 255 / 0.1);
               border-radius: 9999px;
             }
@@ -673,7 +673,7 @@ onBeforeUnmount(() => {
               width: 2rem;
               height: 2rem;
               color: #fff;
-              background-color: rgb(22 93 255);
+              background-color: #1f3e85;
               border-radius: 9999px;
             }
 
@@ -733,7 +733,7 @@ onBeforeUnmount(() => {
 
                 i {
                   margin-right: 0.5rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
                 }
               }
 
@@ -800,7 +800,7 @@ onBeforeUnmount(() => {
 
           i {
             margin-right: 0.5rem;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -930,7 +930,7 @@ onBeforeUnmount(() => {
             padding: 0.25rem 1rem;
             font-size: 0.75rem;
             line-height: 1rem;
-            color: rgb(22 93 255);
+            color: #1f3e85;
             background-color: rgb(22 93 255 / 0.1);
             border-radius: 9999px;
           }
@@ -951,7 +951,7 @@ onBeforeUnmount(() => {
           button {
             font-size: 0.875rem;
             line-height: 1.25rem;
-            color: rgb(22 93 255);
+            color: #1f3e85;
 
             i {
               margin-left: 0.25rem;

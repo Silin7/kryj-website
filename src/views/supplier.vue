@@ -332,7 +332,7 @@ onBeforeUnmount(() => {
           margin: 0 0.75rem 0.75rem 0;
           padding: 0.5rem 1.25rem;
           color: #fff;
-          background-color: rgb(22 93 255);
+          background-color: #1f3e85;
           border: 1px solid rgb(243 244 246);
           border-radius: 9999px;
 
@@ -483,7 +483,7 @@ onBeforeUnmount(() => {
                 i:first-child {
                   margin-right: 0.5rem;
                   font-size: 1rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
                 }
 
                 i:nth-child(2) {
@@ -504,7 +504,7 @@ onBeforeUnmount(() => {
                   padding: 0.25rem 0.5rem;
                   font-size: 0.75rem;
                   line-height: 1rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
                   background-color: rgb(22 93 255 / 0.1);
                   border-radius: 0.25rem;
                 }

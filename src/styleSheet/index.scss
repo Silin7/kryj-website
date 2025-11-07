@@ -106,7 +106,7 @@ p {
       .bannerLeftBtn {
         padding: 0.75rem 2rem;
         color: #fff;
-        background-color: rgb(22 93 255);
+        background-color: #1f3e85;
         border-radius: 9999px;
         box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
@@ -118,7 +118,7 @@ p {
       .bannerLeftBtn:hover {
         @media (min-width: 768px) {
           transform: scale(1.05);
-          box-shadow: 2px 2px 10px 0 rgb(22 93 255);
+          box-shadow: 2px 2px 10px 0 #1f3e85;
         }
       }
 

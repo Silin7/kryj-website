@@ -404,7 +404,7 @@ function convertSecondsToHMS(seconds: any) {
           span {
             margin-right: 0.25rem;
             font-weight: 700;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -415,7 +415,7 @@ function convertSecondsToHMS(seconds: any) {
 
           i {
             margin-right: 0.5rem;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
 
           .containerClassText {
@@ -459,7 +459,7 @@ function convertSecondsToHMS(seconds: any) {
             margin: 0 0.75rem 0.75rem 0;
             padding: 0.5rem 1.25rem;
             color: #fff;
-            background-color: rgb(22 93 255);
+            background-color: #1f3e85;
             border: 1px solid rgb(243 244 246);
             border-radius: 9999px;
 
@@ -602,7 +602,7 @@ function convertSecondsToHMS(seconds: any) {
                   i {
                     font-size: 1.5rem;
                     line-height: 2rem;
-                    color: rgb(22 93 255);
+                    color: #1f3e85;
                   }
                 }
 
@@ -624,7 +624,7 @@ function convertSecondsToHMS(seconds: any) {
 
                 .containerPiprogressBar {
                   height: 4px;
-                  background-color: rgb(22 93 255);
+                  background-color: #1f3e85;
                 }
               }
             }
@@ -649,7 +649,7 @@ function convertSecondsToHMS(seconds: any) {
                 .supplierPingFen {
                   font-weight: 700;
                   line-height: 1.75rem;
-                  color: rgb(22 93 255);
+                  color: #1f3e85;
                 }
 
                 .supplierPingFen2 {
@@ -829,7 +829,7 @@ function convertSecondsToHMS(seconds: any) {
           text-align: center;
           font-weight: 500;
           border-radius: 0.5rem;
-          color: rgb(22 93 255);
+          color: #1f3e85;
           background-color: rgb(243 244 246);
         }
 
@@ -912,7 +912,7 @@ function convertSecondsToHMS(seconds: any) {
 
           .containerHpice {
             font-weight: 700;
-            color: rgb(22 93 255);
+            color: #1f3e85;
           }
         }
 
@@ -928,10 +928,10 @@ function convertSecondsToHMS(seconds: any) {
           justify-content: center;
           align-items: center;
           font-weight: 500;
-          color: rgb(22 93 255);
+          color: #1f3e85;
 
           button {
-            color: rgb(22 93 255);
+            color: #1f3e85;
             line-height: 1.5rem;
           }
         }

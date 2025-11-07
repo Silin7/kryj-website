@@ -363,7 +363,7 @@ onMounted(() => {
       margin: 2rem auto 0;
       padding: 0.75rem 2rem;
       color: #fff;
-      background-color: rgb(22 93 255);
+      background-color: #1f3e85;
       border-radius: 9999px;
       box-shadow:
         0 10px 15px -3px rgb(0 0 0 / 0.1),
