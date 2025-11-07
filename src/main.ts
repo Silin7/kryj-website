@@ -9,6 +9,7 @@ const head = createHead()
 app.use(head)
 
 // 自定义样式 custom style
+import '@/styleSheet/animate.min.css'
 import '@/styleSheet/index.scss'
 
 // font-awesome style

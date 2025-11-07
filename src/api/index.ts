@@ -1,8 +1,6 @@
 import axios from 'axios'
-import router from '@/router/index'
 import { ElMessage } from 'element-plus'
 import { baseURL } from './baseConfig'
-import pageJump from '@/hooks/pageJump'
 
 const api = axios.create({
   baseURL,

@@ -7,9 +7,14 @@ import { fileURL } from '@/api/baseConfig'
 
 // 可视窗口宽度
 const windowWidth = ref(window.innerWidth)
+const windowScrollY = ref(window.scrollY)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
+}
+
+function handleScroll() {
+  windowScrollY.value = window.scrollY
 }
 
 // 合作单位
@@ -218,6 +223,7 @@ function getFlinktop() {
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
+  window.addEventListener('scroll', handleScroll)
   getVippartners()
   getAllaiapp()
   getFlinktop()
@@ -225,6 +231,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateWindowWidth)
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -234,70 +241,73 @@ onBeforeUnmount(() => {
       <!-- video -->
       <video v-if="windowWidth > 768" loop muted preload="auto" autoplay
         poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}" style="width: 100vw; height: auto">
-        <!-- <source src="http://www.silin7.cn/media/banner-2m.mp4" type="video/mp4" /> -->
         <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
       </video>
       <video v-else loop muted preload="auto" autoplay poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}"
         style="width: 100vw; height: 100vh">
-        <source src="http://www.silin7.cn/media/bannermb.mp4" type="video/mp4" />
+        <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
       </video>
-
-      <!-- 公司信息 -->
+      <!-- 公司简介
+       :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']"
+      -->
       <div class="featuresBox">
-        <div class="featuresImgTitle">公司信息</div>
+        <img src="@/assets/home/gongsi.jpg" class="featuresGsImg">
         <div class="featuresRounded">
-          <div class="featuresRoundedItem">
-            <div class="featuresRoundedTop">
-              <div class="featuresRoundedShu"></div>
-              <div class="featuresRoundedTitle">创建背景</div>
-            </div>
-            <div class="featuresRoundedInfo">
-              公司成立于2022年，总部位于济南，聚焦医学人工智能技术研发。核心团队由临床医学、合成化学、生物信息工程、AI算法等多领域专家组成，实现跨学科技术融合。核心团队由临床医学、合成化学、生物信息工程、AI算法等多领域专家组成，实现跨学科技术融合。
-            </div>
-          </div>
-          <div class="featuresRoundedItem">
-            <div class="featuresRoundedTop">
-              <div class="featuresRoundedShu"></div>
-              <div class="featuresRoundedTitle">涵盖范围</div>
-            </div>
-            <div class="featuresRoundedInfo">
-              技术领域‌：医学人工智能、类器官技术、多组学分析、智能药物模拟。
-            </div>
-          </div>
-          <div class="featuresRoundedItem">
-            <div class="featuresRoundedTop">
-              <div class="featuresRoundedShu"></div>
-              <div class="featuresRoundedTitle">应用对象‌</div>
-            </div>
-            <div class="featuresRoundedInfo">
-              医药企业‌：为创新药研发提供高效、精准的AI驱动解决方案；
-              科研机构‌：辅助缩短实验周期，降低研发成本；
-              临床研究团队‌：通过类器官与AI结合，提升药物验证的可靠性。
-            </div>
-          </div>
-          <div class="featuresRoundedItem">
-            <div class="featuresRoundedTop">
-              <div class="featuresRoundedShu"></div>
-              <div class="featuresRoundedTitle">系统创建‌</div>
-            </div>
-            <div class="featuresRoundedInfo">
-              医学AI药物筛选数据库‌：整合多源数据，加速靶点发现;
-              AI辅助药物验证模拟系统‌：预测药物活性与安全性，减少实验试错;
-              智能分子对接与体内模拟分析‌：优化药物设计，提升成药性;
-              将AI与类器官技术深度绑定，构建“多组学-AI-类器官”四位一体体系;
-              通过人工降噪技术提升数据质量，增强模型可靠性。
-            </div>
+          <div class="featuresRoundedTitle">公司简介</div>
+          <div class="featuresRoundedInfo">
+            公司自2022年成立，致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。
+            自主研发了医学人工智能药物筛选数据库平台、AI辅助药物验证模拟系统、智能药物分子对接与体内过程模拟分析等产品。同时将AI与类器官技术深度绑定，创新性地构建了"多组学-AI-人工降噪-类器官"多位一体的智能药物研发体系，彻底解决创新药研发过程中的药物发现困难、研发周期长、实验花费高以及成功率低的问题，结合专家团队进一步确认，提供高效、精准的一站式创新药物研发解决方案。
           </div>
         </div>
       </div>
 
+      <div class="platformsBox">
+        <el-carousel :interval="4000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
+          :height="windowWidth > 768 ? '34rem' : '38rem'">
+          <el-carousel-item>
+            <div class="platformsItem">
+              <img src="@/assets/home/platforms-1.png">
+              <div>
+                <p class="platformsItitle">医学人工智能药物筛选数据库平台</p>
+                <p class="platformsIinfo">
+                  医学人工智能药物筛选数据库平台是面向全球药企、科研机构的核心研发基础设施，以“打破数据孤岛、AI赋能精准筛选”为核心，整合多维度生物医学数据与前沿算法模型，为创新药研发提供从靶点验证到候选药物筛选的全链条数据支撑与智能分析服务，彻底解决传统筛选“数据零散、效率低下、命中率低”的行业痛点。
+                </p>
+              </div>
+            </div>
+          </el-carousel-item>
+          <el-carousel-item>
+            <div class="platformsItem">
+              <img src="@/assets/home/platforms-2.png">
+              <div>
+                <p class="platformsItitle">AI辅助药物验证模拟系统</p>
+                <p class="platformsIinfo">
+                  AI 辅助药物验证模拟系统是衔接药物筛选与实体实验的关键技术平台，聚焦创新药临床前验证环节，融合多物理场模拟、机器学习与多组学数据，构建 “虚拟验证 - 风险预判 -
+                  实验指导”的全流程辅助体系。通过替代部分高成本、高耗时的实体实验，解决传统验证 “周期长、成本高、风险难预判” 的痛点，为药企、科研机构提供高效、精准的临床前验证解决方案，助力候选药物快速推进至实验阶段。
+                </p>
+              </div>
+            </div>
+          </el-carousel-item>
+          <el-carousel-item>
+            <div class="platformsItem">
+              <img src="@/assets/home/platforms-3.png">
+              <div>
+                <p class="platformsItitle">智能药物分子对接与体内过程模拟分析</p>
+                <p class="platformsIinfo">
+                  在创新药研发的关键环节中，药物分子能否精准结合靶点蛋白、进入人体后能否有效发挥作用且规避毒性，是决定研发成败的核心。我司自主研发的智能药物分子对接与体内过程模拟分析系统，依托多领域技术融合优势，构建从
+                  “分子互作” 到 “体内代谢” 的全链条模拟体系，为药物研发提供 “提前预判、精准优化” 的核心支撑，大幅降低实验试错成本，加速候选药物筛选进程。</p>
+              </div>
+            </div>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+
       <!-- 委托开发 AI平台 -->
       <div class="wtkfaiBox">
-        <div class="wtkfaiItem">
+        <div class="wtkfaiItem animate__animated">
           <div class="wtkfaiTitle">委托开发</div>
           <img src="@/assets/home/wtkf.png" alt="" />
         </div>
-        <div class="wtkfaiItem">
+        <div class="wtkfaiItem animate__animated">
           <img src="@/assets/home/aipt.png" alt="" />
           <div class="wtkfaiTitle">AI平台</div>
         </div>
@@ -363,81 +373,58 @@ onBeforeUnmount(() => {
 
   .featuresBox {
     margin: 6rem auto 0;
+    padding: 1.5rem;
     width: 100%;
     max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f4f9;
+    box-sizing:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    border-radius: 1rem;
 
     @media (max-width: 768px) {
-      margin: 0 auto;
+      margin: 0 1rem;
+      padding: 1rem;
+      width: calc(100% - 2rem);
     }
 
-    .featuresImgTitle {
-      margin: 0 auto;
-      padding-left: 1.5rem;
-      width: 100%;
-      height: 8rem;
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      line-height: 8rem;
-      font-weight: 700;
-      color: #1f3e85;
-      background-color: #ebf0fb;
+    .featuresGsImg {
+      width: 30rem;
+      border-radius: 0.5rem;
 
       @media (max-width: 768px) {
-        padding-left: 1rem;
-        height: 5rem;
-        line-height: 5rem;
+        width: 100%;
       }
     }
 
     .featuresRounded {
-      margin: 0 auto;
-      padding: 2.5rem;
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      border-radius: 0 0 1rem 1rem;
-      box-sizing:
-        0 10px 15px -3px rgb(0 0 0 / 0.1),
-        0 4px 6px -4px rgb(0 0 0 / 0.1);
-      background-color: #f1f4f9;
+      width: calc(100% - 31.5rem);
 
       @media (max-width: 768px) {
-        padding: 1rem 1.5rem;
+        width: 100%;
       }
 
-      .featuresRoundedItem {
-        margin-bottom: 2.5rem;
-        width: 100%;
+      .featuresRoundedTitle {
+        margin-bottom: 1rem;
+        font-size: clamp(1.25rem, 4vw, 1.5rem);
+        line-height: 1;
+        font-weight: 700;
+        text-align: center;
+        color: #1f3e85;
 
-        .featuresRoundedTop {
-          display: flex;
-          align-items: center;
-          margin-bottom: 1.5rem;
-
-          .featuresRoundedShu {
-            width: 0.5rem;
-            height: 2rem;
-            background-color: #1f3e85;
-            border-radius: 0.25rem;
-
-            @media (max-width: 768px) {
-              height: 1.5rem;
-            }
-          }
-
-          .featuresRoundedTitle {
-            padding-left: 1rem;
-            font-size: clamp(1.25rem, 4vw, 1.5rem);
-            line-height: 2rem;
-            font-weight: 700;
-            color: #1f3e85;
-          }
+        @media (max-width: 768px) {
+          margin-top: 1rem;
         }
+      }
 
-        .featuresRoundedInfo {
-          font-size: clamp(1rem, 4vw, 1.25rem);
-          color: #4b5563;
-        }
+      .featuresRoundedInfo {
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        line-height: 1.5;
+        color: #4b5563;
       }
     }
   }
@@ -838,6 +825,57 @@ onBeforeUnmount(() => {
           animation: jumpUpwards 300ms ease-in-out forwards;
         }
       }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.platformsBox {
+  position: relative;
+  margin: 6rem auto 0;
+  width: 100%;
+  max-width: 1400px;
+
+  @media (max-width: 768px) {
+    margin: 2rem auto 0;
+    padding: 1rem;
+  }
+
+  .el-carousel__item {
+    background-color: #f1f4f9;
+    border-radius: 1rem;
+  }
+
+  .platformsItem {
+    padding: 1rem 4rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    color: #475669;
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+
+    img {
+      width: 16rem;
+      height: 16rem;
+    }
+
+    .platformsItitle {
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      color: #1f3e85;
+      font-weight: 700;
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+    }
+
+    .platformsIinfo {
+      line-height: 1.5;
+      color: #475669;
     }
   }
 }
