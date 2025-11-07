@@ -1,19 +1,27 @@
 <script setup lang="ts">
-import { onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import {
-  baseregisterApi,
-} from '@/api/modules/login'
+import { authcodeApi, authregisterApi } from '@/api/modules/login'
 
 const isreadRuler: any = ref(false)
 const userUnit: any = ref('')
 const userPost: any = ref('')
 const mobile: any = ref('')
 const password: any = ref('')
+const password2: any = ref('')
 const captchaVerification: any = ref('')
 
+// 获取验证码
+const uuid: any = ref('')
+const codeImg: any = ref('')
 function getCode() {
+  authcodeApi().then((res: any) => {
+    if (res?.code === 0) {
+      uuid.value = res.data.uuid
+      codeImg.value = 'data:image/gif;base64,' + res.data.img
+    }
+  })
 }
 
 // 创建账号
@@ -60,6 +68,20 @@ function ceateAccount() {
     })
     return
   }
+  if (!password2.value) {
+    ElMessage({
+      type: 'error',
+      message: '请再次输入密码',
+    })
+    return
+  }
+  if (password.value !== password2.value) {
+    ElMessage({
+      type: 'error',
+      message: '两次密码输入不一致',
+    })
+    return
+  }
   if (!captchaVerification.value) {
     ElMessage({
       type: 'error',
@@ -74,25 +96,27 @@ function ceateAccount() {
     })
     return
   }
-  getBaseregister()
-}
-
-// 手机号注册
-function getBaseregister() {
-  baseregisterApi({
+  authregisterApi({
+    uuid: uuid.value,
+    userUnit: userUnit.value,
+    userPost: userPost.value,
     mobile: mobile.value,
     password: password.value,
     captchaVerification: captchaVerification.value,
-  }).then((res: any) => {
-    if (res) {
-      ElMessage({
-        type: 'success',
-        message: '账号创建成功',
-      })
-      pageJump('login')
-    }
+  }).then(() => {
+    ElMessage({
+      type: 'success',
+      message: '账号创建成功',
+    })
+    pageJump('login')
+  }).catch(() => {
+    getCode()
   })
 }
+
+onMounted(() => {
+  getCode()
+})
 </script>
 
 <template>
@@ -120,14 +144,14 @@ function getBaseregister() {
       </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd2.png" alt="" />
-        <el-input type="password" show-password v-model="password" placeholder="请再次输入密码" clearable />
+        <el-input type="password" show-password v-model="password2" placeholder="请再次输入密码" clearable />
       </div>
       <div class="frsc">
         <div class="fromItem frsc" style="width: calc(100% - 130px)">
           <img src="@/assets/register/yzm.png" alt="" />
           <el-input v-model="captchaVerification" placeholder="请输入验证码" clearable />
         </div>
-        <img src="@/assets/register/yzmdemo.png" alt="验证码" class="yzmStyle">
+        <img :src="codeImg" alt="" class="yzmStyle" @click="getCode" />
       </div>
       <div class="stateMent">
         <img v-if="isreadRuler" src="@/assets/register/checked.png" alt="" @click="isreadRuler = !isreadRuler" />
@@ -136,11 +160,13 @@ function getBaseregister() {
         <span @click="
           pageJump('article_detail', {
             theurl: 'user-service-agreement',
-          })">《科睿易晶用户服务协议》</span>和
+          })
+          ">《科睿易晶用户服务协议》</span>和
         <span @click="
           pageJump('article_detail', {
             theurl: 'privacy-policy-statement',
-          })">《科睿易晶隐私政策声明》</span>
+          })
+          ">《科睿易晶隐私政策声明》</span>
       </div>
       <button class="createAccount" @click="ceateAccount">创建账号</button>
       <div class="gologin">已有账号？<span @click="pageJump('login')">立即登录</span></div>

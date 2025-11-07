@@ -14,72 +14,56 @@ function updateWindowWidth() {
 }
 
 // 用户端-获取所有启用的板块位置（含完整字段，按排序升序、创建时间倒序）
-const positionid: any = ref('')
-const bannerData: any = ref([])
+const bannerData: any = ref({
+  page_id: 7,
+  title: 'AI赋能应用banner',
+  imgurl: '/uploads/default/cba299972a0d4c8394b0efe4fcee1d06.jpg',
+  istourl: false,
+  url: '',
+  sort: 0,
+  havechar: 0,
+  maintitle: 'AI赋能建筑业 开启智能建造新时代',
+  subtitle: '',
+  description:
+    '当前，以DeepSeek、通义千问等为代表的国产大模型加速发展，推动AI深度融入建筑业，在工程设计、施工建造和运营维护等环节实现创新应用，助力优化资源配置、提升生产效率，加速行业智能化转型与产业升级。',
+  leftbtn: '',
+  leftbtn_url: '',
+  rightbtn: '',
+  rightbtn_url: '',
+  id: 3,
+  page_name: 'AI赋能应用',
+  created_at: '2025-08-22T15:56:17',
+  updated_at: '2025-10-25T15:32:57',
+  deleted_at: null,
+})
 
-function getSecpositions() {
-  secpositionsApi().then((res: any) => {
-    if (res && res.length > 0) {
-      for (let i = 0; i < res.length; i++) {
-        const item = res[i]
-        if (item.url === window.localStorage.getItem('selectedName')) {
-          positionid.value = item.id
-          getBannerlist()
-        }
-        // 代表成果
-        if (item.url === 'aboutresult') {
-          getSeccontentlist1(item.id)
-        }
-        // 核心业务
-        if (item.url === 'corebusiness') {
-          getSeccontentlist2(item.id)
-        }
-      }
-    }
-  })
-}
-
-function getBannerlist() {
-  // 用户端-按板块位置ID获取所有启用的Banner（含位置名称）
-  bannerlistApi(positionid.value).then((res: any) => {
-    bannerData.value = res[0]
-  })
-  // 用户端-根据页面ID（page_id）获取启用的SEO配置详情（含页面名称）
-  syspseoApi(positionid.value).then((res: any) => {
-    if (res) {
-      useHead({
-        title: res.page_name,
-        meta: [
-          { name: 'description', content: res.description },
-          { name: 'keywords', content: res.keywords },
-        ]
-      })
-    }
-  })
-}
-
-// 代表成果
-const seccontentList1: any = ref([])
-
-function getSeccontentlist1(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    seccontentList1.value = res
-  })
-}
-
-// 核心业务
-const seccontentList2: any = ref([])
-
-function getSeccontentlist2(id: any) {
-  seccontentlistApi(id).then((res: any) => {
-    seccontentList2.value = res
-  })
-}
-
+const seccontentList1: any = ref([
+  {
+    touxiang: 'https://www.healthcarecapital.com.cn/upload/files/default/image/202109/1b674ac0-cfe0-4d2a-a47f-ab2b8e21d11c.jpg',
+    xingming: '测试名',
+    zhiwei: '董事长兼CEO',
+    jianjie: ' 在中国医疗健康行业有超过20年的医疗健康项目投资和医院运营管理经验。2014年1月创立浩悦资本，在生物医药、创新医疗器械、IVD与生命科学、健康服务与智慧医疗等领域完成了上百个私募融资与并购重组项目。曾任华兴资本医疗健康行业负责人和远东宏信医疗健康部门投资管理部负责人。比利时根特大学市场分析荣誉硕士。 ',
+  },
+  {
+    touxiang: 'https://www.healthcarecapital.com.cn/upload/files/default/image/202109/3716d07c-a5d1-4e0d-bbf4-e609131a17b6.jpg',
+    xingming: '测试名',
+    zhiwei: '董事长兼CEO',
+    jianjie: ' 在中国医疗健康行业有超过20年的医疗健康项目投资和医院运营管理经验。2014年1月创立浩悦资本，在生物医药、创新医疗器械、IVD与生命科学、健康服务与智慧医疗等领域完成了上百个私募融资与并购重组项目。曾任华兴资本医疗健康行业负责人和远东宏信医疗健康部门投资管理部负责人。比利时根特大学市场分析荣誉硕士。 ',
+  }, {
+    touxiang: 'https://www.healthcarecapital.com.cn/upload/files/default/image/202404/954ab4b7-cb84-4bfd-9663-810138918d95.jpg',
+    xingming: '测试名',
+    zhiwei: '董事长兼CEO',
+    jianjie: ' 在中国医疗健康行业有超过20年的医疗健康项目投资和医院运营管理经验。2014年1月创立浩悦资本，在生物医药、创新医疗器械、IVD与生命科学、健康服务与智慧医疗等领域完成了上百个私募融资与并购重组项目。曾任华兴资本医疗健康行业负责人和远东宏信医疗健康部门投资管理部负责人。比利时根特大学市场分析荣誉硕士。 ',
+  }, {
+    touxiang: 'https://www.healthcarecapital.com.cn/upload/files/default/image/202109/1b674ac0-cfe0-4d2a-a47f-ab2b8e21d11c.jpg',
+    xingming: '测试名',
+    zhiwei: '董事长兼CEO',
+    jianjie: ' 在中国医疗健康行业有超过20年的医疗健康项目投资和医院运营管理经验。2014年1月创立浩悦资本，在生物医药、创新医疗器械、IVD与生命科学、健康服务与智慧医疗等领域完成了上百个私募融资与并购重组项目。曾任华兴资本医疗健康行业负责人和远东宏信医疗健康部门投资管理部负责人。比利时根特大学市场分析荣誉硕士。 ',
+  }
+])
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
-  getSecpositions()
 })
 
 onBeforeUnmount(() => {
@@ -91,7 +75,7 @@ onBeforeUnmount(() => {
   <div>
     <div class="aboutPage">
       <!-- BANNER -->
-      <!-- <div class="abbannerBox" @click="windowOpen(bannerData.url, bannerData.istourl)">
+      <div class="abbannerBox" @click="windowOpen(bannerData.url, bannerData.istourl)">
         <img :src="fileURL + bannerData.imgurl" alt="abbanner" />
         <div class="abbannerAbsolute">
           <div class="abbannerContent">
@@ -99,7 +83,7 @@ onBeforeUnmount(() => {
             <div class="abbannerSubtitle">工程项目数字化服务与产品的国家高新技术企业</div>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- 公司简介 -->
       <div class="introtOut">
         <div class="introtBox">
@@ -120,7 +104,7 @@ onBeforeUnmount(() => {
                 <li class="licolor2">信用认证企业</li>
                 <li class="licolor3">行业科学技术奖</li>
                 <li class="licolor1">20+专业书籍参编</li>
-                <!-- <li class="licolor2">主流媒体报道</li> -->
+                <!-- <li class="licolor2">主流毕业院校&从业经历</li> -->
               </ul>
               <div class="frsc">
                 <i class="fa fa-bullseye"></i>
@@ -157,7 +141,7 @@ onBeforeUnmount(() => {
               <div class="introtRightItem">
                 <div class="introtRightItemD"></div>
                 <div class="introtRightItemY">2025年7月</div>
-                <div class="introtRightItemT">获得国家行业科学技术奖，被多家主流媒体报道</div>
+                <div class="introtRightItemT">获得国家行业科学技术奖，被多家主流毕业院校&从业经历</div>
               </div>
               <div class="introtRightItem">
                 <div class="introtRightItemD"></div>
@@ -168,14 +152,14 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
-      <!-- 代表成果 -->
+      <!-- 我们的团队 -->
       <div class="achievementBox">
-        <div class="achievementTitle">代表成果</div>
+        <div class="achievementTitle">我们的团队</div>
         <div class="achievementHeng"></div>
-        <div class="achievementInfo">在实践探索中，我们不断突破创新，取得了丰硕成果</div>
+        <div class="achievementInfo">平均15年产业研究、基金投资和企业管理经验 </div>
         <div class="achievementRidbox">
           <div v-for="(item, index) in seccontentList1" :key="index" class="achievementRiditem">
-            <img :src="fileURL + item.secimg" alt="" style="width: 100%; height: 12rem" />
+            <img :src="item.touxiang" alt="" style="width: 100%; height: 20rem" />
             <div class="achievementRidimgbox">
               <div class="achievementRidimgfx">
                 <div class="achievementRidimgFrsc">
@@ -195,10 +179,10 @@ onBeforeUnmount(() => {
                     style="color: rgb(22 163 74); background-color: rgb(220 252 231)">
                     <i class="fa fa-certificate"></i>
                   </div>
-                  <div class="achievementRidtitle">{{ item.title }}</div>
+                  <div class="achievementRidtitle">{{ item.xingming }}</div>
                 </div>
                 <div class="achievementGridinfo">
-                  {{ item.descriptioncontent }}
+                  {{ item.jianjie }}
                 </div>
               </div>
             </div>
@@ -206,7 +190,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <!-- 核心业务 -->
-      <div class="businessOut">
+      <!-- <div class="businessOut">
         <div class="businessBox">
           <div class="businessTitle">核心业务</div>
           <div class="businessHeng"></div>
@@ -218,43 +202,17 @@ onBeforeUnmount(() => {
                   <div class="frsc">
                     <img :src="fileURL + item.secimg" alt=""
                       style="margin-right: 1rem; width: 4rem; height: 4rem; border-radius: 0.75rem;" />
-                    <!-- <div class="serviceCardItemIcon frcc">
-                      <i class="fa fa-video-camera"></i>
-                    </div> -->
                     <div class="serviceCardItemTt">{{ item.title }}</div>
                   </div>
                   <div class="serviceCardItemSub">
                     {{ item.descriptioncontent }}
                   </div>
-                  <!-- <div class="serviceCardItemYycj">应用场景：</div>
-                  <div class="serviceCardItemJsbox">
-                    <div class="serviceCardItemJsitem">
-                      <i class="fa fa-check-circle"></i>
-                      <span>工程新技术普及教育视频</span>
-                    </div>
-                    <div class="serviceCardItemJsitem">
-                      <i class="fa fa-check-circle"></i>
-                      <span>BIM软件实操教学系列</span>
-                    </div>
-                    <div class="serviceCardItemJsitem">
-                      <i class="fa fa-check-circle"></i>
-                      <span>工程数字化案例解析视频</span>
-                    </div>
-                    <div class="serviceCardItemJsitem">
-                      <i class="fa fa-check-circle"></i>
-                      <span>行业标准解读视频课程</span>
-                    </div>
-                  </div>
-                  <button>
-                    <span>查看案例</span>
-                    <i class="fa fa-arrow-right"></i>
-                  </button> -->
                 </div>
               </el-col>
             </el-row>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- 未来展望 -->
       <div class="futureOut">
         <div class="futureBox">
@@ -262,10 +220,10 @@ onBeforeUnmount(() => {
           <div class="futureHeng"></div>
           <div class="futureCardBox">
             <div class="futureCardItem">
-              进入"十四五"发展新阶段，山东科睿易晶生物技术有限公司将以加快数字化发展为契机，聚焦BIM、CIM技术，实施全面数字化转型。
+              进入"十四五"公司自2022年成立，致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。
             </div>
             <div class="futureCardItem">
-              我们将继续走智能化和智慧化发展道路，为推进和谐共生的数字生态，贡献匠心智造的力量，助力建筑行业实现高质量发展。
+              自主研发了医学人工智能药物筛选数据库平台、AI辅助药物验证模拟系统、智能药物分子对接与体内过程模拟分析等产品。同时将AI与类器官技术深度绑定，创新性地构建了"多组学-AI-人工降噪-类器官"多位一体的智能药物研发体系，彻底解决创新药研发过程中的药物发现困难、研发周期长、实验花费高以及成功率低的问题，结合专家团队进一步确认，提供高效、精准的一站式创新药物研发解决方案。
             </div>
           </div>
           <div class="futureRow">
@@ -274,7 +232,7 @@ onBeforeUnmount(() => {
               <div class="futureColText">专业团队</div>
             </div>
             <div class="futureColBox">
-              <div class="futureColNum">500+</div>
+              <div class="futureColNum">99+</div>
               <div class="futureColText">服务项目</div>
             </div>
             <div class="futureColBox">
@@ -282,15 +240,15 @@ onBeforeUnmount(() => {
               <div class="futureColText">专业书籍</div>
             </div>
             <div class="futureColBox">
-              <div class="futureColNum">9年+</div>
+              <div class="futureColNum">3年+</div>
               <div class="futureColText">行业深耕</div>
             </div>
           </div>
         </div>
       </div>
-      <!-- 媒体报道 -->
+      <!-- 毕业院校&从业经历 -->
       <div class="mediaBox">
-        <div class="mediaTitle">媒体报道</div>
+        <div class="mediaTitle">毕业院校&从业经历</div>
         <div class="mediaHeng"></div>
         <el-row :gutter="16" class="mediaRow">
           <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
@@ -306,9 +264,9 @@ onBeforeUnmount(() => {
             <img src="@/assets/zhejiangdaily.png" alt="" />
           </el-col>
         </el-row>
-        <div class="mediaCard">
+        <!-- <div class="mediaCard">
           <p>
-            "山东科睿易晶生物技术有限公司在新型城市基础设施建设领域崭露头角，其工程数字化解决方案为传统建筑行业注入了新的活力。"
+            "山东科睿易晶生物技术有限公司致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。"
           </p>
           <div class="frsc">
             <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="" class="mediaAvatal" />
@@ -317,7 +275,7 @@ onBeforeUnmount(() => {
               <div class="mediaTv">山东电视台经济频道</div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -325,98 +283,101 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .aboutPage {
+  overflow-x: hidden;
   min-height: calc(100vh - 120px);
   background-color: #f9fafb;
-  overflow-x: hidden;
 
-  // .abbannerBox {
-  //   position: relative;
-  //   padding-top: 80px;
-  //   width: 100vw;
+  .abbannerBox {
+    position: relative;
+    padding-top: 100px;
+    width: 100vw;
+    height: 550px;
 
-  //   @media (max-width: 768px) {
-  //     padding-top: 64px;
-  //   }
+    @media (max-width: 768px) {
+      padding-top: 64px;
+    }
 
-  //   img {
-  //     width: 100vw;
-  //     height: 368px;
-  //   }
+    img {
+      width: 100vw;
+      height: 450px;
+    }
 
-  //   .abbannerAbsolute {
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     z-index: 2;
-  //     width: 100vw;
+    .abbannerAbsolute {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 100vw;
 
-  //     .abbannerContent {
-  //       margin: 0 auto;
-  //       padding: 10rem 2rem 0;
-  //       width: 100%;
-  //       max-width: 1536px;
+      .abbannerContent {
+        margin: 0 auto;
+        padding: 100px 2rem 0;
+        width: 100%;
+        max-width: 1400px;
+        height: 550px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
 
-  //       @media (max-width: 768px) {
-  //         padding: 6rem 1rem 0;
-  //       }
+        .abbannerTitle {
+          margin-bottom: 1.5rem;
+          font-size: clamp(2rem, 4vw, 3rem);
+          font-weight: 700;
+          line-height: 1.25;
+          color: rgb(255 255 255);
+        }
 
-  //       .abbannerTitle {
-  //         margin-bottom: 1.5rem;
-  //         font-size: clamp(2rem, 4vw, 3rem);
-  //         font-weight: 700;
-  //         line-height: 1.25;
-  //         color: rgb(255 255 255);
-  //       }
+        .abbannerSubtitle {
+          margin-bottom: 2rem;
+          max-width: 60rem;
+          font-size: clamp(1rem, 4vw, 1.25rem);
+          font-weight: 500;
+          color: rgb(255 255 255 / 0.9);
+        }
 
-  //       .abbannerSubtitle {
-  //         margin-bottom: 2rem;
-  //         max-width: 42rem;
-  //         font-size: clamp(1.25rem, 4vw, 1.5rem);
-  //         font-weight: 500;
-  //         color: rgb(255 255 255 / 0.9);
-  //       }
+        .abbannerJgkbtn {
+          padding: 0.75rem 2rem;
+          color: #fff;
+          background-color: #1f3e85;
+          border-radius: 9999px;
+          box-shadow:
+            0 10px 15px -3px rgb(0 0 0 / 0.1),
+            0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-  //       .abbannerJgkbtn {
-  //         padding: 0.75rem 2rem;
-  //         color: #fff;
-  //         background-color: rgb(22 93 255);
-  //         border-radius: 9999px;
-  //         box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+          @media (max-width: 768px) {
+            padding: 0.75rem 1.5rem;
+          }
+        }
 
-  //         @media (max-width: 768px) {
-  //           padding: 0.75rem 1.5rem;
-  //         }
-  //       }
+        .abbannerJgkbtn:hover {
+          @media (min-width: 768px) {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 10px 0 #1f3e85;
+          }
+        }
 
-  //       .abbannerJgkbtn:hover {
-  //         @media (min-width: 768px) {
-  //           transform: scale(1.05);
-  //           box-shadow: 2px 2px 10px 0 rgb(22 93 255);
-  //         }
-  //       }
+        .abbannerJjfabtn {
+          margin-left: 20px;
+          padding: 0.75rem 2rem;
+          color: #fff;
+          background-color: rgba(255 255 255 / 0.2);
+          border: 1px solid rgba(255 255 255 / 0.3);
+          border-radius: 9999px;
 
-  //       .abbannerJjfabtn {
-  //         margin-left: 20px;
-  //         padding: 0.75rem 2rem;
-  //         color: #fff;
-  //         background-color: rgba(255 255 255 / 0.2);
-  //         border: 1px solid rgba(255 255 255 / 0.3);
-  //         border-radius: 9999px;
+          @media (max-width: 768px) {
+            padding: 0.75rem 1.5rem;
+          }
+        }
 
-  //         @media (max-width: 768px) {
-  //           padding: 0.75rem 1.5rem;
-  //         }
-  //       }
-
-  //       .abbannerJjfabtn:hover {
-  //         @media (min-width: 768px) {
-  //           transform: scale(1.05);
-  //           box-shadow: 2px 2px 10px 0 rgba(255 255 255 / 0.2);
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+        .abbannerJjfabtn:hover {
+          @media (min-width: 768px) {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 10px 0 rgba(255 255 255 / 0.2);
+          }
+        }
+      }
+    }
+  }
 
   .introtOut {
     padding: 6.25rem 0 2rem;
@@ -700,13 +661,13 @@ onBeforeUnmount(() => {
             font-size: 1rem;
             line-height: 1.5rem;
             color: rgb(75 85 99);
-            height: 3rem;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            // height: 3rem;
+            // display: -webkit-box;
+            // -webkit-box-orient: vertical;
+            // -webkit-line-clamp: 3;
+            // line-clamp: 3;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
           }
         }
       }

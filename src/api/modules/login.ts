@@ -1,48 +1,23 @@
 import api from '@/api/index'
 
-// 发送手机验证码
-export function sendverificationcodeApi(data: any) {
-  return api.post('/api/client/sms/sms/send-verification-code', null, {
-    params: {
-      ...data,
-    },
-  })
+// 验证码
+export function authcodeApi() {
+  return api.get('/app-api/member/auth/code')
 }
 
-// 验证手机验证码
-export function verifyverificationcodeApi(data: any) {
-  return api.post('/api/client/sms/sms/verify-verification-code', null, {
-    params: {
-      ...data,
-    },
-  })
+// 注册
+export function authregisterApi(data: any) {
+  return api.post('/app-api/member/auth/register', data)
 }
 
-// 手机号注册
-export function baseregisterApi(data: any) {
-  return api.post('/api/client/base/register', null, {
-    params: {
-      ...data,
-    },
-  })
+// 登录
+export function authloginApi(data: any) {
+  return api.post('/app-api/member/auth/login', data)
 }
 
-// 验证码登录
-export function baselogincodeApi(data: any) {
-  return api.post('/api/client/base/login/code', null, {
-    params: {
-      ...data,
-    },
-  })
-}
-
-// 密码登录
-export function baseloginpwdApi(data: any) {
-  return api.post('/api/client/base/login/password', null, {
-    params: {
-      ...data,
-    },
-  })
+// 用户信息
+export function authinfoApi() {
+  return api.post('/app-api/member/auth/get')
 }
 
 // 找回密码

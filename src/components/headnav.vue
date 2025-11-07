@@ -54,11 +54,15 @@ function menuMouseleave() {
 }
 
 // 登陆后的用户信息
-const userInfo: any = ref({})
+const userInfo: any = ref(
+  window.localStorage.getItem('userInfo')
+    ? JSON.parse(window.localStorage.getItem('userInfo') as string)
+    : {},
+)
 
 function getUserInfo() {
-  if (window.localStorage.getItem('userinfo')) {
-    userInfo.value = JSON.parse(window.localStorage.getItem('userinfo') as string)
+  if (window.localStorage.getItem('userInfo')) {
+    userInfo.value = JSON.parse(window.localStorage.getItem('userInfo') as string)
   } else {
     userInfo.value = {}
   }
@@ -80,7 +84,7 @@ function logoutFunction() {
           })
           menuChildShow.value = false
           window.localStorage.removeItem('token')
-          window.localStorage.removeItem('userinfo')
+          window.localStorage.removeItem('userInfo')
           window.localStorage.removeItem('permission')
           pageJump('login')
         }
@@ -117,23 +121,32 @@ onBeforeUnmount(() => {
   <div>
     <div :class="[windowScrollY === 0 ? 'headNoMove' : 'headMoved', 'headPositon']">
       <div class="headFlex">
-        <img src="@/assets/logo/logo-21.jpg" alt="logo" class="headLogo" @click="pageJump('home')" />
+        <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/logo/logo-16-9-w.png" alt="logo"
+          class="headLogo" @click="pageJump('home')" />
+        <img v-else src="@/assets/logo/logo-16-9.png" alt="logo" class="headLogo" @click="pageJump('home')" />
         <template v-if="windowWidth > 1200">
           <div class="headNav">
             <div v-for="(item, index) in menuList" :key="index" class="menuItem" @mouseenter="menuMouseenter(item)"
               @mouseleave="menuMouseleave" @click="tabRouterPush(item)">
-              <img src="@/assets/header/yanhua_l.png" alt="yanhua-l" class="menuYanhua"
+              <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_bz2.png"
+                class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
+              <img v-else src="@/assets/header/cb_lz2.png" class="menuYanhua"
                 :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
               <div class="menuTitle" :style="selectedTab === item.name ? 'opacity: 1;' : ''">
-                {{ item.title }}
+                <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ item.title
+                  }}</span>
               </div>
-              <img src="@/assets/header/yanhua_r.png" alt="yanhua-r" class="menuYanhua"
+              <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_by2.png"
+                class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
+              <img v-else src="@/assets/header/cb_ly2.png" class="menuYanhua"
                 :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
             </div>
           </div>
-          <div v-if="userInfo.name" ref="buttonRef" class="userName" v-click-outside="onClickOutside">
-            <i class="fa fa-user-circle mr-2"></i>
-            <span>{{ userInfo.name }}</span>
+          <div v-if="userInfo.mobile" ref="buttonRef" class="userName" v-click-outside="onClickOutside">
+            <i class="fa fa-user-circle mr-2"
+              :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''"></i>
+            <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ userInfo.mobile
+              }}</span>
             <el-popover placement="bottom" :virtual-ref="buttonRef" virtual-triggering :width="160" trigger="click">
               <div>
                 <!-- <div class="popoverItem" @click="pageJump('user-index')">用户中心</div> -->
@@ -141,7 +154,9 @@ onBeforeUnmount(() => {
               </div>
             </el-popover>
           </div>
-          <button v-else class="headLogin" @click="pageJump('login')">登录/注册</button>
+          <button v-else class="headLogin" @click="pageJump('login')">
+            <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">登录/注册</span>
+          </button>
         </template>
         <div v-else class="drawerIcon" @click="drawerVisible = true">
           <i class="fa fa-bars"></i>
@@ -151,9 +166,9 @@ onBeforeUnmount(() => {
 
     <!-- 移动端 抽屉 -->
     <el-drawer v-model="drawerVisible" :with-header="false" direction="rtl" size="80%" class="mobiledrawer">
-      <div v-if="userInfo.name" class="drawerTitle">
+      <div v-if="userInfo.mobile" class="drawerTitle">
         <p>欢迎您，</p>
-        <p>{{ userInfo.name }}</p>
+        <p>{{ userInfo.mobile }}</p>
       </div>
       <div v-else class="drawerTitle">
         <p>您好，</p>
@@ -166,11 +181,11 @@ onBeforeUnmount(() => {
           :class="['collapseItem', selectedTab === item.name ? 'collapseActive' : '']" @click="tabRouterPush(item)">
           {{ item.title }}
         </div>
-        <!-- <button v-if="userInfo.name" @click="logoutFunction" class="mobileBtns">
+        <!-- <button v-if="userInfo.mobile" @click="logoutFunction" class="mobileBtns">
           用户中心
           <i class="fa fa-user-md"></i>
         </button> -->
-        <button v-if="userInfo.name" @click="logoutFunction" class="mobileBtns">
+        <button v-if="userInfo.mobile" @click="logoutFunction" class="mobileBtns">
           退出登录
           <i class="fa fa-sign-out"></i>
         </button>
@@ -181,7 +196,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .headNoMove {
-  background-image: linear-gradient(to bottom, rgba(235, 240, 251, 1) 50%, rgba(235, 240, 251, 0));
+  background-image: linear-gradient(to bottom, #55aed710 50%, #0e1d2a10);
 }
 
 .headMoved {
@@ -220,6 +235,7 @@ onBeforeUnmount(() => {
         margin: 0 2rem;
         position: relative;
         display: flex;
+        align-items: center;
 
         .menuTitle {
           color: #1f3e85;
@@ -228,8 +244,9 @@ onBeforeUnmount(() => {
         }
 
         .menuYanhua {
-          width: 2rem;
-          height: 1.625rem;
+          margin: 0 0.5rem;
+          width: 1.25rem;
+          height: 1.25rem;
           opacity: 0;
         }
 
@@ -249,6 +266,7 @@ onBeforeUnmount(() => {
       display: flex;
       align-items: center;
       color: #1f3e85;
+      // color: #fff;
     }
 
     .headLogin {

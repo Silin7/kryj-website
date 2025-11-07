@@ -1,23 +1,24 @@
 <script setup lang="ts">
-import { onUnmounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import {
-  sendverificationcodeApi,
-  // verifyverificationcodeApi,
-  baselogincodeApi,
-  baseloginpwdApi,
-} from '@/api/modules/login'
+import { authcodeApi, authloginApi, authinfoApi } from '@/api/modules/login'
 
 const mobile: any = ref('')
 const password: any = ref('')
-const code: any = ref('')
 const captchaVerification: any = ref('')
 
+// 获取验证码
+const uuid: any = ref('')
+const codeImg: any = ref('')
 function getCode() {
+  authcodeApi().then((res: any) => {
+    uuid.value = res.data.uuid
+    codeImg.value = 'data:image/gif;base64,' + res.data.img
+  })
 }
 
-// 验证码登录
+// 登录
 function loginByCoode() {
   if (!mobile.value) {
     ElMessage({
@@ -48,50 +49,44 @@ function loginByCoode() {
     })
     return
   }
-  baseloginpwdApi({
+  authloginApi({
+    uuid: uuid.value,
     mobile: mobile.value,
     password: password.value,
     captchaVerification: captchaVerification.value,
   }).then((res: any) => {
-    if (res) {
-      ElMessage({
-        type: 'success',
-        message: '登录成功',
-      })
-      window.localStorage.setItem('token', res.token)
-      window.localStorage.setItem('userinfo', JSON.stringify(res.user_info))
-      window.localStorage.setItem('permission', JSON.stringify(res.permission))
-      pageJump('home')
-    }
+    window.localStorage.setItem('userId', res.data.userId)
+    window.localStorage.setItem('accessToken', res.data.accessToken)
+    window.localStorage.setItem('refreshToken', res.data.refreshToken)
+    window.localStorage.setItem('expiresTime', res.data.expiresTime)
+    window.localStorage.setItem('getCheckTime', res.data.getCheckTime)
+    getAuthinfo()
+  }).catch(() => {
+    getCode()
   })
 }
 
-// 验证码登录
-function getBaselogincode() {
-  baselogincodeApi({
-    mobile: mobile.value,
-    code: code.value,
-  }).then((res: any) => {
-    if (res) {
-      ElMessage({
-        type: 'success',
-        message: '登录成功',
-      })
-      window.localStorage.setItem('token', res.token)
-      window.localStorage.setItem('userinfo', JSON.stringify(res.user_info))
-      window.localStorage.setItem('permission', JSON.stringify(res.permission))
-      pageJump('home')
-    }
+// 用户信息
+function getAuthinfo() {
+  authinfoApi().then((res: any) => {
+    ElMessage({
+      type: 'success',
+      message: '登录成功',
+    })
+    window.localStorage.setItem('userInfo', JSON.stringify(res.data))
+    pageJump('home')
   })
 }
+
+onMounted(() => {
+  getCode()
+})
 </script>
 
 <template>
   <div class="loginPage">
     <div class="loginBox">
-      <div class="hyzc">
-        欢迎登录
-      </div>
+      <div class="hyzc">欢迎登录</div>
       <div class="fromBox">
         <div class="fromItem frsc">
           <img src="@/assets/register/shoujihao.png" alt="" />
@@ -107,16 +102,14 @@ function getBaselogincode() {
             <img src="@/assets/register/yzm.png" alt="" />
             <el-input v-model="captchaVerification" placeholder="请输入验证码" clearable />
           </div>
-          <img src="@/assets/register/yzmdemo.png" alt="验证码" class="yzmStyle">
+          <img :src="codeImg" alt="" class="yzmStyle" @click="getCode" />
         </div>
         <div class="frec">
           <button class="forgotPassword" @click="pageJump('rpassword')">忘记密码</button>
         </div>
       </div>
       <button class="createAccount" @click="loginByCoode">登录</button>
-      <div class="gologin">
-        还没账户？<span @click="pageJump('register')">免费注册</span>
-      </div>
+      <div class="gologin">还没账户？<span @click="pageJump('register')">免费注册</span></div>
     </div>
     <div class="copyright">
       Copyright ©2025 科睿易晶 版权所有 鲁ICP备123456789-1号鲁公网安备37000000号

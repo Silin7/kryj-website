@@ -234,7 +234,8 @@ onBeforeUnmount(() => {
       <!-- video -->
       <video v-if="windowWidth > 768" loop muted preload="auto" autoplay
         poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}" style="width: 100vw; height: auto">
-        <source src="http://www.silin7.cn/media/banner-2m.mp4" type="video/mp4" />
+        <!-- <source src="http://www.silin7.cn/media/banner-2m.mp4" type="video/mp4" /> -->
+        <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
       </video>
       <video v-else loop muted preload="auto" autoplay poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}"
         style="width: 100vw; height: 100vh">
