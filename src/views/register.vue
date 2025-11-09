@@ -137,7 +137,7 @@ function ceateAccount() {
     return
   }
   authregisterApi({
-    uuid: uuid.value,
+    // uuid: uuid.value,
     userUnit: userUnit.value,
     userPost: userPost.value,
     mobile: mobile.value,
