@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import { authcodeApi, authregisterApi } from '@/api/interface'
+import { authsmscodeApi, authregisterApi } from '@/api/interface'
 
 const isreadRuler: any = ref(false)
 const userUnit: any = ref('')
@@ -12,16 +12,56 @@ const password: any = ref('')
 const password2: any = ref('')
 const captchaVerification: any = ref('')
 
-// 获取验证码
-const uuid: any = ref('')
-const codeImg: any = ref('')
+// // 获取验证码
+// const uuid: any = ref('')
+// const codeImg: any = ref('')
+// function getCode() {
+//   authcodeApi().then((res: any) => {
+//     if (res?.code === 0) {
+//       uuid.value = res.data.uuid
+//       codeImg.value = 'data:image/gif;base64,' + res.data.img
+//     }
+//   })
+// }
+
 function getCode() {
-  authcodeApi().then((res: any) => {
-    if (res?.code === 0) {
-      uuid.value = res.data.uuid
-      codeImg.value = 'data:image/gif;base64,' + res.data.img
+  if (!mobile.value) {
+    ElMessage({
+      type: 'error',
+      message: '请输入手机号',
+    })
+    return
+  }
+  if (!/^(?:(?:\+|00)86)?1\d{10}$/.test(mobile.value)) {
+    ElMessage({
+      type: 'error',
+      message: '手机号格式错误',
+    })
+    return
+  }
+  authsmscodeApi({
+    mobile: mobile.value,
+    scene: 5,
+  }).then((res: any) => {
+    if (res) {
+      countdownChange()
     }
   })
+}
+
+// 验证码倒计时
+const countdown: any = ref(60)
+const verificationTimer: any = ref(null)
+
+function countdownChange() {
+  verificationTimer.value = setInterval(() => {
+    countdown.value -= 1
+    // 清除定时器
+    if (countdown.value === 0) {
+      clearInterval(verificationTimer.value)
+      countdown.value = 60
+    }
+  }, 1000)
 }
 
 // 创建账号
@@ -146,12 +186,20 @@ onMounted(() => {
         <img src="@/assets/register/pwd2.png" alt="" />
         <el-input type="password" show-password v-model="password2" placeholder="请再次输入密码" clearable />
       </div>
-      <div class="frsc">
+      <!-- <div class="frsc">
         <div class="fromItem frsc" style="width: calc(100% - 130px)">
           <img src="@/assets/register/yzm.png" alt="" />
           <el-input v-model="captchaVerification" placeholder="请输入验证码" clearable />
         </div>
         <img :src="codeImg" alt="" class="yzmStyle" @click="getCode" />
+      </div> -->
+      <div class="fromItem frsc">
+        <img src="@/assets/register/yzm.png" alt="" />
+        <el-input v-model="captchaVerification" style="width: calc(100% - 140px)" placeholder="短信验证码" clearable />
+        <div v-if="countdown < 60 && countdown > 0" class="djsTimeStyle">
+          已发送（{{ countdown }}）
+        </div>
+        <button v-else @click="getCode">获取验证码</button>
       </div>
       <div class="stateMent">
         <img v-if="isreadRuler" src="@/assets/register/checked.png" alt="" @click="isreadRuler = !isreadRuler" />

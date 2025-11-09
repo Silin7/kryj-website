@@ -5,6 +5,11 @@ export function authcodeApi() {
   return api.get('/app-api/member/auth/code')
 }
 
+// 登录注册 - 验证码 参数 -- mobile: 手机号; scene: 4 忘记密码 5 注册
+export function authsmscodeApi(data: any) {
+  return api.get('/app-api/member/auth/send-sms-code', data)
+}
+
 // 登录注册 - 注册
 export function authregisterApi(data: any) {
   return api.post('/app-api/member/auth/register', data)
@@ -18,6 +23,11 @@ export function authloginApi(data: any) {
 // 登录注册 - 用户信息
 export function authinfoApi() {
   return api.post('/app-api/member/auth/get')
+}
+
+// 登录注册 - 退出登录
+export function baselogoutdApi() {
+  return api.post('/app-api/member/auth/logout')
 }
 
 // AI预测平台  体验次数

@@ -3,7 +3,7 @@ import { onMounted, onBeforeUnmount, ref, computed, unref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
 import useHeaderStore from '@/store/modules/header'
-import { baselogoutdApi } from '@/api/modules/login'
+import { baselogoutdApi } from '@/api/interface'
 
 const windowWidth = ref(window.innerWidth)
 const windowScrollY = ref(window.scrollY)
@@ -76,16 +76,17 @@ function logoutFunction() {
     type: 'warning',
   })
     .then(() => {
-      baselogoutdApi({}).then((res: any) => {
+      baselogoutdApi().then((res: any) => {
         if (res) {
           ElMessage({
             type: 'success',
             message: '退出成功',
           })
           menuChildShow.value = false
-          window.localStorage.removeItem('token')
+          window.localStorage.removeItem('accessToken')
+          window.localStorage.removeItem('refreshToken')
+          window.localStorage.removeItem('expiresTime')
           window.localStorage.removeItem('userInfo')
-          window.localStorage.removeItem('permission')
           pageJump('login')
         }
       })
@@ -134,7 +135,7 @@ onBeforeUnmount(() => {
                 :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
               <div class="menuTitle" :style="selectedTab === item.name ? 'opacity: 1;' : ''">
                 <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ item.title
-                  }}</span>
+                }}</span>
               </div>
               <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_by2.png"
                 class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
@@ -146,7 +147,7 @@ onBeforeUnmount(() => {
             <i class="fa fa-user-circle mr-2"
               :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''"></i>
             <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ userInfo.mobile
-              }}</span>
+            }}</span>
             <el-popover placement="bottom" :virtual-ref="buttonRef" virtual-triggering :width="160" trigger="click">
               <div>
                 <!-- <div class="popoverItem" @click="pageJump('user-index')">用户中心</div> -->
