@@ -4,6 +4,7 @@ import pageJump from '@/hooks/pageJump'
 import backToTop from '@/hooks/backToTop'
 import windowOpen from '@/hooks/windowOpen'
 import { fileURL } from '@/api/baseConfig'
+import { friendlinkApi } from '@/api/interface'
 
 // 可视窗口宽度
 const windowWidth = ref(window.innerWidth)
@@ -122,103 +123,9 @@ function getAllaiapp() {
 const flinktop: any = ref([])
 
 function getFlinktop() {
-  // flinktopApi().then((res: any) => {
-  //   if (res && res.length > 0) {
-  //     flinktop.value = res
-  //   }
-  // })
-  flinktop.value = [
-    {
-      name: '建筑信息研究院',
-      logo: '/uploads/default/b04eb8e30b3c48beaf82aefd80430d7c.png',
-      link_url: 'http://xincai.duoqixin.com/v2/index.html',
-      remark: '建筑信息研究应用',
-      is_recommend: 0,
-      sort: 0,
-      status: 1,
-      id: 29,
-      is_recommend_name: '否',
-      status_name: '启用',
-      created_at: '2025-08-22T17:07:26',
-      updated_at: '2025-08-22T17:07:26',
-      deleted_at: null,
-    },
-    {
-      name: '智慧城市科技',
-      logo: '/uploads/default/ae25eb791ebf4bce98238448538b61c0.png',
-      link_url: 'http://xincai.duoqixin.com/v2/index.html',
-      remark: '智慧城市解决方案',
-      is_recommend: 0,
-      sort: 0,
-      status: 1,
-      id: 28,
-      is_recommend_name: '否',
-      status_name: '启用',
-      created_at: '2025-08-22T17:06:53',
-      updated_at: '2025-08-22T17:06:53',
-      deleted_at: null,
-    },
-    {
-      name: '数字工程设计院',
-      logo: '/uploads/default/7c82a4d37694426a819e859bebe2e46c.jpg',
-      link_url: 'http://xincai.duoqixin.com/v2/index.html',
-      remark: '数字化工程设计',
-      is_recommend: 0,
-      sort: 0,
-      status: 1,
-      id: 27,
-      is_recommend_name: '否',
-      status_name: '启用',
-      created_at: '2025-08-22T17:06:38',
-      updated_at: '2025-08-22T17:06:38',
-      deleted_at: null,
-    },
-    {
-      name: '绿色建材协会',
-      logo: '/uploads/default/bb3371da3896417a99906fb08877f752.jpg',
-      link_url: 'https://www.baidu.com/',
-      remark: '推广绿色建筑材料',
-      is_recommend: 0,
-      sort: 0,
-      status: 1,
-      id: 26,
-      is_recommend_name: '否',
-      status_name: '启用',
-      created_at: '2025-08-22T17:06:11',
-      updated_at: '2025-08-22T17:06:11',
-      deleted_at: null,
-    },
-    {
-      name: '建筑科技有限公司',
-      logo: '/uploads/default/defa3f33b03d46c2b91765fdbfd09d92.jpg',
-      link_url: 'http://www.abc.com/',
-      remark: '专注建筑科技创新',
-      is_recommend: 0,
-      sort: 0,
-      status: 1,
-      id: 25,
-      is_recommend_name: '否',
-      status_name: '启用',
-      created_at: '2025-08-18T15:39:38',
-      updated_at: '2025-08-22T17:08:07',
-      deleted_at: null,
-    },
-    {
-      name: '智能建造研究院',
-      logo: '/uploads/default/2907d6142d394b81b6bb0ae373a82137.jpg',
-      link_url: 'https://www.chanjet.com/',
-      remark: '建筑智能化研究',
-      is_recommend: 0,
-      sort: 0,
-      status: 1,
-      id: 24,
-      is_recommend_name: '否',
-      status_name: '启用',
-      created_at: '2025-08-18T11:39:22',
-      updated_at: '2025-08-22T17:08:16',
-      deleted_at: null,
-    },
-  ]
+  friendlinkApi().then((res: any) => {
+    flinktop.value = res.data
+  })
 }
 
 onMounted(() => {
@@ -236,124 +143,122 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
-    <div class="homePage">
-      <!-- video -->
-      <video v-if="windowWidth > 768" loop muted preload="auto" autoplay poster="" data-setup="{}"
-        style="width: 100vw; height: auto">
-        <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
-      </video>
-      <video v-else loop muted preload="auto" autoplay poster="" data-setup="{}" style="width: 100vw; height: 100vh">
-        <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
-      </video>
-      <!-- 公司简介
+  <div class="homePage">
+    <!-- video -->
+    <video v-if="windowWidth > 768" loop muted preload="auto" autoplay poster="" data-setup="{}"
+      style="width: 100vw; height: auto">
+      <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
+    </video>
+    <video v-else loop muted preload="auto" autoplay poster="" data-setup="{}" style="width: 100vw; height: 100vh">
+      <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
+    </video>
+    <!-- 公司简介
        :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']"
       -->
-      <div class="featuresBox">
-        <img src="@/assets/home/gongsi.jpg" class="featuresGsImg">
-        <div class="featuresRounded">
-          <div class="featuresRoundedTitle">山东科睿易晶生物技术有限公司</div>
-          <div class="featuresRoundedInfo">
-            公司自2022年成立，致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。
-            自主研发了医学人工智能药物筛选数据库平台、AI辅助药物验证模拟系统、智能药物分子对接与体内过程模拟分析等产品。同时将AI与类器官技术深度绑定，创新性地构建了"多组学-AI-人工降噪-类器官"多位一体的智能药物研发体系，彻底解决创新药研发过程中的药物发现困难、研发周期长、实验花费高以及成功率低的问题，结合专家团队进一步确认，提供高效、精准的一站式创新药物研发解决方案。
+    <div class="featuresBox">
+      <img src="@/assets/home/gongsi.jpg" class="featuresGsImg">
+      <div class="featuresRounded">
+        <div class="featuresRoundedTitle">山东科睿易晶生物技术有限公司</div>
+        <div class="featuresRoundedInfo">
+          公司自2022年成立，致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。
+          自主研发了医学人工智能药物筛选数据库平台、AI辅助药物验证模拟系统、智能药物分子对接与体内过程模拟分析等产品。同时将AI与类器官技术深度绑定，创新性地构建了"多组学-AI-人工降噪-类器官"多位一体的智能药物研发体系，彻底解决创新药研发过程中的药物发现困难、研发周期长、实验花费高以及成功率低的问题，结合专家团队进一步确认，提供高效、精准的一站式创新药物研发解决方案。
+        </div>
+      </div>
+    </div>
+
+    <div class="platformsBox">
+      <el-carousel :interval="4000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
+        :height="windowWidth > 768 ? '34rem' : '38rem'">
+        <el-carousel-item>
+          <div class="platformsItem">
+            <img src="@/assets/home/platforms-1.png">
+            <div>
+              <p class="platformsItitle">医学人工智能药物筛选数据库平台</p>
+              <p class="platformsIinfo">
+                医学人工智能药物筛选数据库平台是面向全球药企、科研机构的核心研发基础设施，以“打破数据孤岛、AI赋能精准筛选”为核心，整合多维度生物医学数据与前沿算法模型，为创新药研发提供从靶点验证到候选药物筛选的全链条数据支撑与智能分析服务，彻底解决传统筛选“数据零散、效率低下、命中率低”的行业痛点。
+              </p>
+            </div>
+          </div>
+        </el-carousel-item>
+        <el-carousel-item>
+          <div class="platformsItem">
+            <img src="@/assets/home/platforms-2.png">
+            <div>
+              <p class="platformsItitle">AI辅助药物验证模拟系统</p>
+              <p class="platformsIinfo">
+                AI 辅助药物验证模拟系统是衔接药物筛选与实体实验的关键技术平台，聚焦创新药临床前验证环节，融合多物理场模拟、机器学习与多组学数据，构建 “虚拟验证 - 风险预判 -
+                实验指导”的全流程辅助体系。通过替代部分高成本、高耗时的实体实验，解决传统验证 “周期长、成本高、风险难预判” 的痛点，为药企、科研机构提供高效、精准的临床前验证解决方案，助力候选药物快速推进至实验阶段。
+              </p>
+            </div>
+          </div>
+        </el-carousel-item>
+        <el-carousel-item>
+          <div class="platformsItem">
+            <img src="@/assets/home/platforms-3.png">
+            <div>
+              <p class="platformsItitle">智能药物分子对接与体内过程模拟分析</p>
+              <p class="platformsIinfo">
+                在创新药研发的关键环节中，药物分子能否精准结合靶点蛋白、进入人体后能否有效发挥作用且规避毒性，是决定研发成败的核心。我司自主研发的智能药物分子对接与体内过程模拟分析系统，依托多领域技术融合优势，构建从
+                “分子互作” 到 “体内代谢” 的全链条模拟体系，为药物研发提供 “提前预判、精准优化” 的核心支撑，大幅降低实验试错成本，加速候选药物筛选进程。</p>
+            </div>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+
+    <!-- 委托开发 AI预测平台  -->
+    <div class="wtkfaiBox">
+      <div class="wtkfaiItem animate__animated">
+        <div class="wtkfaiTitle">委托开发</div>
+        <img src="@/assets/home/wtkf.png" alt="" />
+      </div>
+      <div class="wtkfaiItem animate__animated">
+        <img src="@/assets/home/aipt.png" alt="" />
+        <div class="wtkfaiTitle">AI预测平台 </div>
+      </div>
+    </div>
+
+    <!-- 产品中心 -->
+    <div class="cpzxBox">
+      <div class="cpzxContent">
+        <div class="cpzxTitle">产品中心</div>
+        <div class="cpzxHeng"></div>
+        <div class="cpzxClassbox">
+          <div class="cpzxClassitem" v-for="(item, index) in businessAi" :key="index">
+            <div class="cpzxClassitemfa frcc">
+              <i :class="item.icon"></i>
+            </div>
+            <div class="cpzxClassitemtext">{{ item.title }}</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="platformsBox">
-        <el-carousel :interval="4000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
-          :height="windowWidth > 768 ? '34rem' : '38rem'">
-          <el-carousel-item>
-            <div class="platformsItem">
-              <img src="@/assets/home/platforms-1.png">
-              <div>
-                <p class="platformsItitle">医学人工智能药物筛选数据库平台</p>
-                <p class="platformsIinfo">
-                  医学人工智能药物筛选数据库平台是面向全球药企、科研机构的核心研发基础设施，以“打破数据孤岛、AI赋能精准筛选”为核心，整合多维度生物医学数据与前沿算法模型，为创新药研发提供从靶点验证到候选药物筛选的全链条数据支撑与智能分析服务，彻底解决传统筛选“数据零散、效率低下、命中率低”的行业痛点。
-                </p>
-              </div>
-            </div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div class="platformsItem">
-              <img src="@/assets/home/platforms-2.png">
-              <div>
-                <p class="platformsItitle">AI辅助药物验证模拟系统</p>
-                <p class="platformsIinfo">
-                  AI 辅助药物验证模拟系统是衔接药物筛选与实体实验的关键技术平台，聚焦创新药临床前验证环节，融合多物理场模拟、机器学习与多组学数据，构建 “虚拟验证 - 风险预判 -
-                  实验指导”的全流程辅助体系。通过替代部分高成本、高耗时的实体实验，解决传统验证 “周期长、成本高、风险难预判” 的痛点，为药企、科研机构提供高效、精准的临床前验证解决方案，助力候选药物快速推进至实验阶段。
-                </p>
-              </div>
-            </div>
-          </el-carousel-item>
-          <el-carousel-item>
-            <div class="platformsItem">
-              <img src="@/assets/home/platforms-3.png">
-              <div>
-                <p class="platformsItitle">智能药物分子对接与体内过程模拟分析</p>
-                <p class="platformsIinfo">
-                  在创新药研发的关键环节中，药物分子能否精准结合靶点蛋白、进入人体后能否有效发挥作用且规避毒性，是决定研发成败的核心。我司自主研发的智能药物分子对接与体内过程模拟分析系统，依托多领域技术融合优势，构建从
-                  “分子互作” 到 “体内代谢” 的全链条模拟体系，为药物研发提供 “提前预判、精准优化” 的核心支撑，大幅降低实验试错成本，加速候选药物筛选进程。</p>
-              </div>
-            </div>
-          </el-carousel-item>
-        </el-carousel>
-      </div>
-
-      <!-- 委托开发 AI平台 -->
-      <div class="wtkfaiBox">
-        <div class="wtkfaiItem animate__animated">
-          <div class="wtkfaiTitle">委托开发</div>
-          <img src="@/assets/home/wtkf.png" alt="" />
-        </div>
-        <div class="wtkfaiItem animate__animated">
-          <img src="@/assets/home/aipt.png" alt="" />
-          <div class="wtkfaiTitle">AI平台</div>
-        </div>
-      </div>
-
-      <!-- 产品中心 -->
-      <div class="cpzxBox">
-        <div class="cpzxContent">
-          <div class="cpzxTitle">产品中心</div>
-          <div class="cpzxHeng"></div>
-          <div class="cpzxClassbox">
-            <div class="cpzxClassitem" v-for="(item, index) in businessAi" :key="index">
-              <div class="cpzxClassitemfa frcc">
-                <i :class="item.icon"></i>
-              </div>
-              <div class="cpzxClassitemtext">{{ item.title }}</div>
-            </div>
+    <!-- 合作单位  -->
+    <div class="mxBox">
+      <div class="mxContent">
+        <div class="mxTitle">合作单位</div>
+        <div class="mxHeng"></div>
+        <div class="mxInfo">感谢以下单位对本平台的大力支持与合作</div>
+        <div class="mxClassbox">
+          <div v-for="(item, index) in vippartners" :key="index" class="mxClassitem" @click="windowOpen(item.url)">
+            <img :src="fileURL + item.logoimg" alt="" class="mxClassitemfa" />
+            <div class="mxClassitemtext">{{ item.company_name }}</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- 合作单位  -->
-      <div class="mxBox">
-        <div class="mxContent">
-          <div class="mxTitle">合作单位</div>
-          <div class="mxHeng"></div>
-          <div class="mxInfo">感谢以下单位对本平台的大力支持与合作</div>
-          <div class="mxClassbox">
-            <div v-for="(item, index) in vippartners" :key="index" class="mxClassitem" @click="windowOpen(item.url)">
-              <img :src="fileURL + item.logoimg" alt="" class="mxClassitemfa" />
-              <div class="mxClassitemtext">{{ item.company_name }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 友情链接  -->
-      <div class="pyBox">
-        <div class="pyTitle">友情链接</div>
-        <div class="pyHeng"></div>
-        <div class="pyClassbox">
-          <div v-for="(item, index) in flinktop" :key="index" class="pyClassitem"
-            @click="windowOpen(item.link_url, true)">
-            <img :src="fileURL + item.logo" alt="" class="pyClassitemfa" />
-            <div class="pyClassitemtext">{{ item.name }}</div>
-            <div class="pyClassiteminfo">{{ item.remark }}</div>
-          </div>
+    <!-- 友情链接  -->
+    <div class="pyBox">
+      <div class="pyTitle">友情链接</div>
+      <div class="pyHeng"></div>
+      <div class="pyClassbox">
+        <div v-for="(item, index) in flinktop" :key="index" class="pyClassitem"
+          @click="windowOpen(item.contentOutLink, true)">
+          <img :src="item.contentImg" alt="" class="pyClassitemfa" />
+          <div class="pyClassitemtext">{{ item.contentTitle }}</div>
+          <!-- <div class="pyClassiteminfo">{{ item.remark }}</div> -->
         </div>
       </div>
     </div>

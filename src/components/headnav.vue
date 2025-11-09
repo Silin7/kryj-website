@@ -37,7 +37,7 @@ const menuList: any = ref([
   { title: '公司信息', path: '/about', name: 'about' },
   { title: '委托开发', path: '/', name: '' },
   { title: '产品出售', path: '/', name: '' },
-  { title: 'AI平台', path: '/ai', name: 'ai' },
+  { title: 'AI预测平台 ', path: '/ai', name: 'ai' },
 ])
 
 // menuChild show Mouseenter Mouseleave

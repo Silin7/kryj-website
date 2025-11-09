@@ -25,6 +25,11 @@ function getCheckTime() {
 
 // 查询条件
 const searchForm: any = ref({})
+const searchClick: any = ref(false)
+
+function ksycClick() {
+  searchClick.value = true
+}
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
@@ -38,12 +43,12 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="aiPage">
-    <div v-if="notLogin" class="messageMask">
+    <div v-if="notLogin && searchClick" class="messageMask">
       <div class="messageBox">
         <div class="messageTitle">温馨提示</div>
-        <div class="messageContent">AI平台需要登录后才可以体验<br />是否前往登录</div>
+        <div class="messageContent">AI预测平台 需要登录后才可以体验<br />是否前往登录</div>
         <div class="massageBtns">
-          <button class="messageCancel" @click="notLogin = false">取消</button>
+          <button class="messageCancel" @click="searchClick = false">取消</button>
           <button class="messageQuery" @click="pageJump('login')">去登录</button>
         </div>
       </div>
@@ -78,11 +83,17 @@ onBeforeUnmount(() => {
           </el-col>
         </el-row>
         <div class="searchBox">
-          <div class="aiTimes" style="opacity: 0;">免费体验剩余<span>{{ checkTime }}</span>次</div>
-          <button class="searchBtn">
+          <div></div>
+          <button class="searchBtn" @click="ksycClick">
             <i class="fa fa-search"></i>开始预测
           </button>
-          <div class="aiTimes">免费体验剩余<span>{{ checkTime }}</span>次</div>
+          <div v-if="notLogin" class="aiTimes">
+            新用户注册可免费体验3次，立即
+            <span @click="pageJump('login')">登录/注册</span>
+          </div>
+          <div v-else class="aiTimes">
+            免费体验剩余<span>{{ checkTime }}</span>次
+          </div>
         </div>
       </div>
       <div class="aiContentSc">
@@ -108,11 +119,11 @@ onBeforeUnmount(() => {
     position: relative;
     padding-top: 100px;
     width: 100vw;
-    height: 550px;
+    height: 500px;
 
     img {
       width: 100vw;
-      height: 450px;
+      height: 400px;
     }
 
     .aibannerAbsolute {
@@ -127,7 +138,7 @@ onBeforeUnmount(() => {
         padding: 0 2rem;
         width: 100%;
         max-width: 1400px;
-        height: 450px;
+        height: 400px;
         display: flex;
         flex-flow: column;
         justify-content: center;
@@ -200,8 +211,17 @@ onBeforeUnmount(() => {
       .searchBox {
         margin-top: 1rem;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: flex-end;
+
+        div {
+          width: calc(50% - 120px);
+
+          @media (max-width: 768px) {
+            width: 100%;
+          }
+        }
 
         .searchBtn {
           margin: 0 1rem;
@@ -239,6 +259,10 @@ onBeforeUnmount(() => {
             font-size: 1.25rem;
             font-weight: 700;
             color: #1f3e85;
+
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }

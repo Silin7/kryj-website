@@ -20,7 +20,7 @@ export function authinfoApi() {
   return api.post('/app-api/member/auth/get')
 }
 
-// AI平台 体验次数
+// AI预测平台  体验次数
 export function checkTimeApi() {
   return api.post('/app-api/member/auth/getCheckTime')
 }
