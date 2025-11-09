@@ -239,12 +239,11 @@ onBeforeUnmount(() => {
   <div>
     <div class="homePage">
       <!-- video -->
-      <video v-if="windowWidth > 768" loop muted preload="auto" autoplay
-        poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}" style="width: 100vw; height: auto">
+      <video v-if="windowWidth > 768" loop muted preload="auto" autoplay poster="" data-setup="{}"
+        style="width: 100vw; height: auto">
         <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
       </video>
-      <video v-else loop muted preload="auto" autoplay poster="http://www.silin7.cn/media/dexbanner.png" data-setup="{}"
-        style="width: 100vw; height: 100vh">
+      <video v-else loop muted preload="auto" autoplay poster="" data-setup="{}" style="width: 100vw; height: 100vh">
         <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
       </video>
       <!-- 公司简介
@@ -253,7 +252,7 @@ onBeforeUnmount(() => {
       <div class="featuresBox">
         <img src="@/assets/home/gongsi.jpg" class="featuresGsImg">
         <div class="featuresRounded">
-          <div class="featuresRoundedTitle">公司简介</div>
+          <div class="featuresRoundedTitle">山东科睿易晶生物技术有限公司</div>
           <div class="featuresRoundedInfo">
             公司自2022年成立，致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。
             自主研发了医学人工智能药物筛选数据库平台、AI辅助药物验证模拟系统、智能药物分子对接与体内过程模拟分析等产品。同时将AI与类器官技术深度绑定，创新性地构建了"多组学-AI-人工降噪-类器官"多位一体的智能药物研发体系，彻底解决创新药研发过程中的药物发现困难、研发周期长、实验花费高以及成功率低的问题，结合专家团队进一步确认，提供高效、精准的一站式创新药物研发解决方案。

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { useHead } from '@vueuse/head'
-import { articlebyurlApi } from '@/api/modules/article'
+import { upaywycyxApi, upayszcApi, upachildysxyApi } from '@/api/interface'
 
 // 路由信息
 const route = useRoute()
@@ -19,15 +18,21 @@ const theurl: any = ref('')
 const articledetail: any = ref({})
 
 function getArticlebyurl() {
-  articlebyurlApi(theurl.value).then((res: any) => {
-    articledetail.value = res
-    useHead({
-      title: res.title,
-      meta: [
-        { name: 'description', content: res.keywords },
-      ]
+  if (theurl.value === 'upaywycyxApi') {
+    upaywycyxApi().then((res: any) => {
+      articledetail.value = res.data
     })
-  })
+  }
+  if (theurl.value === 'upayszcApi') {
+    upayszcApi().then((res: any) => {
+      articledetail.value = res.data
+    })
+  }
+  if (theurl.value === 'upachildysxyApi') {
+    upachildysxyApi().then((res: any) => {
+      articledetail.value = res.data
+    })
+  }
 }
 
 onMounted(() => {
@@ -45,7 +50,7 @@ onBeforeUnmount(() => {
   <div class="adPage">
     <div class="adCbox">
       <div class="adCFuwb">
-        <div v-html="articledetail.content"></div>
+        <div v-html="articledetail.contentDetails"></div>
       </div>
     </div>
   </div>
@@ -54,20 +59,24 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .adPage {
   overflow-x: hidden;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 88px);
   background: #fff;
+
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 112px);
+  }
 
   .adCbox {
     position: relative;
     margin: 0 auto;
-    margin-top: 5rem;
+    margin-top: 100px;
     padding: 2.5rem 1rem;
     width: 100%;
     max-width: 1400px;
     min-height: calc(100vh - 562px);
 
     @media (max-width: 768px) {
-      margin-top: 4rem;
+      margin-top: 100px;
       padding: 1rem;
     }
 

@@ -109,24 +109,28 @@ onMounted(() => {
       <button class="createAccount" @click="loginByCoode">登录</button>
       <div class="gologin">还没账户？<span @click="pageJump('register')">免费注册</span></div>
     </div>
-    <div class="copyright">
+    <!-- <div class="copyright">
       Copyright ©2025 科睿易晶 版权所有 鲁ICP备123456789-1号鲁公网安备37000000号
-    </div>
+    </div> -->
   </div>
 </template>
 
 <style lang="scss">
 .loginPage {
   overflow-y: auto;
-  position: fixed;
+  // position: fixed;
   padding: 1rem;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 88px);
   background-image: url('../assets/login-banner.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
   background-position: right;
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 112px);
+  }
 
   .loginBox {
     margin-top: 10rem;

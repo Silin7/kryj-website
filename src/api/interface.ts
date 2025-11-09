@@ -24,3 +24,23 @@ export function authinfoApi() {
 export function checkTimeApi() {
   return api.post('/app-api/member/auth/getCheckTime')
 }
+
+// 药物预测网用户使用协议
+export function upaywycyxApi() {
+  return api.post('/app-api/cms/content/user-privacy-agreement/ywycyx')
+}
+
+// 隐私政策
+export function upayszcApi() {
+  return api.post('/app-api/cms/content/user-privacy-agreement/yszc')
+}
+
+// 儿童隐私协议
+export function upachildysxyApi() {
+  return api.post('/app-api/cms/content/user-privacy-agreement/childysxy')
+}
+
+// 友情链接
+export function friendlinkApi() {
+  return api.post('/app-api/cms/content/friend-link')
+}

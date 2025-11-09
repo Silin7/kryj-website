@@ -62,9 +62,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <div class="aiTbox">
-      <div></div>
       <div class="aiTitle">AI预测基础版（精度约65%）</div>
-      <div class="aiTimes">免费体验剩余<span>{{ checkTime }}</span>次</div>
     </div>
     <div class="aiContent">
       <div class="aiContentSr">
@@ -79,9 +77,13 @@ onBeforeUnmount(() => {
               style="width: 100%; height: 40px" />
           </el-col>
         </el-row>
-        <button class="searchBtn">
-          <i class="fa fa-search"></i>开始预测
-        </button>
+        <div class="searchBox">
+          <div class="aiTimes" style="opacity: 0;">免费体验剩余<span>{{ checkTime }}</span>次</div>
+          <button class="searchBtn">
+            <i class="fa fa-search"></i>开始预测
+          </button>
+          <div class="aiTimes">免费体验剩余<span>{{ checkTime }}</span>次</div>
+        </div>
       </div>
       <div class="aiContentSc">
         <div class="aiContentScTitle">【预测结果】</div>
@@ -155,9 +157,7 @@ onBeforeUnmount(() => {
     width: 100%;
     max-width: 1400px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: center;
 
     @media (max-width: 768px) {
       flex-flow: column;
@@ -170,22 +170,6 @@ onBeforeUnmount(() => {
       font-size: clamp(1.5rem, 4vw, 2.5rem);
       line-height: clamp(1.5rem, 4vw, 2.5rem);
       color: #1f3e85;
-    }
-
-    .aiTimes {
-      font-size: 0.875rem;
-      color: #4b5563;
-
-      @media (max-width: 768px) {
-        margin-top: 1rem;
-      }
-
-      span {
-        margin: 0 0.25rem;
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #1f3e85;
-      }
     }
   }
 
@@ -213,26 +197,49 @@ onBeforeUnmount(() => {
         color: #4c659d;
       }
 
-      .searchBtn {
-        display: block;
-        margin: 1rem auto 0;
-        color: #fff;
-        background-color: #1f3e85;
-        width: 7.5rem;
-        height: 2.5rem;
-        border-radius: 0.5rem;
-        opacity: 0.6;
+      .searchBox {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
 
-        &:hover {
-          opacity: 1;
+        .searchBtn {
+          margin: 0 1rem;
+          display: block;
+          color: #fff;
+          background-color: #1f3e85;
+          width: 7.5rem;
+          height: 2.5rem;
+          border-radius: 0.5rem;
+          opacity: 0.6;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          i {
+            margin-right: 0.5rem;
+          }
+
+          @media (max-width: 768px) {
+            opacity: 1;
+          }
         }
 
-        i {
-          margin-right: 0.5rem;
-        }
+        .aiTimes {
+          font-size: 0.875rem;
+          color: #4b5563;
 
-        @media (max-width: 768px) {
-          opacity: 1;
+          @media (max-width: 768px) {
+            margin-top: 1rem;
+          }
+
+          span {
+            margin: 0 0.25rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f3e85;
+          }
         }
       }
     }

@@ -263,7 +263,7 @@ const routes: Array<RouteRecordRaw> = [
       stcode: 'login',
       website: true,
       hashead: true,
-      hasfoot: false,
+      hasfoot: true,
     },
   },
   {
@@ -275,7 +275,7 @@ const routes: Array<RouteRecordRaw> = [
       stcode: 'register',
       website: true,
       hashead: true,
-      hasfoot: false,
+      hasfoot: true,
     },
   },
   {

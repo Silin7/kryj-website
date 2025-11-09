@@ -159,36 +159,45 @@ onMounted(() => {
         我已阅读并同意
         <span @click="
           pageJump('article_detail', {
-            theurl: 'user-service-agreement',
+            theurl: 'upaywycyxApi',
           })
-          ">《科睿易晶用户服务协议》</span>和
+          ">《药物预测网用户使用协议》</span>、
         <span @click="
           pageJump('article_detail', {
-            theurl: 'privacy-policy-statement',
+            theurl: 'upayszcApi',
           })
-          ">《科睿易晶隐私政策声明》</span>
+          ">《隐私政策》</span>和
+        <span @click="
+          pageJump('article_detail', {
+            theurl: 'upachildysxyApi',
+          })
+          ">《儿童隐私协议》</span>
       </div>
       <button class="createAccount" @click="ceateAccount">创建账号</button>
       <div class="gologin">已有账号？<span @click="pageJump('login')">立即登录</span></div>
     </div>
-    <div class="copyright">
+    <!-- <div class="copyright">
       Copyright ©2025 科睿易晶 版权所有 鲁ICP备123456789-1号鲁公网安备37000000号
-    </div>
+    </div> -->
   </div>
 </template>
 
 <style lang="scss">
 .registerPage {
   overflow-y: auto;
-  position: fixed;
+  // position: fixed;
   padding: 1rem;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 88px);
   background-image: url('../assets/login-banner.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
   background-position: right;
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 112px);
+  }
 
   .registerBox {
     margin-top: 8rem;
