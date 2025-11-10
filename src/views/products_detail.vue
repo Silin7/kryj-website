@@ -1216,7 +1216,7 @@ const value1 = ref(4.8)
     right: 20px;
     bottom: 20vh;
     // bottom: calc(-1.75rem + 50vh);
-    z-index: 9999;
+    z-index: 99;
     width: 3.5rem;
     height: 3.5rem;
     background: linear-gradient(135deg, #165dff 0%, #36cfc9 100%);

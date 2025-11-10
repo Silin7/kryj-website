@@ -962,7 +962,7 @@ onBeforeUnmount(() => {
                 position: absolute;
                 top: 1rem;
                 left: 1rem;
-                z-index: 10;
+                z-index: 2;
                 border-radius: 0.25rem;
                 padding-left: 0.5rem;
                 padding-right: 0.5rem;
@@ -1078,7 +1078,7 @@ onBeforeUnmount(() => {
                 position: absolute;
                 top: 1rem;
                 left: 1rem;
-                z-index: 10;
+                z-index: 2;
                 border-radius: 0.25rem;
                 padding-left: 0.5rem;
                 padding-right: 0.5rem;

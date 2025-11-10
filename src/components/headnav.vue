@@ -209,7 +209,7 @@ onBeforeUnmount(() => {
   width: 100vw;
   position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: 99;
 
   .headFlex {
     margin: 0 auto;

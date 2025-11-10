@@ -149,13 +149,10 @@ function ceateAccount() {
       message: '账号创建成功',
     })
     pageJump('login')
-  }).catch(() => {
-    getCode()
   })
 }
 
 onMounted(() => {
-  getCode()
 })
 </script>
 
@@ -232,11 +229,9 @@ onMounted(() => {
 
 <style lang="scss">
 .registerPage {
-  overflow-y: auto;
-  // position: fixed;
   padding: 1rem;
   width: 100vw;
-  height: calc(100vh - 88px);
+  min-height: calc(100vh - 88px);
   background-image: url('../assets/login-banner.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -244,7 +239,7 @@ onMounted(() => {
   background-position: right;
 
   @media (max-width: 768px) {
-    height: calc(100vh - 112px);
+    min-height: calc(100vh - 112px);
   }
 
   .registerBox {
@@ -257,7 +252,7 @@ onMounted(() => {
 
     @media (min-width: 768px) {
       position: absolute;
-      z-index: 9999;
+      z-index: 2;
       top: 10%;
       right: 20%;
       padding: 30px 50px 50px;

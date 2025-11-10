@@ -427,7 +427,7 @@ onBeforeUnmount(() => {
               //   position: absolute;
               //   top: 1rem;
               //   left: 1rem;
-              //   z-index: 10;
+              //   z-index: 2;
               //   border-radius: 9999px;
               //   padding-left: 0.75rem;
               //   padding-right: 0.75rem;

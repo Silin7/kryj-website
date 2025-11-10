@@ -117,11 +117,9 @@ onMounted(() => {
 
 <style lang="scss">
 .loginPage {
-  overflow-y: auto;
-  // position: fixed;
   padding: 1rem;
   width: 100vw;
-  height: calc(100vh - 88px);
+  min-height: calc(100vh - 88px);
   background-image: url('../assets/login-banner.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -129,11 +127,11 @@ onMounted(() => {
   background-position: right;
 
   @media (max-width: 768px) {
-    height: calc(100vh - 112px);
+    min-height: calc(100vh - 112px);
   }
 
   .loginBox {
-    margin-top: 10rem;
+    margin-top: 8rem;
     padding: 2rem 1rem;
     background: #fff;
     box-shadow:
@@ -142,6 +140,7 @@ onMounted(() => {
 
     @media (min-width: 768px) {
       position: absolute;
+      z-index: 2;
       top: 10%;
       right: 20%;
       padding: 30px 50px 50px;
