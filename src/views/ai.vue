@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import pageJump from '@/hooks/pageJump'
-import { checkTimeApi } from '@/api/interface'
+import { checkTimeApi, cusedlistApi } from '@/api/interface'
 
 const windowWidth = ref(window.innerWidth)
 
@@ -35,12 +35,20 @@ function ksycClick() {
 const dialogVisible: any = ref(true)
 const dialogData: any = ref({
   orderNo: 'WX_VIDEO_8_1762740007_JNU8T6',
-  qrCodeData: 'weixin://wxpay/bizpayurl?pr=0L3lD4ez3',
+  qrCodeData: 'https://www.silin7.cn/media/erweima.png',
 })
+const usedList: any = ref([])
+
+function getCusedlist() {
+  cusedlistApi().then(res => {
+    usedList.value = res.data
+  })
+}
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   getCheckTime()
+  getCusedlist()
 })
 
 onBeforeUnmount(() => {
@@ -117,25 +125,32 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <el-dialog title="Tips" v-model="dialogVisible" width="1200">
+    <el-dialog title="购买方案" v-model="dialogVisible" width="400">
       <!-- 单次 2999，3次4999，包月5999，半年14999，一年19999 -->
-      <div class="">
-        <div class="">
-          <div class="">购买后方案</div>
-          <div class="">2026/11/28到期</div>
+      <div class="payment-method">
+
+        <div class="method-header">
+          <img src="@/assets/user/weixin.png" alt="微信支付" class="icon" />
+          <span>微信支付</span>
         </div>
-        <div class="">
+        <div class="course-box">
+          <img :src="dialogData.qrCodeData" style="width: 216px; height: 216px;" />
+        </div>
+        <!-- <div class="">
           <div class="">购买时长</div>
           <div class="">
-            <div class="">单次 </div>
-            <div class="">3次</div>
-            <div class="">包月</div>
-            <div class="">半年</div>
-            <div class="">一年</div>
+            <div v-for="(item, index) in usedList" :key="index">
+              {{ item.comboName }}
+            </div>
           </div>
+        </div> -->
+        <div class="course-info">
+          <p>测试标题</p>
+          <p>
+            支付金额：<span class="price">¥999</span>
+          </p>
+          <p>请用微信扫码支付</p>
         </div>
-        <img :src="dialogData.qrCodeData" style="width: 100%" />
-
       </div>
     </el-dialog>
   </div>
@@ -347,5 +362,55 @@ onBeforeUnmount(() => {
       }
     }
   }
+}
+</style>
+
+<style>
+.payment-method {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.method-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.course-box {
+  width: 246px;
+  height: 246px;
+  margin: 0 auto 2rem;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+.course-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.course-info p {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.course-info p:first-child {
+  color: #1f3e85;
+}
+
+.price {
+  color: red;
+  font-weight: bold;
 }
 </style>

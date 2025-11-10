@@ -54,3 +54,9 @@ export function upachildysxyApi() {
 export function friendlinkApi() {
   return api.post('/app-api/cms/content/friend-link')
 }
+
+// 获取套餐 需登录
+export function cusedlistApi() {
+  return api.get('/app-api/member/combo/get-used-list')
+}
+
