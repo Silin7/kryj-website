@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import { authsmscodeApi, authregisterApi } from '@/api/interface'
+import { authcodeApi, authsmscodeApi, authregisterApi } from '@/api/interface'
 
 const isreadRuler: any = ref(false)
 const userUnit: any = ref('')
@@ -11,20 +11,19 @@ const mobile: any = ref('')
 const password: any = ref('')
 const password2: any = ref('')
 const captchaVerification: any = ref('')
+const code: any = ref('')
 
-// // 获取验证码
-// const uuid: any = ref('')
-// const codeImg: any = ref('')
-// function getCode() {
-//   authcodeApi().then((res: any) => {
-//     if (res?.code === 0) {
-//       uuid.value = res.data.uuid
-//       codeImg.value = 'data:image/gif;base64,' + res.data.img
-//     }
-//   })
-// }
-
+// 获取验证码
+const uuid: any = ref('')
+const codeImg: any = ref('')
 function getCode() {
+  authcodeApi().then((res: any) => {
+    uuid.value = res.data.uuid
+    codeImg.value = 'data:image/gif;base64,' + res.data.img
+  })
+}
+
+function getDxcode() {
   if (!mobile.value) {
     ElMessage({
       type: 'error',
@@ -129,6 +128,13 @@ function ceateAccount() {
     })
     return
   }
+  if (!code.value) {
+    ElMessage({
+      type: 'error',
+      message: '请输入短线验证码',
+    })
+    return
+  }
   if (!isreadRuler.value) {
     ElMessage({
       type: 'error',
@@ -137,7 +143,7 @@ function ceateAccount() {
     return
   }
   authregisterApi({
-    // uuid: uuid.value,
+    uuid: uuid.value,
     userUnit: userUnit.value,
     userPost: userPost.value,
     mobile: mobile.value,
@@ -149,10 +155,13 @@ function ceateAccount() {
       message: '账号创建成功',
     })
     pageJump('login')
+  }).catch(() => {
+    getCode()
   })
 }
 
 onMounted(() => {
+  getCode()
 })
 </script>
 
@@ -183,20 +192,20 @@ onMounted(() => {
         <img src="@/assets/register/pwd2.png" alt="" />
         <el-input type="password" show-password v-model="password2" placeholder="请再次输入密码" clearable />
       </div>
-      <!-- <div class="frsc">
+      <div class="frsc">
         <div class="fromItem frsc" style="width: calc(100% - 130px)">
           <img src="@/assets/register/yzm.png" alt="" />
           <el-input v-model="captchaVerification" placeholder="请输入验证码" clearable />
         </div>
         <img :src="codeImg" alt="" class="yzmStyle" @click="getCode" />
-      </div> -->
+      </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/yzm.png" alt="" />
-        <el-input v-model="captchaVerification" style="width: calc(100% - 140px)" placeholder="短信验证码" clearable />
+        <el-input v-model="code" style="width: calc(100% - 140px)" placeholder="短信验证码" clearable />
         <div v-if="countdown < 60 && countdown > 0" class="djsTimeStyle">
           已发送（{{ countdown }}）
         </div>
-        <button v-else @click="getCode">获取验证码</button>
+        <button v-else @click="getDxcode">获取验证码</button>
       </div>
       <div class="stateMent">
         <img v-if="isreadRuler" src="@/assets/register/checked.png" alt="" @click="isreadRuler = !isreadRuler" />
