@@ -30,6 +30,16 @@ export function baselogoutdApi() {
   return api.post('/app-api/member/auth/logout')
 }
 
+// 首页 - 主页数据
+export function zhhomeApi() {
+  return api.post('/app-api/cms/content/zh/home')
+}
+
+// 页脚
+export function zhfooterApi() {
+  return api.post('/app-api/cms/content/zh/footer')
+}
+
 // AI预测平台  体验次数
 export function checkTimeApi() {
   return api.post('/app-api/member/auth/getCheckTime')
