@@ -45,6 +45,11 @@ function getCusedlist() {
   })
 }
 
+const usedActive: any = ref(0)
+function usedItemClick(index: any) {
+  usedActive.value = index
+}
+
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   getCheckTime()
@@ -125,32 +130,42 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <el-dialog title="购买方案" v-model="dialogVisible" width="400">
-      <!-- 单次 2999，3次4999，包月5999，半年14999，一年19999 -->
-      <div class="payment-method">
-
-        <div class="method-header">
-          <img src="@/assets/user/weixin.png" alt="微信支付" class="icon" />
-          <span>微信支付</span>
+    <el-dialog title="选择购买方案" v-model="dialogVisible" :width="windowWidth <= 768 ? '92%' : '600'">
+      <div class="paymentMethod">
+        <!-- <div class="methodHeader">
+          <img src="@/assets/user/weixin.png" alt="微信支付" class="methodIcon" />
+          <span>请使用微信扫码支付</span>
         </div>
-        <div class="course-box">
-          <img :src="dialogData.qrCodeData" style="width: 216px; height: 216px;" />
-        </div>
-        <!-- <div class="">
-          <div class="">购买时长</div>
-          <div class="">
-            <div v-for="(item, index) in usedList" :key="index">
-              {{ item.comboName }}
+        <div class="courseBox">
+          <img :src="dialogData.qrCodeData" style="width: 100%; height: 100%;" />
+        </div> -->
+        <div class="usedBox">
+          <div v-for="(item, index) in usedList" :key="index"
+            :class="['usedItem', usedActive === index ? 'usedItemActive' : '']" @click="usedItemClick(index)">
+            <div class="usedComboName">
+              <span>{{ item.comboName }}</span>
+            </div>
+            <div class="usedRealPrice">
+              ￥<span>{{ item.comboRealPrice }}</span>
+            </div>
+            <div v-if="item.comboPrice !== item.comboRealPrice" class="usedPrice">
+              原价￥{{ item.comboPrice }}
+            </div>
+            <div v-if="item.discountPrice" class="usedDisPrice">
+              立减<span>{{ item.discountPrice }}</span>
+            </div>
+            <div v-if="item.discountPercent" class="usedDisPrice">
+              享<span>{{ (100 - item.discountPercent) / 10 }}</span>折
             </div>
           </div>
-        </div> -->
-        <div class="course-info">
-          <p>测试标题</p>
-          <p>
-            支付金额：<span class="price">¥999</span>
-          </p>
-          <p>请用微信扫码支付</p>
         </div>
+        <!-- <div class="priceInfo">
+          <div class="realPrice">
+            <span>¥</span>
+            <span class="price">999</span>
+          </div>
+          <div class="yuanPrice">原价¥1298.5</div>
+        </div> -->
       </div>
     </el-dialog>
   </div>
@@ -363,54 +378,152 @@ onBeforeUnmount(() => {
     }
   }
 }
-</style>
 
-<style>
-.payment-method {
-  padding: 15px;
-  border: 1px solid #ddd;
+.paymentMethod {
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ebf0fb;
   border-radius: 8px;
-}
 
-.method-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
+  .methodHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
 
-.icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-}
+    .methodIcon {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+  }
 
-.course-box {
-  width: 246px;
-  height: 246px;
-  margin: 0 auto 2rem;
-  padding: 0.75rem;
-  border: 1px solid #e5e7eb;
-  background-color: #f3f4f6;
-  border-radius: 0.5rem;
-}
+  .courseBox {
+    margin: 0 auto 2rem;
+    padding: 0.875rem;
+    width: 250px;
+    height: 250px;
+    background-color: #ebf0fb;
+    border-radius: 0.5rem;
+  }
 
-.course-cover {
-  width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-}
+  // .priceInfo {
+  //   margin-top: 1rem;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: flex-end;
 
-.course-info p {
-  margin: 1rem 0;
-  text-align: center;
-}
+  //   .realPrice {
+  //     margin-right: 0.25rem;
 
-.course-info p:first-child {
-  color: #1f3e85;
-}
+  //     span:first-child {
+  //       color: #1f3e85;
+  //       opacity: 0.6;
+  //     }
 
-.price {
-  color: red;
-  font-weight: bold;
+  //     .price {
+  //       margin-left: 0.25rem;
+  //       font-weight: bold;
+  //       font-size: 2rem;
+  //       line-height: 2rem;
+  //       color: #F56C6C;
+  //     }
+  //   }
+
+  //   .yuanPrice {
+  //     font-size: 0.875rem;
+  //     color: #1f3e85;
+  //     opacity: 0.6;
+  //     text-decoration: line-through;
+  //   }
+  // }
+
+  .usedBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .usedItem {
+      position: relative;
+      margin: 0 0.5rem 1rem;
+      width: 130px;
+      height: 160px;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      color: #1f3e85;
+      border: 1px solid #ebf0fb;
+      border-radius: 0.5rem;
+
+      &:hover {
+        cursor: pointer;
+        // color: #fff;
+        // background-color: #1f3e85;
+        background-image: linear-gradient(0deg, #e7f0fd 0%, #accbee 100%);
+
+        // .usedRealPrice {
+        //   color: #fff;
+        // }
+      }
+
+      div {
+        margin: 0.25rem 0;
+      }
+
+      .usedComboName {
+        margin: 0.25rem 0;
+        font-weight: 700;
+      }
+
+      .usedRealPrice {
+        display: flex;
+        align-items: flex-end;
+        font-size: 0.875rem;
+        color: #f56c6c;
+
+        span {
+          font-size: 1.5rem;
+          line-height: 1.5rem;
+          font-weight: 700;
+        }
+      }
+
+      .usedPrice {
+        font-size: 0.875rem;
+        line-height: 0.875rem;
+        text-decoration: line-through;
+        color: #4b5563;
+        opacity: 0.6;
+      }
+
+      .usedDisPrice {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0 1rem 0 0.5rem;
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+        color: #fff;
+        background-color: #fd5485;
+        border-radius: 0 0 1.5rem 0;
+      }
+    }
+
+    .usedItemActive {
+      // color: #fff;
+      // background-color: #1f3e85;
+      // background-image: linear-gradient(120deg, #1f3e85 0%, #4c659d 100%);
+      background-image: linear-gradient(0deg, #e7f0fd 0%, #accbee 100%);
+
+      // .usedRealPrice {
+      //   color: #fff;
+      // }
+
+      // .usedPrice {
+      //   color: #fff;
+      // }
+    }
+  }
 }
 </style>
