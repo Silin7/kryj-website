@@ -31,23 +31,31 @@ function ksycClick() {
   searchClick.value = true
 }
 
-// dialog
+// 套餐 pay dialog
 const dialogVisible: any = ref(true)
 const dialogData: any = ref({
   orderNo: 'WX_VIDEO_8_1762740007_JNU8T6',
   qrCodeData: 'https://www.silin7.cn/media/erweima.png',
 })
-const usedList: any = ref([])
 
+// 套餐列表
+const usedList: any = ref([])
 function getCusedlist() {
   cusedlistApi().then(res => {
     usedList.value = res.data
   })
 }
 
+// 选择套餐
 const usedActive: any = ref(0)
 function usedItemClick(index: any) {
   usedActive.value = index
+}
+
+// 立即支付
+const usedPay: any = ref(false)
+function payNowClick() {
+  usedPay.value = true
 }
 
 onMounted(() => {
@@ -130,16 +138,9 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <el-dialog title="选择购买方案" v-model="dialogVisible" :width="windowWidth <= 768 ? '92%' : '600'">
+    <el-dialog title="选择购买方案" v-model="dialogVisible" :width="windowWidth <= 768 ? 'calc(100% - 2rem)' : '600'">
       <div class="paymentMethod">
-        <!-- <div class="methodHeader">
-          <img src="@/assets/user/weixin.png" alt="微信支付" class="methodIcon" />
-          <span>请使用微信扫码支付</span>
-        </div>
-        <div class="courseBox">
-          <img :src="dialogData.qrCodeData" style="width: 100%; height: 100%;" />
-        </div> -->
-        <div class="usedBox">
+        <div v-if="!usedPay" class="usedBox">
           <div v-for="(item, index) in usedList" :key="index"
             :class="['usedItem', usedActive === index ? 'usedItemActive' : '']" @click="usedItemClick(index)">
             <div class="usedComboName">
@@ -159,13 +160,23 @@ onBeforeUnmount(() => {
             </div>
           </div>
         </div>
-        <!-- <div class="priceInfo">
-          <div class="realPrice">
-            <span>¥</span>
-            <span class="price">999</span>
+        <div v-else class="weixinPayBox">
+          <div class="methodHeader">
+            <i class="fa fa-chevron-left" @click="usedPay = false"></i>
+            <div class="frcc">
+              <img src="@/assets/user/weixin.png" alt="微信支付" class="methodIcon" />
+              <span>请使用微信扫码支付</span>
+            </div>
+            <div style="width: 1.5rem; height: 1.5rem;"></div>
           </div>
-          <div class="yuanPrice">原价¥1298.5</div>
-        </div> -->
+          <div class="courseBox">
+            <img :src="dialogData.qrCodeData" style="width: 100%; height: 100%;" />
+          </div>
+          <div class="usedRealPrice">
+            ￥<span>{{ usedList[usedActive].comboRealPrice }}</span>
+          </div>
+        </div>
+        <button v-if="!usedPay" class="payBtn" @click="payNowClick">立即支付</button>
       </div>
     </el-dialog>
   </div>
@@ -380,62 +391,10 @@ onBeforeUnmount(() => {
 }
 
 .paymentMethod {
-  padding: 1rem;
+  padding: 1rem 0;
   font-size: 1rem;
   border: 1px solid #ebf0fb;
-  border-radius: 8px;
-
-  .methodHeader {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2rem;
-
-    .methodIcon {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
-    }
-  }
-
-  .courseBox {
-    margin: 0 auto 2rem;
-    padding: 0.875rem;
-    width: 250px;
-    height: 250px;
-    background-color: #ebf0fb;
-    border-radius: 0.5rem;
-  }
-
-  // .priceInfo {
-  //   margin-top: 1rem;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: flex-end;
-
-  //   .realPrice {
-  //     margin-right: 0.25rem;
-
-  //     span:first-child {
-  //       color: #1f3e85;
-  //       opacity: 0.6;
-  //     }
-
-  //     .price {
-  //       margin-left: 0.25rem;
-  //       font-weight: bold;
-  //       font-size: 2rem;
-  //       line-height: 2rem;
-  //       color: #F56C6C;
-  //     }
-  //   }
-
-  //   .yuanPrice {
-  //     font-size: 0.875rem;
-  //     color: #1f3e85;
-  //     opacity: 0.6;
-  //     text-decoration: line-through;
-  //   }
-  // }
+  border-radius: 0.5rem;
 
   .usedBox {
     display: flex;
@@ -457,13 +416,7 @@ onBeforeUnmount(() => {
 
       &:hover {
         cursor: pointer;
-        // color: #fff;
-        // background-color: #1f3e85;
         background-image: linear-gradient(0deg, #e7f0fd 0%, #accbee 100%);
-
-        // .usedRealPrice {
-        //   color: #fff;
-        // }
       }
 
       div {
@@ -473,27 +426,6 @@ onBeforeUnmount(() => {
       .usedComboName {
         margin: 0.25rem 0;
         font-weight: 700;
-      }
-
-      .usedRealPrice {
-        display: flex;
-        align-items: flex-end;
-        font-size: 0.875rem;
-        color: #f56c6c;
-
-        span {
-          font-size: 1.5rem;
-          line-height: 1.5rem;
-          font-weight: 700;
-        }
-      }
-
-      .usedPrice {
-        font-size: 0.875rem;
-        line-height: 0.875rem;
-        text-decoration: line-through;
-        color: #4b5563;
-        opacity: 0.6;
       }
 
       .usedDisPrice {
@@ -506,24 +438,84 @@ onBeforeUnmount(() => {
         line-height: 1.25rem;
         color: #fff;
         background-color: #fd5485;
-        border-radius: 0 0 1.5rem 0;
+        border-radius: 0.5rem 0 1.5rem 0;
       }
     }
 
     .usedItemActive {
-      // color: #fff;
-      // background-color: #1f3e85;
-      // background-image: linear-gradient(120deg, #1f3e85 0%, #4c659d 100%);
       background-image: linear-gradient(0deg, #e7f0fd 0%, #accbee 100%);
-
-      // .usedRealPrice {
-      //   color: #fff;
-      // }
-
-      // .usedPrice {
-      //   color: #fff;
-      // }
+      // background-image: linear-gradient(0deg, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)
     }
+  }
+
+  .usedRealPrice {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: #e44343;
+    text-align: center;
+
+    span {
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      font-weight: 700;
+    }
+  }
+
+  .usedPrice {
+    margin: 0.25rem auto;
+    font-size: 0.875rem;
+    line-height: 0.875rem;
+    text-decoration: line-through;
+    color: #4b5563;
+    opacity: 0.6;
+    text-align: center;
+  }
+
+  .weixinPayBox {
+    padding: 0 1rem;
+
+    .methodHeader {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #4b5563;
+
+      i {
+        cursor: pointer;
+        width: 1.25rem;
+        height: 1.25rem;
+        line-height: 1.25rem;
+      }
+
+      .methodIcon {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .courseBox {
+      margin: 0 auto 1rem;
+      padding: 0.875rem;
+      width: 16rem;
+      height: 16rem;
+      background-color: #ebf0fb;
+      // background-color: #fd548520;
+      border-radius: 0.5rem;
+    }
+  }
+
+  .payBtn {
+    display: block;
+    margin: 0 auto;
+    width: 7.5rem;
+    height: 2.5rem;
+    color: #fff;
+    background-color: #fd5485;
+    border-radius: 0.5rem;
   }
 }
 </style>
