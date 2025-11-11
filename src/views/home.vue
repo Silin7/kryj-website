@@ -4,9 +4,9 @@ import pageJump from '@/hooks/pageJump'
 import backToTop from '@/hooks/backToTop'
 import windowOpen from '@/hooks/windowOpen'
 import { fileURL } from '@/api/baseConfig'
-import { friendlinkApi } from '@/api/interface'
+import { zhhomeApi, friendlinkApi } from '@/api/interface'
 
-// 可视窗口宽度
+// 可视窗口宽度 + 滚动
 const windowWidth = ref(window.innerWidth)
 const windowScrollY = ref(window.scrollY)
 
@@ -16,6 +16,15 @@ function updateWindowWidth() {
 
 function handleScroll() {
   windowScrollY.value = window.scrollY
+}
+
+// 首页数据
+const homeData: any = ref({})
+
+function getZhhome() {
+  zhhomeApi().then((res: any) => {
+    homeData.value = res.data
+  })
 }
 
 // 合作单位
@@ -131,6 +140,7 @@ function getFlinktop() {
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   window.addEventListener('scroll', handleScroll)
+  getZhhome()
   getVippartners()
   getAllaiapp()
   getFlinktop()
@@ -145,12 +155,12 @@ onBeforeUnmount(() => {
 <template>
   <div class="homePage">
     <!-- video -->
-    <video v-if="windowWidth > 768" loop muted preload="auto" autoplay poster="" data-setup="{}"
+    <video v-if="windowWidth > 768" loop muted preload="auto" autoplay :poster="homeData?.homeBanner?.contentImg" data-setup="{}"
       style="width: 100vw; height: auto">
-      <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
+      <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
     </video>
-    <video v-else loop muted preload="auto" autoplay poster="" data-setup="{}" style="width: 100vw; height: 100vh">
-      <source src="http://www.silin7.cn/media/kryj-banner.mp4" type="video/mp4" />
+    <video v-else loop muted preload="auto" autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}" style="width: 100vw; height: 100vh">
+      <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
     </video>
     <!-- 公司简介
        :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']"
@@ -158,10 +168,9 @@ onBeforeUnmount(() => {
     <div class="featuresBox">
       <img src="@/assets/home/gongsi.jpg" class="featuresGsImg">
       <div class="featuresRounded">
-        <div class="featuresRoundedTitle">山东科睿易晶生物技术有限公司</div>
+        <div class="featuresRoundedTitle">{{ homeData?.homeCompany?.contentTitle }}</div>
         <div class="featuresRoundedInfo">
-          公司自2022年成立，致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。
-          自主研发了医学人工智能药物筛选数据库平台、AI辅助药物验证模拟系统、智能药物分子对接与体内过程模拟分析等产品。同时将AI与类器官技术深度绑定，创新性地构建了"多组学-AI-人工降噪-类器官"多位一体的智能药物研发体系，彻底解决创新药研发过程中的药物发现困难、研发周期长、实验花费高以及成功率低的问题，结合专家团队进一步确认，提供高效、精准的一站式创新药物研发解决方案。
+          {{ homeData?.homeCompany?.contentDescription }}
         </div>
       </div>
     </div>
@@ -182,24 +191,19 @@ onBeforeUnmount(() => {
         </el-carousel-item>
         <el-carousel-item>
           <div class="platformsItem">
-            <img src="@/assets/home/platforms-2.png">
+            <img :src="homeData?.companyProduct?.contentImg">
             <div>
-              <p class="platformsItitle">AI辅助药物验证模拟系统</p>
-              <p class="platformsIinfo">
-                AI 辅助药物验证模拟系统是衔接药物筛选与实体实验的关键技术平台，聚焦创新药临床前验证环节，融合多物理场模拟、机器学习与多组学数据，构建 “虚拟验证 - 风险预判 -
-                实验指导”的全流程辅助体系。通过替代部分高成本、高耗时的实体实验，解决传统验证 “周期长、成本高、风险难预判” 的痛点，为药企、科研机构提供高效、精准的临床前验证解决方案，助力候选药物快速推进至实验阶段。
-              </p>
+              <p class="platformsItitle">{{ homeData?.companyProduct?.contentTitle }}</p>
+              <p class="platformsIinfo">{{ homeData?.companyProduct?.contentDescription }}</p>
             </div>
           </div>
         </el-carousel-item>
         <el-carousel-item>
           <div class="platformsItem">
-            <img src="@/assets/home/platforms-3.png">
+            <img :src="homeData?.companyProduct?.contentImg">
             <div>
-              <p class="platformsItitle">智能药物分子对接与体内过程模拟分析</p>
-              <p class="platformsIinfo">
-                在创新药研发的关键环节中，药物分子能否精准结合靶点蛋白、进入人体后能否有效发挥作用且规避毒性，是决定研发成败的核心。我司自主研发的智能药物分子对接与体内过程模拟分析系统，依托多领域技术融合优势，构建从
-                “分子互作” 到 “体内代谢” 的全链条模拟体系，为药物研发提供 “提前预判、精准优化” 的核心支撑，大幅降低实验试错成本，加速候选药物筛选进程。</p>
+              <p class="platformsItitle">{{ homeData?.companyProduct?.contentTitle }}</p>
+              <p class="platformsIinfo">{{ homeData?.companyProduct?.contentDescription }}</p>
             </div>
           </div>
         </el-carousel-item>
