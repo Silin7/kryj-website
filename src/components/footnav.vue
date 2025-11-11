@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import useHeaderStore from '@/store/modules/header'
-import { sysinfosApi } from '@/api/modules/basic'
+import { zhfooterApi } from '@/api/interface'
 
 // 可视窗口宽度
 const windowWidth = ref(window.innerWidth)
@@ -14,22 +14,17 @@ function updateWindowWidth() {
 const sysInfos: any = ref({})
 
 function getSysinfosApi() {
-  // sysinfosApi().then((res: any) => {
-  //   if (res && res.length > 0) {
-  //     for (let i = 0; i < res.length; i++) {
-  //       const item = res[i]
-  //       sysInfos.value[item.ky] = item.val
-  //     }
-  //   }
-  // })
-  sysInfos.value = {
-    sys_address: '山东省济南市高新区春兰路1177号银丰生物城3号地块4号楼504',
-    sys_tel: '15668313535',
-    sys_email: '15668313535@163.com',
-    sys_worktime: '周一至周五 9:00-18:00',
-    sys_company: '© 2025 山东科睿易晶生物技术有限公司. 保留所有权利.',
-    sys_filing:  '鲁ICP备12345678号-1'
-  }
+  zhfooterApi().then((res: any) => {
+    sysInfos.value = res.data.footer
+  })
+  // sysInfos.value = {
+  //   sys_address: '山东省济南市高新区春兰路1177号银丰生物城3号地块4号楼504',
+  //   sys_tel: '15668313535',
+  //   sys_email: '15668313535@163.com',
+  //   sys_worktime: '周一至周五 9:00-18:00',
+  //   sys_company: '© 2025 山东科睿易晶生物技术有限公司. 保留所有权利.',
+  //   sys_filing:  '鲁ICP备12345678号-1'
+  // }
 }
 
 const headerStore = useHeaderStore()
@@ -56,31 +51,31 @@ onBeforeUnmount(() => {
           <div class="contactFa">
             <i class="fa fa-map-marker"></i>
           </div>
-          <div class="contacttext">{{ sysInfos.sys_address }}</div>
+          <div class="contacttext">{{ sysInfos.contentSource }}</div>
         </div>
         <div class="contactUs frsc">
           <div class="contactFa">
             <i class="fa fa-phone"></i>
           </div>
-          <div class="contacttext">{{ sysInfos.sys_tel }}</div>
+          <div class="contacttext">{{ sysInfos.contentShortTitle }}</div>
         </div>
         <div class="contactUs frsc">
           <div class="contactFa">
             <i class="fa fa-envelope"></i>
           </div>
-          <div class="contacttext">{{ sysInfos.sys_email }}</div>
+          <div class="contacttext">{{ sysInfos.contentAuthor }}</div>
         </div>
-        <div class="contactUs frsc">
+        <!-- <div class="contactUs frsc">
           <div class="contactFa">
             <i class="fa fa-clock-o"></i>
           </div>
           <div class="contacttext">{{ sysInfos.sys_worktime }}</div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="footBottom" :style="selectedTab !== 'home' ? 'margin-top: 0;' : ''">
-      <div class="footInfo">{{ sysInfos.sys_company }}</div>
-      <div class="footInfo">{{ sysInfos.sys_filing }}</div>
+      <div class="footInfo">{{ sysInfos.contentKeyword }}</div>
+      <div class="footInfo">{{ sysInfos.contentDescription }}</div>
     </div>
   </div>
 </template>
