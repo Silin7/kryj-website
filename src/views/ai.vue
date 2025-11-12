@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import pageJump from '@/hooks/pageJump'
-import { checkTimeApi, cusedlistApi } from '@/api/interface'
+import { checkTimeApi, cusedlistApi, ordercreateApi } from '@/api/interface'
 
 const windowWidth = ref(window.innerWidth)
 
@@ -39,23 +39,32 @@ const dialogData: any = ref({
 })
 
 // 套餐列表
+const usedId: any = ref('')
 const usedList: any = ref([])
 function getCusedlist() {
   cusedlistApi().then(res => {
     usedList.value = res.data
+    if (res.data?.length > 0) {
+      usedId.value = res.data[0].id
+    }
   })
 }
 
 // 选择套餐
-const usedActive: any = ref(0)
-function usedItemClick(index: any) {
-  usedActive.value = index
+function usedItemClick(id: any) {
+  usedId.value = id
 }
 
 // 立即支付
 const usedPay: any = ref(false)
 function payNowClick() {
-  usedPay.value = true
+  ordercreateApi({
+    spuId: usedId.value,
+    channelCode: 'wx_native'
+  }).then((res: any) => {
+    usedPay.value = true
+    console.log('-------->', res)
+  })
 }
 
 onMounted(() => {
@@ -142,9 +151,9 @@ onBeforeUnmount(() => {
       <div class="paymentMethod">
         <div v-if="!usedPay" class="usedBox">
           <div v-for="(item, index) in usedList" :key="index"
-            :class="['usedItem', usedActive === index ? 'usedItemActive' : '']" @click="usedItemClick(index)">
+            :class="['usedItem', usedId === item.id ? 'usedItemActive' : '']" @click="usedId = item.id">
             <div class="usedComboName">
-              <span>{{ item.comboName }}</span>
+              <span>{{ item.comboName }}{{ item.id }}</span>
             </div>
             <div class="usedRealPrice">
               ￥<span>{{ item.comboRealPrice }}</span>
@@ -173,7 +182,7 @@ onBeforeUnmount(() => {
             <img :src="dialogData.qrCodeData" style="width: 100%; height: 100%;" />
           </div>
           <div class="usedRealPrice">
-            ￥<span>{{ usedList[usedActive].comboRealPrice }}</span>
+            ￥<span>{{ usedList[usedId].comboRealPrice }}</span>
           </div>
         </div>
         <button v-if="!usedPay" class="payBtn" @click="payNowClick">立即支付</button>

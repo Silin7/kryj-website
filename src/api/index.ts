@@ -16,7 +16,6 @@ const api = axios.create({
 api.interceptors.request.use((request) => {
   // 设置请求头
   if (request.headers && localStorage.getItem('accessToken')) {
-    request.headers.accessToken = `Bearer ${localStorage.getItem('accessaccessToken') ?? ''}`
     request.headers.Authorization = `Bearer ${localStorage.getItem('accessToken') ?? ''}`
   }
   return request

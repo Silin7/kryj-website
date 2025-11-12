@@ -22,7 +22,7 @@ export function authloginApi(data: any) {
 
 // 登录注册 - 用户信息
 export function authinfoApi() {
-  return api.post('/app-api/member/auth/get')
+  return api.post('/app-api/member/user/get')
 }
 
 // 登录注册 - 退出登录
@@ -43,6 +43,11 @@ export function zhfooterApi() {
 // AI预测平台  体验次数
 export function checkTimeApi() {
   return api.post('/app-api/member/auth/getCheckTime')
+}
+
+// AI预测平台  创建订单
+export function ordercreateApi(data: any) {
+  return api.post('/app-api/member/order/create', data)
 }
 
 // 药物预测网用户使用协议
