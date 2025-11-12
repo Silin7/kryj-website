@@ -65,13 +65,8 @@ onBeforeUnmount(() => {
           </div>
           <div class="contacttext">{{ sysInfos.contentAuthor }}</div>
         </div>
-        <!-- <div class="contactUs frsc">
-          <div class="contactFa">
-            <i class="fa fa-clock-o"></i>
-          </div>
-          <div class="contacttext">{{ sysInfos.sys_worktime }}</div>
-        </div> -->
       </div>
+      <img :src="sysInfos.contentImg" alt="">
     </div>
     <div class="footBottom" :style="selectedTab !== 'home' ? 'margin-top: 0;' : ''">
       <div class="footInfo">{{ sysInfos.contentKeyword }}</div>
@@ -90,28 +85,26 @@ onBeforeUnmount(() => {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     border-bottom: 1px solid #1a3670;
 
     .quickbox {
+      max-width: calc(100% - 8rem);
       flex-shrink: 0;
       display: flex;
+      flex-flow: column;
       flex-wrap: wrap;
       align-items: center;
 
-      @media (max-width: 768px) {
-        width: 100%;
-      }
-
       .contactUs {
+        width: 100%;
         flex-shrink: 0;
-        margin-right: 1rem;
-        padding-bottom: 1rem;
+        padding: 0 1rem 1rem 0;
         display: flex;
         align-items: flex-start;
 
         @media (max-width: 768px) {
-          width: 100%;
+          padding: 0 0.5rem 0.5rem 0;
         }
 
         .contactFa {
@@ -139,6 +132,16 @@ onBeforeUnmount(() => {
 
       .contactUs:last-child {
         margin-right: 0;
+      }
+    }
+
+    img {
+      margin-bottom: 1rem;
+      width: 8rem;
+      height: 8rem;
+
+      @media (max-width: 768px) {
+        margin-bottom: 0;
       }
     }
   }
