@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useHead } from '@vueuse/head'
 import pageJump from '@/hooks/pageJump'
 import backToTop from '@/hooks/backToTop'
 import windowOpen from '@/hooks/windowOpen'
-import { fileURL } from '@/api/baseConfig'
 import { zhhomeApi, friendlinkApi } from '@/api/interface'
 
 // 可视窗口宽度 + 滚动
@@ -24,109 +24,118 @@ const homeData: any = ref({})
 function getZhhome() {
   zhhomeApi().then((res: any) => {
     homeData.value = res.data
+    if (res.data.seo) {
+      useHead({
+        title: res.data.seo.categoryTitle,
+        meta: [
+          { name: 'description', content: res.data.seo.categoryDescrip },
+          { name: 'keywords', content: res.data.seo.categoryKeyword },
+        ],
+      })
+    }
   })
 }
 
-// 合作单位
-const vippartners: any = ref([])
+// // 合作单位
+// const vippartners: any = ref([])
 
-function getVippartners() {
-  // vippartnersApi().then((res: any) => {
-  //   vippartners.value = res
-  // })
-  vippartners.value = [
-    {
-      company_name: '中粮集团',
-      logoimg: '/uploads/default/decc62b362c9440e856a726e2f94cc5e.png',
-      istourl: false,
-      url: null,
-      description: null,
-      remark: '',
-      sort: 0,
-      id: 7,
-      created_at: '2025-08-20T22:02:19',
-      updated_at: '2025-08-20T22:02:19',
-    },
-    {
-      company_name: '沃尔玛公司',
-      logoimg: '/uploads/default/45400411009740f8892e40610c704aea.png',
-      istourl: false,
-      url: null,
-      description: null,
-      remark: '',
-      sort: 0,
-      id: 6,
-      created_at: '2025-08-20T22:01:08',
-      updated_at: '2025-08-20T22:01:08',
-    },
-    {
-      company_name: '三星电子',
-      logoimg: '/uploads/default/aa5b299753694f03a97478a54a0ade2e.png',
-      istourl: false,
-      url: null,
-      description: null,
-      remark: '',
-      sort: 0,
-      id: 5,
-      created_at: '2025-08-20T22:00:12',
-      updated_at: '2025-08-20T22:00:12',
-    },
-    {
-      company_name: '大众汽车',
-      logoimg: '/uploads/default/99fa26b4247042dd88f003738a3024ff.png',
-      istourl: true,
-      url: 'https://www.vw.com.cn/',
-      description: null,
-      remark: '',
-      sort: 2,
-      id: 4,
-      created_at: '2025-08-20T16:25:48',
-      updated_at: '2025-08-20T16:27:37',
-    },
-    {
-      company_name: '苹果公司',
-      logoimg: '/uploads/default/70776a7a004149338907026d34922b90.png',
-      istourl: true,
-      url: 'https://www.apple.com.cn',
-      description: null,
-      remark: '',
-      sort: 2,
-      id: 3,
-      created_at: '2025-08-20T16:25:18',
-      updated_at: '2025-08-20T16:27:55',
-    },
-    {
-      company_name: '阿里巴巴集团',
-      logoimg: '/uploads/default/8c6afe3c96d8428997f827ee80ba3f81.jpg',
-      istourl: false,
-      url: null,
-      description:
-        '阿里巴巴集团控股有限公司（Alibaba Group Holding Limited）， 成立于1999年6月28日，总部位于中国浙江杭州。',
-      remark: '',
-      sort: 2,
-      id: 2,
-      created_at: '2025-08-18T12:34:51',
-      updated_at: '2025-08-20T16:24:31',
-    },
-  ]
-}
+// function getVippartners() {
+//   // vippartnersApi().then((res: any) => {
+//   //   vippartners.value = res
+//   // })
+//   vippartners.value = [
+//     {
+//       company_name: '中粮集团',
+//       logoimg: '/uploads/default/decc62b362c9440e856a726e2f94cc5e.png',
+//       istourl: false,
+//       url: null,
+//       description: null,
+//       remark: '',
+//       sort: 0,
+//       id: 7,
+//       created_at: '2025-08-20T22:02:19',
+//       updated_at: '2025-08-20T22:02:19',
+//     },
+//     {
+//       company_name: '沃尔玛公司',
+//       logoimg: '/uploads/default/45400411009740f8892e40610c704aea.png',
+//       istourl: false,
+//       url: null,
+//       description: null,
+//       remark: '',
+//       sort: 0,
+//       id: 6,
+//       created_at: '2025-08-20T22:01:08',
+//       updated_at: '2025-08-20T22:01:08',
+//     },
+//     {
+//       company_name: '三星电子',
+//       logoimg: '/uploads/default/aa5b299753694f03a97478a54a0ade2e.png',
+//       istourl: false,
+//       url: null,
+//       description: null,
+//       remark: '',
+//       sort: 0,
+//       id: 5,
+//       created_at: '2025-08-20T22:00:12',
+//       updated_at: '2025-08-20T22:00:12',
+//     },
+//     {
+//       company_name: '大众汽车',
+//       logoimg: '/uploads/default/99fa26b4247042dd88f003738a3024ff.png',
+//       istourl: true,
+//       url: 'https://www.vw.com.cn/',
+//       description: null,
+//       remark: '',
+//       sort: 2,
+//       id: 4,
+//       created_at: '2025-08-20T16:25:48',
+//       updated_at: '2025-08-20T16:27:37',
+//     },
+//     {
+//       company_name: '苹果公司',
+//       logoimg: '/uploads/default/70776a7a004149338907026d34922b90.png',
+//       istourl: true,
+//       url: 'https://www.apple.com.cn',
+//       description: null,
+//       remark: '',
+//       sort: 2,
+//       id: 3,
+//       created_at: '2025-08-20T16:25:18',
+//       updated_at: '2025-08-20T16:27:55',
+//     },
+//     {
+//       company_name: '阿里巴巴集团',
+//       logoimg: '/uploads/default/8c6afe3c96d8428997f827ee80ba3f81.jpg',
+//       istourl: false,
+//       url: null,
+//       description:
+//         '阿里巴巴集团控股有限公司（Alibaba Group Holding Limited）， 成立于1999年6月28日，总部位于中国浙江杭州。',
+//       remark: '',
+//       sort: 2,
+//       id: 2,
+//       created_at: '2025-08-18T12:34:51',
+//       updated_at: '2025-08-20T16:24:31',
+//     },
+//   ]
+// }
 
-// 产品中心
-const businessAi: any = ref([])
+// // 产品中心
+// const businessAi: any = ref([])
 
-function getAllaiapp() {
-  // allaiappApi().then((res: any) => {
-  //   businessAi.value = []
-  // })
-  businessAi.value = [
-    { icon: 'fa fa-github-alt', title: 'AI 驱动药物靶点发现数据库' },
-    { icon: 'fa fa-medkit', title: '小分子创新药研发' },
-    { icon: 'fa fa-heartbeat', title: '老药新用筛选平台' },
-    { icon: 'fa fa-subscript', title: '生物制剂研发辅助系统' },
-    { icon: 'fa fa-contao', title: '药物晶型预测与筛选系统' },
-    { icon: 'fa fa-h-square', title: '类器官多组学数据 AI 整合分析工具' },
-  ]
-}
+// function getAllaiapp() {
+//   // allaiappApi().then((res: any) => {
+//   //   businessAi.value = []
+//   // })
+//   businessAi.value = [
+//     { icon: 'fa fa-github-alt', title: 'AI 驱动药物靶点发现数据库' },
+//     { icon: 'fa fa-medkit', title: '小分子创新药研发' },
+//     { icon: 'fa fa-heartbeat', title: '老药新用筛选平台' },
+//     { icon: 'fa fa-subscript', title: '生物制剂研发辅助系统' },
+//     { icon: 'fa fa-contao', title: '药物晶型预测与筛选系统' },
+//     { icon: 'fa fa-h-square', title: '类器官多组学数据 AI 整合分析工具' },
+//   ]
+// }
 
 // 友情链接
 const flinktop: any = ref([])
@@ -141,9 +150,9 @@ onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   window.addEventListener('scroll', handleScroll)
   getZhhome()
-  getVippartners()
-  getAllaiapp()
   getFlinktop()
+  // getVippartners()
+  // getAllaiapp()
 })
 
 onBeforeUnmount(() => {
@@ -155,16 +164,17 @@ onBeforeUnmount(() => {
 <template>
   <div class="homePage">
     <!-- video -->
-    <video v-if="windowWidth > 768" loop muted preload="auto" autoplay :poster="homeData?.homeBanner?.contentImg" data-setup="{}"
-      style="width: 100vw; height: auto">
+    <video v-if="windowWidth > 768" loop muted preload="auto" autoplay :poster="homeData?.homeBanner?.contentImg"
+      data-setup="{}" style="width: 100vw; height: auto;">
+      <!-- <source src="http://www.silin7.cn/media/bsjx.mp4" type="video/mp4" /> -->
       <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
     </video>
-    <video v-else loop muted preload="auto" autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}" style="width: 100vw; height: 100vh">
+    <video v-else loop muted preload="auto" autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}"
+      style="width: 100vw; height: 100vh;">
       <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
     </video>
-    <!-- 公司简介
-       :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']"
-      -->
+
+    <!-- 公司简介 :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']" -->
     <div class="featuresBox">
       <img src="@/assets/home/gongsi.jpg" class="featuresGsImg">
       <div class="featuresRounded">
@@ -175,35 +185,16 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
+    <!-- 产品轮播 -->
     <div class="platformsBox">
-      <el-carousel :interval="4000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
+      <el-carousel :interval="2000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
         :height="windowWidth > 768 ? '34rem' : '38rem'">
-        <el-carousel-item>
+        <el-carousel-item v-for="(item, index) in homeData?.companyProduct" :key="index">
           <div class="platformsItem">
-            <img src="@/assets/home/platforms-1.png">
+            <img :src="item.contentImg">
             <div>
-              <p class="platformsItitle">医学人工智能药物筛选数据库平台</p>
-              <p class="platformsIinfo">
-                医学人工智能药物筛选数据库平台是面向全球药企、科研机构的核心研发基础设施，以“打破数据孤岛、AI赋能精准筛选”为核心，整合多维度生物医学数据与前沿算法模型，为创新药研发提供从靶点验证到候选药物筛选的全链条数据支撑与智能分析服务，彻底解决传统筛选“数据零散、效率低下、命中率低”的行业痛点。
-              </p>
-            </div>
-          </div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <div class="platformsItem">
-            <img :src="homeData?.companyProduct?.contentImg">
-            <div>
-              <p class="platformsItitle">{{ homeData?.companyProduct?.contentTitle }}</p>
-              <p class="platformsIinfo">{{ homeData?.companyProduct?.contentDescription }}</p>
-            </div>
-          </div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <div class="platformsItem">
-            <img :src="homeData?.companyProduct?.contentImg">
-            <div>
-              <p class="platformsItitle">{{ homeData?.companyProduct?.contentTitle }}</p>
-              <p class="platformsIinfo">{{ homeData?.companyProduct?.contentDescription }}</p>
+              <p class="platformsItitle">{{ item.contentTitle }}</p>
+              <p class="platformsIinfo">{{ item.contentDescription }}</p>
             </div>
           </div>
         </el-carousel-item>
@@ -216,14 +207,14 @@ onBeforeUnmount(() => {
         <div class="wtkfaiTitle">委托开发</div>
         <img src="@/assets/home/wtkf.png" alt="" />
       </div>
-      <div class="wtkfaiItem animate__animated">
+      <div class="wtkfaiItem animate__animated" @click="pageJump('ai')">
         <img src="@/assets/home/aipt.png" alt="" />
         <div class="wtkfaiTitle">AI预测平台 </div>
       </div>
     </div>
 
     <!-- 产品中心 -->
-    <div class="cpzxBox">
+    <!-- <div class="cpzxBox">
       <div class="cpzxContent">
         <div class="cpzxTitle">产品中心</div>
         <div class="cpzxHeng"></div>
@@ -236,10 +227,10 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- 合作单位  -->
-    <div class="mxBox">
+    <!-- <div class="mxBox">
       <div class="mxContent">
         <div class="mxTitle">合作单位</div>
         <div class="mxHeng"></div>
@@ -251,7 +242,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- 友情链接  -->
     <div class="pyBox">
