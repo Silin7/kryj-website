@@ -165,18 +165,18 @@ onBeforeUnmount(() => {
   <div class="homePage">
     <!-- video -->
     <video v-if="windowWidth > 768" loop muted preload="auto" autoplay :poster="homeData?.homeBanner?.contentImg"
-      data-setup="{}" style="width: 100vw; height: auto;">
+      data-setup="{}" style="width: 100vw; height: auto">
       <!-- <source src="http://www.silin7.cn/media/bsjx.mp4" type="video/mp4" /> -->
       <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
     </video>
     <video v-else loop muted preload="auto" autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}"
-      style="width: 100vw; height: 100vh;">
+      style="width: 100vw; height: 100vh">
       <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
     </video>
 
     <!-- 公司简介 :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']" -->
     <div class="featuresBox">
-      <img src="@/assets/home/gongsi.jpg" class="featuresGsImg">
+      <img src="@/assets/home/gongsi.jpg" class="featuresGsImg" />
       <div class="featuresRounded">
         <div class="featuresRoundedTitle">{{ homeData?.homeCompany?.contentTitle }}</div>
         <div class="featuresRoundedInfo">
@@ -191,7 +191,7 @@ onBeforeUnmount(() => {
         :height="windowWidth > 768 ? '34rem' : '38rem'">
         <el-carousel-item v-for="(item, index) in homeData?.companyProduct" :key="index">
           <div class="platformsItem">
-            <img :src="item.contentImg">
+            <img :src="item.contentImg" />
             <div>
               <p class="platformsItitle">{{ item.contentTitle }}</p>
               <p class="platformsIinfo">{{ item.contentDescription }}</p>
@@ -205,11 +205,15 @@ onBeforeUnmount(() => {
     <div class="wtkfaiBox">
       <div class="wtkfaiItem animate__animated">
         <div class="wtkfaiTitle">委托开发</div>
-        <img src="@/assets/home/wtkf.png" alt="" />
+        <img src="@/assets/home/wtkf.png" alt="" class="wtkfaiPicture" />
+        <img src="@/assets/home/jb1.png" alt="" class="ysjImg">
+        <img src="@/assets/home/jb1.png" alt="" class="zxjImg">
       </div>
       <div class="wtkfaiItem animate__animated" @click="pageJump('ai')">
-        <img src="@/assets/home/aipt.png" alt="" />
-        <div class="wtkfaiTitle">AI预测平台 </div>
+        <img src="@/assets/home/aipt.png" alt="" class="wtkfaiPicture" />
+        <img src="@/assets/home/jb1.png" alt="" class="ysjImg">
+        <img src="@/assets/home/jb1.png" alt="" class="zxjImg">
+        <div class="wtkfaiTitle">AI预测平台</div>
       </div>
     </div>
 
@@ -331,11 +335,12 @@ onBeforeUnmount(() => {
   .wtkfaiBox {
     position: relative;
     margin: 0 auto;
+    // padding: 01rem;
     width: 100%;
     max-width: 1400px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 
     @media (max-width: 768px) {
       margin-top: 2rem;
@@ -343,13 +348,33 @@ onBeforeUnmount(() => {
     }
 
     .wtkfaiItem {
-      cursor: pointer;
-      width: calc(50% - 2rem);
-      background-color: #ebf0fb;
-      border-radius: 10px;
+      position: relative;
+      padding: 1rem 0;
+      width: 40%;
+      // width: calc(50% - 2rem);
       display: flex;
       flex-flow: column;
       align-items: center;
+      background-color: #ebf0fb;
+
+      &:hover {
+        cursor: pointer;
+
+        .wtkfaiTitle {
+          transform: scale(1.1);
+          transition: all ease 0.2s;
+        }
+
+        .wtkfaiPicture {
+          transform: scale(1.1);
+          transition: all ease 0.2s;
+        }
+
+        img {
+          opacity: 1;
+          transition: all ease 0.2s;
+        }
+      }
 
       @media (max-width: 768px) {
         width: 100%;
@@ -386,8 +411,27 @@ onBeforeUnmount(() => {
         font-size: clamp(1.25rem, 4vw, 1.75rem);
       }
 
-      img {
-        width: 60%;
+      .wtkfaiPicture {
+        width: 50%;
+      }
+
+      .ysjImg {
+        position: absolute;
+        top: -0.65rem;
+        right: -0.65rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        opacity: 0;
+      }
+
+      .zxjImg {
+        position: absolute;
+        bottom: -0.65rem;
+        left: -0.65rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        transform: rotate(180deg);
+        opacity: 0;
       }
     }
   }
