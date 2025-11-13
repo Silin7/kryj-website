@@ -74,30 +74,15 @@ function ceateAccount() {
     })
     return
   }
-  getBaseforgotdpwd()
-  // verifyverificationcodeApi({
-  //   phone: phone.value,
-  //   code: code.value,
-  // }).then((res: any) => {
-  //   if (res) {
-  //     getBaseforgotdpwd()
-  //   }
-  // })
-}
-
-// 找回密码
-function getBaseforgotdpwd() {
   updatepasswordApi({
     password: password.value,
     code: code.value,
-  }).then((res: any) => {
-    if (res) {c
-      ElMessage({
-        type: 'success',
-        message: '账号创建成功',
-      })
-      pageJump('login')
-    }
+  }).then(() => {
+    ElMessage({
+      type: 'success',
+      message: '账号创建成功',
+    })
+    pageJump('login')
   })
 }
 
@@ -111,22 +96,22 @@ onUnmounted(() => {
     <div class="registerbox">
       <div class="hyzc">修改密码</div>
       <div class="fromItem frsc">
-        <img src="@/assets/register/yzm.png" />
-        <el-input v-model="code" style="width: calc(100% - 140px)" placeholder="短信验证码" clearable />
-        <div v-if="countdown < 60 && countdown > 0" class="djsTimeStyle">
-          已发送（{{ countdown }}）
-        </div>
-        <button v-else @click="getCode">获取验证码</button>
-      </div>
-      <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" />
-        <el-input type="password" show-password v-model="password" style="width: 100%" placeholder="请输入8-20位密码（含字母和数字）"
+        <el-input type="password" show-password v-model="password" style="width: 100%" placeholder="请输入8-20位新密码（含字母和数字）"
           clearable />
       </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" />
         <el-input type="password" show-password v-model="password2" style="width: 100%" placeholder="请再次输入新密码"
           clearable />
+      </div>
+      <div class="fromItem frsc">
+        <img src="@/assets/register/yzm.png" />
+        <el-input v-model="code" style="width: calc(100% - 140px)" placeholder="短信验证码" clearable />
+        <div v-if="countdown < 60 && countdown > 0" class="djsTimeStyle">
+          已发送（{{ countdown }}）
+        </div>
+        <button v-else @click="getCode">获取验证码</button>
       </div>
       <button class="createAccount" @click="ceateAccount">
         重新设置密码
@@ -152,7 +137,7 @@ onUnmounted(() => {
   }
 
   .registerbox {
-    margin-top: 8rem;
+    margin-top: 10rem;
     padding: 2rem 1rem;
     background: #fff;
     box-shadow:

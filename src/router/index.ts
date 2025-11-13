@@ -283,11 +283,23 @@ const routes: Array<RouteRecordRaw> = [
     name: 'rpassword',
     component: () => import('@/views/rpassword.vue'),
     meta: {
-      title: '注册',
+      title: '修改密码',
       stcode: 'rpassword',
       website: true,
       hashead: true,
-      hasfoot: false,
+      hasfoot: true,
+    },
+  },
+  {
+    path: '/rmobile',
+    name: 'rmobile',
+    component: () => import('@/views/rmobile.vue'),
+    meta: {
+      title: '修改手机号',
+      stcode: 'rmobile',
+      website: true,
+      hashead: true,
+      hasfoot: true,
     },
   },
   {
@@ -317,7 +329,7 @@ router.beforeEach((to, from, next) => {
   }
 
   // 登录路由重定向
-  if (to?.name === 'login' && from.name) {
+  if (to?.name === 'login' && from.name === 'ai') {
     window.localStorage.setItem('redirectName', from.name as string)
   } else {
     window.localStorage.removeItem('redirectName')

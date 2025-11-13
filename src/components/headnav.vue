@@ -135,7 +135,7 @@ onBeforeUnmount(() => {
                 :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
               <div class="menuTitle" :style="selectedTab === item.name ? 'opacity: 1;' : ''">
                 <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ item.title
-                }}</span>
+                  }}</span>
               </div>
               <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_by2.png"
                 class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
@@ -146,11 +146,13 @@ onBeforeUnmount(() => {
           <div v-if="userInfo.mobile" ref="buttonRef" class="userName" v-click-outside="onClickOutside">
             <i class="fa fa-user-circle mr-2"
               :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''"></i>
-            <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ userInfo.mobile
-            }}</span>
+            <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">
+              {{ userInfo.mobile }}
+            </span>
             <el-popover placement="bottom" :virtual-ref="buttonRef" virtual-triggering :width="160" trigger="click">
               <div>
-                <!-- <div class="popoverItem" @click="pageJump('user-index')">用户中心</div> -->
+                <div class="popoverItem" @click="pageJump('rmobile')">修改手机号</div>
+                <div class="popoverItem" @click="pageJump('rpassword')">修改密码</div>
                 <div class="popoverItem" @click="logoutFunction">退出登录</div>
               </div>
             </el-popover>
@@ -182,10 +184,14 @@ onBeforeUnmount(() => {
           :class="['collapseItem', selectedTab === item.name ? 'collapseActive' : '']" @click="tabRouterPush(item)">
           {{ item.title }}
         </div>
-        <!-- <button v-if="userInfo.mobile" @click="logoutFunction" class="mobileBtns">
-          用户中心
-          <i class="fa fa-user-md"></i>
-        </button> -->
+        <button v-if="userInfo.mobile" @click="pageJump('rmobile')" class="mobileBtns">
+          修改手机号
+          <i class="fa fa-edit"></i>
+        </button>
+        <button v-if="userInfo.mobile" @click="pageJump('rpassword')" class="mobileBtns">
+          修改密码
+          <i class="fa fa-edit"></i>
+        </button>
         <button v-if="userInfo.mobile" @click="logoutFunction" class="mobileBtns">
           退出登录
           <i class="fa fa-sign-out"></i>

@@ -250,6 +250,7 @@ onMounted(() => {
 
   @media (max-width: 768px) {
     min-height: calc(100vh - 112px);
+    padding-bottom: 2.75rem;
   }
 
   .registerBox {
