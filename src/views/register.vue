@@ -131,7 +131,7 @@ function ceateAccount() {
   if (!code.value) {
     ElMessage({
       type: 'error',
-      message: '请输入短线验证码',
+      message: '请输入短信验证码',
     })
     return
   }
@@ -149,6 +149,7 @@ function ceateAccount() {
     mobile: mobile.value,
     password: password.value,
     captchaVerification: captchaVerification.value,
+    code: code.value,
   }).then(() => {
     ElMessage({
       type: 'success',
