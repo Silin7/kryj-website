@@ -16,7 +16,7 @@ function getCode() {
     authsmscodeApi({
       mobile: userInfo.value.mobile,
       scene: 3,
-    }).then((res: any) => {
+    }).then(() => {
       countdownChange()
     })
   }

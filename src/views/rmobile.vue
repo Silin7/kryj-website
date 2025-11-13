@@ -4,7 +4,6 @@ import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
 import { authsmscodeApi, updatemobileApi } from '@/api/interface'
 
-const userInfo: any = ref()
 const mobile: any = ref('')
 const code: any = ref('')
 
