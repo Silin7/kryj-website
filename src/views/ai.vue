@@ -35,7 +35,7 @@ function ksycClick() {
 }
 
 // 套餐 pay dialog
-const dialogVisible: any = ref(true)
+const dialogVisible: any = ref(false)
 
 // 套餐列表
 const usedId: any = ref('')
@@ -156,7 +156,7 @@ onBeforeUnmount(() => {
               <span @click="pageJump('login')">登录/注册</span>
             </div>
             <div v-else class="aiTimes">
-              免费体验剩余<span>{{ checkTime }}</span>次
+              免费体验剩余<span>{{ checkTime }}</span>次，<span @click="dialogVisible = true">立即购买</span>
             </div>
           </div>
         </div>
