@@ -20,6 +20,16 @@ export function authloginApi(data: any) {
   return api.post('/app-api/member/auth/login', data)
 }
 
+// 登录注册 - 修改密码
+export function updatepasswordApi(data: any) {
+  return api.put('/app-api/member/user/update-password', data)
+}
+
+// 登录注册 - 修改手机号
+export function updatemobileApi(data: any) {
+  return api.put('/app-api/member/user/update-mobile', data)
+}
+
 // 登录注册 - 用户信息
 export function authinfoApi() {
   return api.post('/app-api/member/user/get')
@@ -40,14 +50,29 @@ export function zhfooterApi() {
   return api.post('/app-api/cms/content/zh/footer')
 }
 
-// AI预测平台  体验次数
+// AI预测平台 - 体验次数
 export function checkTimeApi() {
   return api.post('/app-api/member/auth/getCheckTime')
 }
 
-// AI预测平台  创建订单
+// AI预测平台 - 套餐列表
+export function cusedlistApi() {
+  return api.get('/app-api/member/combo/get-used-list')
+}
+
+// AI预测平台 - 创建订单
 export function ordercreateApi(data: any) {
   return api.post('/app-api/member/order/create', data)
+}
+
+// AI预测平台 - 查询订单状态
+export function orderstatusApi(orderId: any) {
+  return api.get('/app-api/member/order/status?orderId=' + orderId)
+}
+
+// AI预测平台 - 订单列表
+export function orderpageApi(data: any) {
+  return api.get('/app-api/member/order/page', data)
 }
 
 // 药物预测网用户使用协议
@@ -68,10 +93,5 @@ export function upachildysxyApi() {
 // 友情链接
 export function friendlinkApi() {
   return api.post('/app-api/cms/content/friend-link')
-}
-
-// 获取套餐 需登录
-export function cusedlistApi() {
-  return api.get('/app-api/member/combo/get-used-list')
 }
 
