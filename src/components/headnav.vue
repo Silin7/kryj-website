@@ -135,7 +135,7 @@ onBeforeUnmount(() => {
                 :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
               <div class="menuTitle" :style="selectedTab === item.name ? 'opacity: 1;' : ''">
                 <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ item.title
-                  }}</span>
+                }}</span>
               </div>
               <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_by2.png"
                 class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
@@ -150,12 +150,20 @@ onBeforeUnmount(() => {
               {{ userInfo.mobile }}
               <i class="fa fa-angle-down"></i>
             </span>
-            <el-popover placement="bottom" :virtual-ref="buttonRef" virtual-triggering :width="160" trigger="click">
+            <el-popover placement="bottom" :virtual-ref="buttonRef" virtual-triggering :width="150" trigger="click">
               <div>
-                <div class="popoverItem" @click="pageJump('myorder')">我的订单</div>
-                <div class="popoverItem" @click="pageJump('rmobile')">修改手机号</div>
-                <div class="popoverItem" @click="pageJump('rpassword')">修改密码</div>
-                <div class="popoverItem" @click="logoutFunction">退出登录</div>
+                <div class="popoverItem" @click="pageJump('myorder')">
+                  <i class="fa fa-navicon"></i>我的订单
+                </div>
+                <div class="popoverItem" @click="pageJump('rmobile')">
+                  <i class="fa fa-phone"></i>修改手机号
+                </div>
+                <div class="popoverItem" @click="pageJump('rpassword')">
+                  <i class="fa fa-edit"></i>修改密码
+                </div>
+                <div class="popoverItem" @click="logoutFunction">
+                  <i class="fa fa-sign-out"></i>退出登录
+                </div>
               </div>
             </el-popover>
           </div>
@@ -191,7 +199,7 @@ onBeforeUnmount(() => {
           我的订单
         </button>
         <button v-if="userInfo.mobile" @click="pageJump('rmobile')" class="mobileBtns">
-          <i class="fa fa-edit"></i>
+          <i class="fa fa-phone"></i>
           修改手机号
         </button>
         <button v-if="userInfo.mobile" @click="pageJump('rpassword')" class="mobileBtns">
@@ -252,7 +260,6 @@ onBeforeUnmount(() => {
 
         .menuTitle {
           color: #1f3e85;
-          opacity: 0.6;
           line-height: 1.625rem;
         }
 
@@ -268,6 +275,7 @@ onBeforeUnmount(() => {
           .menuTitle,
           .menuYanhua {
             opacity: 1;
+            transform: scale(1.05);
           }
         }
       }
@@ -286,10 +294,9 @@ onBeforeUnmount(() => {
       cursor: pointer;
       line-height: 1.625rem;
       color: #1f3e85;
-      opacity: 0.6;
 
       &:hover {
-        opacity: 1;
+        transform: scale(1.05);
       }
     }
 
@@ -326,11 +333,9 @@ onBeforeUnmount(() => {
       padding: 0.75rem 1.25rem;
       line-height: 1.5rem;
       color: #1f3e85;
-      opacity: 0.6;
     }
 
     .collapseActive {
-      opacity: 1;
       border-radius: 0.75rem;
       background-color: #ebf0fb;
     }
@@ -356,11 +361,13 @@ onBeforeUnmount(() => {
   cursor: pointer;
   line-height: 2.5rem;
   color: #1f3e85;
-  text-align: center;
-  opacity: 0.6;
+  padding-left: 1rem;
+
+  i {
+    margin-right: 0.5rem;
+  }
 
   &:hover {
-    opacity: 1;
     background-color: #eee;
   }
 }
