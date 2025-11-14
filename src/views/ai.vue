@@ -202,7 +202,7 @@ onBeforeUnmount(() => {
             <div class="dialogSubTitle">支付方式：</div>
             <div class="weixinPay">
               <div class="weixinCard">
-                <img src="@/assets/user/weixin.png" />
+                <img src="@/assets/sys/weixin.png" />
                 <span>微信支付</span>
               </div>
             </div>

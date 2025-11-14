@@ -287,7 +287,7 @@ const handleEnded = () => {
       <div class="payment-methods">
         <div class="payment-method wechat">
           <div class="method-header">
-            <img src="@/assets/user/weixin.png" alt="微信支付" class="icon" />
+            <img src="@/assets/sys/weixin.png" alt="微信支付" class="icon" />
             <span>微信支付</span>
           </div>
           <div class="course-box">
@@ -303,7 +303,7 @@ const handleEnded = () => {
         </div>
         <div class="payment-method alipay">
           <div class="method-header">
-            <img src="@/assets/user/alipay.png" alt="支付宝支付" class="icon" />
+            <img src="@/assets/sys/alipay.png" alt="支付宝支付" class="icon" />
             <span>支付宝支付</span>
           </div>
           <button class="pay-btn" @click="getAlpayvideocreate">去支付宝支付</button>

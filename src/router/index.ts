@@ -267,6 +267,18 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/myorder',
+    name: 'myorder',
+    component: () => import('@/views/myorder.vue'),
+    meta: {
+      title: '我的订单',
+      stcode: 'myorder',
+      website: true,
+      hashead: true,
+      hasfoot: true,
+    },
+  },
+  {
     path: '/register',
     name: 'register',
     component: () => import('@/views/register.vue'),

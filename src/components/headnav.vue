@@ -151,6 +151,7 @@ onBeforeUnmount(() => {
             </span>
             <el-popover placement="bottom" :virtual-ref="buttonRef" virtual-triggering :width="160" trigger="click">
               <div>
+                <div class="popoverItem" @click="pageJump('myorder')">我的订单</div>
                 <div class="popoverItem" @click="pageJump('rmobile')">修改手机号</div>
                 <div class="popoverItem" @click="pageJump('rpassword')">修改密码</div>
                 <div class="popoverItem" @click="logoutFunction">退出登录</div>
@@ -184,6 +185,10 @@ onBeforeUnmount(() => {
           :class="['collapseItem', selectedTab === item.name ? 'collapseActive' : '']" @click="tabRouterPush(item)">
           {{ item.title }}
         </div>
+        <button v-if="userInfo.mobile" @click="pageJump('myorder')" class="mobileBtns">
+          我的订单
+          <i class="fa fa-edit"></i>
+        </button>
         <button v-if="userInfo.mobile" @click="pageJump('rmobile')" class="mobileBtns">
           修改手机号
           <i class="fa fa-edit"></i>

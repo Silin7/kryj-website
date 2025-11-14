@@ -71,8 +71,36 @@ export function orderstatusApi(orderId: any) {
 }
 
 // AI预测平台 - 订单列表
-export function orderpageApi(data: any) {
-  return api.get('/app-api/member/order/page', data)
+export function orderpageApi(params: any) {
+  return api.get('/app-api/member/order/page', {
+    params,
+  })
+}
+
+// AI预测平台 - 我的检测记录
+export function checkrecordApi(params: any) {
+  return api.get('/app-api/member/ai/check-record', {
+    params,
+  })
+}
+
+// AI预测平台 - AI检测-疾病 不分页 无需登录
+export function checkdiseaseApi(params: any) {
+  return api.get('/app-api/member/ai/check-disease', {
+    params,
+  })
+}
+
+// AI预测平台 - AI检测-病种 分页 无需登录
+export function checkdrugsApi(params: any) {
+  return api.get('/app-api/member/ai/check-drugs', {
+    params,
+  })
+}
+
+// AI预测平台 - AI检测
+export function aicheckApi(data: any) {
+  return api.post('/app-api/member/ai/check', data)
 }
 
 // 药物预测网用户使用协议
