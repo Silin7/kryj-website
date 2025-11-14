@@ -262,10 +262,7 @@ onMounted(() => {
       0 4px 6px -4px rgb(0 0 0 / 0.1);
 
     @media (min-width: 768px) {
-      position: absolute;
-      z-index: 2;
-      top: 10%;
-      right: 20%;
+      margin: 10% 0 0 calc(80% - 480px);
       padding: 30px 50px 50px;
       width: 30rem;
     }
