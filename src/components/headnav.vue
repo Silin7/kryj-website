@@ -148,6 +148,7 @@ onBeforeUnmount(() => {
               :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''"></i>
             <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">
               {{ userInfo.mobile }}
+              <i class="fa fa-angle-down"></i>
             </span>
             <el-popover placement="bottom" :virtual-ref="buttonRef" virtual-triggering :width="160" trigger="click">
               <div>
@@ -186,20 +187,20 @@ onBeforeUnmount(() => {
           {{ item.title }}
         </div>
         <button v-if="userInfo.mobile" @click="pageJump('myorder')" class="mobileBtns">
+          <i class="fa fa-navicon"></i>
           我的订单
-          <i class="fa fa-edit"></i>
         </button>
         <button v-if="userInfo.mobile" @click="pageJump('rmobile')" class="mobileBtns">
-          修改手机号
           <i class="fa fa-edit"></i>
+          修改手机号
         </button>
         <button v-if="userInfo.mobile" @click="pageJump('rpassword')" class="mobileBtns">
-          修改密码
           <i class="fa fa-edit"></i>
+          修改密码
         </button>
         <button v-if="userInfo.mobile" @click="logoutFunction" class="mobileBtns">
-          退出登录
           <i class="fa fa-sign-out"></i>
+          退出登录
         </button>
       </div>
     </el-drawer>
@@ -341,11 +342,12 @@ onBeforeUnmount(() => {
     display: flex;
     align-items: center;
     color: #1f3e85;
-    background-color: #ebf0fb;
+    // background-color: #ebf0fb;
+    border: 1px solid #ebf0fb;
     border-radius: 0.75rem;
 
     i {
-      margin-left: 0.75rem;
+      margin-right: 0.5rem;
     }
   }
 }
