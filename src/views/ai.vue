@@ -2,9 +2,17 @@
 import dayjs from 'dayjs'
 import qrcode from 'qrcode'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElLoading } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import { checkTimeApi, cusedlistApi, ordercreateApi, orderstatusApi } from '@/api/interface'
+import {
+  checkTimeApi,
+  checkdiseaseApi,
+  checkdrugsApi,
+  aicheckApi,
+  cusedlistApi,
+  ordercreateApi,
+  orderstatusApi,
+} from '@/api/interface'
 
 const windowWidth = ref(window.innerWidth)
 
@@ -13,13 +21,13 @@ function updateWindowWidth() {
 }
 
 // 免费体验剩余次数
-const checkTime: any = ref(0)
 const notLogin: any = ref(false)
+const checkInfo: any = ref(0)
 
 function getCheckTime() {
   checkTimeApi().then((res: any) => {
     if (res?.code === 0) {
-      checkTime.value = res.data
+      checkInfo.value = res.data
     } else if (res?.code === 401) {
       notLogin.value = true
     }
@@ -27,11 +35,88 @@ function getCheckTime() {
 }
 
 // 查询条件
-const searchForm: any = ref({})
-const searchClick: any = ref(false)
+const searchForm: any = ref({
+  diseaseId: '',
+  diseaseNo: '',
+  diseaseName: '',
+  drugId: '',
+  drugNo: '',
+  drugName: '',
+})
 
+// 查询条件 - 疾病
+const diseaseList: any = ref([])
+function getCheckdisease() {
+  checkdiseaseApi().then((res: any) => {
+    diseaseList.value = res.data.list
+  })
+}
+function diseaseChange(value: any) {
+  const data = diseaseList.value.find((item: any) => {
+    return item.english === value
+  })
+  searchForm.value.diseaseId = data.id
+  searchForm.value.diseaseName = data.chinese
+}
+
+const drugList: any = ref([])
+function getCheckdrugs(english: any) {
+  checkdrugsApi({
+    english,
+  }).then((res: any) => {
+    drugList.value = res.data.list
+  })
+}
+function drugRemoteMethod(e: any) {
+  debounce(getCheckdrugs(e))
+}
+function drugChange(value: any) {
+  const data = drugList.value.find((item: any) => {
+    return item.english === value
+  })
+  searchForm.value.drugId = data.sigId
+  searchForm.value.drugName = data.chinese
+}
+
+// 点击查询
+const searchClick: any = ref(false)
+const searchResult: any = ref({})
 function ksycClick() {
-  searchClick.value = true
+  if (notLogin.value) {
+    searchClick.value = true
+    return
+  }
+  if (!checkInfo.value.validDate && checkInfo.value.checkTime === 0) {
+    dialogVisible.value = true
+    return
+  }
+  if (!searchForm.value.diseaseNo) {
+    ElMessage({
+      type: 'error',
+      message: '请输入疾病名称',
+    })
+    return
+  }
+  if (!searchForm.value.drugNo) {
+    ElMessage({
+      type: 'error',
+      message: '请输入化合物名称',
+    })
+    return
+  }
+  const loading = ElLoading.service({
+    lock: true,
+    text: 'Loading',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  aicheckApi(searchForm.value)
+    .then((res: any) => {
+      searchResult.value = res.data
+      getCheckTime()
+    })
+    .finally(() => {
+      loading.close()
+    })
 }
 
 // 套餐 pay dialog
@@ -92,10 +177,21 @@ function getpayvideostatus() {
   })
 }
 
+// 防抖函数（Debounce）
+function debounce(func: any, delay: any = 1000) {
+  let timer: any = null
+  return function () {
+    clearTimeout(timer)
+    timer = setTimeout(func, delay)
+  }
+}
+
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   getCheckTime()
   getCusedlist()
+  getCheckdisease()
+  getCheckdrugs('')
 })
 
 onBeforeUnmount(() => {
@@ -130,20 +226,30 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <div class="aiTbox">
+        <div style="width: 7rem"></div>
         <div class="aiTitle">AI预测基础版（精度约65%）</div>
+        <div class="myRecords" @click="pageJump('myrecords')">
+          我的检测记录 <i class="fa fa-angle-right"></i>
+        </div>
       </div>
       <div class="aiContent">
         <div class="aiContentSr">
           <el-row :gutter="16">
             <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb-4">
               <div class="supplierClassText">疾病名称：</div>
-              <el-input v-model="searchForm.jb_name" placeholder="请输入疾病名称" clearable
-                style="width: 100%; height: 40px" />
+              <el-select v-model="searchForm.diseaseNo" placeholder="请输入疾病名称" size="large" clearable filterable
+                @change="diseaseChange">
+                <el-option v-for="(item, index) in diseaseList" :key="index" :label="item.english + '-' + item.chinese"
+                  :value="item.english" />
+              </el-select>
             </el-col>
             <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb-4">
               <div class="supplierClassText">化合物名称：</div>
-              <el-input v-model="searchForm.hhw_name" placeholder="请输入化合物名称" clearable
-                style="width: 100%; height: 40px" />
+              <el-select v-model="searchForm.drugNo" placeholder="请输入化合物名称" size="large" clearable filterable remote
+                reserve-keyword :remote-method="drugRemoteMethod" @change="drugChange">
+                <el-option v-for="(item, index) in drugList" :key="index" :label="item.english + '-' + item.chinese"
+                  :value="item.english" />
+              </el-select>
             </el-col>
           </el-row>
           <div class="searchBox">
@@ -156,15 +262,25 @@ onBeforeUnmount(() => {
               <span @click="pageJump('login')">登录/注册</span>
             </div>
             <div v-else class="aiTimes">
-              免费体验剩余<span>{{ checkTime }}</span>次，<span @click="dialogVisible = true">立即购买</span>
+              <p v-if="checkInfo.validDate">
+                有效期截止 <span>{{ dayjs(checkInfo.checkDate).format('YYYY年MM月DD日') }}</span>，<b
+                  @click="dialogVisible = true">立即续费</b>
+              </p>
+              <p v-else>
+                体验剩余<span>{{ checkInfo.checkTime }}</span>次，<b @click="dialogVisible = true">立即购买</b>
+              </p>
             </div>
           </div>
         </div>
         <div class="aiContentSc">
           <div class="aiContentScTitle">【预测结果】</div>
           <div class="aiContentScText">
-            <img src="@/assets/ai/Bot.png" class="aiCstImg" />
-            <!-- <p class="aiCstSubstance">输入疾病名称和化合物名称，点击开始预测...</p> -->
+            <p v-if="searchResult.message" class="aiCstSubstance">
+              <span v-if="searchResult.status === 0" style="color: #1f3e85;">{{ searchResult.message }}</span>
+              <span v-else-if="searchResult.status === 1" style="color: #f56c6c;">{{ searchResult.message }}</span>
+              <span v-else style="color: #909399;">{{ searchResult.message }}</span>
+            </p>
+            <img v-else src="@/assets/ai/Bot.png" class="aiCstImg" />
           </div>
           <div class="aiContentScTips">
             注：本结果为AI基础版预测，仅供参考，实际有效性请以临床实验为准。
@@ -221,7 +337,9 @@ onBeforeUnmount(() => {
           </div>
           <div v-if="usedItem.comboType === '2'" class="frbc">
             <div class="dialogRlabel">有效日期</div>
-            <div class="dialogRlabel">{{ dayjs(usedItem.nextCheckDate).format('YYYY年MM月DD日') }}</div>
+            <div class="dialogRlabel">
+              {{ dayjs(usedItem.nextCheckDate).format('YYYY年MM月DD日') }}
+            </div>
           </div>
           <div class="dialogRddje">
             <div class="dialogDdjelabel">订单金额</div>
@@ -307,7 +425,8 @@ onBeforeUnmount(() => {
     width: 100%;
     max-width: 1400px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-end;
 
     @media (max-width: 768px) {
       flex-flow: column;
@@ -320,6 +439,22 @@ onBeforeUnmount(() => {
       font-size: clamp(1.5rem, 4vw, 2.5rem);
       line-height: clamp(1.5rem, 4vw, 2.5rem);
       color: #1f3e85;
+    }
+
+    .myRecords {
+      width: 7rem;
+      text-align: right;
+      font-weight: 700;
+      color: #1f3e85;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+
+      i {
+        font-weight: 700;
+      }
     }
   }
 
@@ -393,15 +528,23 @@ onBeforeUnmount(() => {
             margin-top: 1rem;
           }
 
-          span {
+          b {
             margin: 0 0.25rem;
             font-size: 1.25rem;
-            font-weight: 700;
             color: #1f3e85;
 
             &:hover {
+              display: inline-block;
               cursor: pointer;
+              transform: scale(1.05);
             }
+          }
+
+          span {
+            margin: 0 0.25rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1f3e85;
           }
         }
       }
@@ -426,8 +569,10 @@ onBeforeUnmount(() => {
         align-items: center;
 
         .aiCstSubstance {
+          font-size: 1.5rem;
           color: #1f3e85;
           text-align: center;
+          font-weight: 700;
         }
 
         .aiCstImg {
@@ -464,7 +609,7 @@ onBeforeUnmount(() => {
   .dialogLeft {
     width: 70%;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       width: 100%;
     }
 
@@ -550,45 +695,6 @@ onBeforeUnmount(() => {
             background-image: linear-gradient(0deg, #e7f0fd 0%, #4ba6ff80 100%);
           }
         }
-
-        .weixinPayBox {
-          padding: 0 1rem;
-
-          .methodHeader {
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #4b5563;
-
-            i {
-              cursor: pointer;
-              width: 1.25rem;
-              height: 1.25rem;
-              line-height: 1.25rem;
-            }
-          }
-
-          .courseBox {
-            margin: 0 auto 1rem;
-            padding: 0.875rem;
-            width: 16rem;
-            height: 16rem;
-            background-color: #ebf0fb;
-            // background-color: #fd548520;
-            border-radius: 0.5rem;
-          }
-        }
-
-        .payBtn {
-          display: block;
-          margin: 0 auto;
-          width: 7.5rem;
-          height: 2.5rem;
-          color: #fff;
-          background-color: #fd5485;
-          border-radius: 0.5rem;
-        }
       }
 
       .weixinPay {
@@ -628,7 +734,7 @@ onBeforeUnmount(() => {
     border-radius: 0.5rem;
     padding: 1rem;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       width: 100%;
     }
 

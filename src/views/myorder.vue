@@ -2,6 +2,7 @@
 import dayjs from 'dayjs'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { orderpageApi } from '@/api/interface'
+import formatCurrency from '@/hooks/formatCurrency'
 
 const windowWidth = ref(window.innerWidth)
 
@@ -9,22 +10,18 @@ function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
-const tableLoading = ref(false)
 const pageNo: any = ref(1)
 const pageSize: any = ref(10)
 const total: any = ref(0)
 const tableData = ref([])
 
 function getOrderpage() {
-  tableLoading.value = true
   orderpageApi({
     pageNo: pageNo.value,
     pageSize: pageSize.value,
   }).then((res: any) => {
     total.value = res.data.total
     tableData.value = res.data.list
-  }).finally(() => {
-    tableLoading.value = false
   })
 }
 
@@ -58,7 +55,11 @@ onBeforeUnmount(() => {
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column prop="id" label="订单编号" />
             <el-table-column prop="spuName" label="商品" />
-            <el-table-column prop="price" label="价格" />
+            <el-table-column label="价格" header-align="left" align="right">
+              <template #default="{ row }">
+                ¥{{ formatCurrency((row.price / 100), 2) }}
+              </template>
+            </el-table-column>
             <el-table-column label="状态">
               <template #default="{ row }">
                 <el-tag v-if="row.payStatus" type="success">已支付</el-tag>

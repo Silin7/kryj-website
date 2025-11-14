@@ -27,6 +27,30 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/myorder',
+    name: 'myorder',
+    component: () => import('@/views/myorder.vue'),
+    meta: {
+      title: '我的订单',
+      stcode: 'myorder',
+      website: true,
+      hashead: true,
+      hasfoot: true,
+    },
+  },
+  {
+    path: '/myrecords',
+    name: 'myrecords',
+    component: () => import('@/views/myrecords.vue'),
+    meta: {
+      title: '我的检测记录',
+      stcode: 'myrecords',
+      website: true,
+      hashead: true,
+      hasfoot: true,
+    },
+  },
+  {
     path: '/about',
     name: 'about',
     component: () => import('@/views/about.vue'),
@@ -57,18 +81,6 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '登录',
       stcode: 'login',
-      website: true,
-      hashead: true,
-      hasfoot: true,
-    },
-  },
-  {
-    path: '/myorder',
-    name: 'myorder',
-    component: () => import('@/views/myorder.vue'),
-    meta: {
-      title: '我的订单',
-      stcode: 'myorder',
       website: true,
       hashead: true,
       hasfoot: true,

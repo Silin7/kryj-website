@@ -85,10 +85,8 @@ export function checkrecordApi(params: any) {
 }
 
 // AI预测平台 - AI检测-疾病 不分页 无需登录
-export function checkdiseaseApi(params: any) {
-  return api.get('/app-api/member/ai/check-disease', {
-    params,
-  })
+export function checkdiseaseApi() {
+  return api.get('/app-api/member/ai/check-disease')
 }
 
 // AI预测平台 - AI检测-病种 分页 无需登录
