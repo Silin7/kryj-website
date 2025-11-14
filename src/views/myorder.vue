@@ -49,9 +49,9 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <div class="aiPage">
-      <div class="aiContent">
-        <div v-if="tableData?.length > 0" class="aiContentSr">
+    <div class="myorderPage">
+      <div class="myorderPageContent">
+        <div v-if="tableData?.length > 0" class="myorderPageContentSr">
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column prop="id" label="订单编号" />
             <el-table-column prop="spuName" label="商品" />
@@ -94,7 +94,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss" scoped>
-.aiPage {
+.myorderPage {
   position: relative;
   overflow-x: hidden;
   min-height: calc(100vh - 88px);
@@ -104,25 +104,20 @@ onBeforeUnmount(() => {
     min-height: calc(100vh - 112px);
   }
 
-  .aiContent {
+  .myorderPageContent {
     position: relative;
     margin: 100px auto 0;
     padding: 1rem;
     width: 100%;
     max-width: 1400px;
 
-    .aiContentSr {
-      // min-height: calc(100vh - 188px - 2rem);
+    .myorderPageContentSr {
       padding: 1rem;
       border-radius: 1rem;
       background-color: #fff;
       box-shadow:
         0 10px 15px -3px rgb(0 0 0 / 0.1),
         0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-      // @media (max-width: 768px) {
-      //   min-height: calc(100vh - 212px - 2rem);
-      // }
     }
   }
 

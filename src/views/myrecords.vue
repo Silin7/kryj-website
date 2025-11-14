@@ -48,9 +48,9 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <div class="aiPage">
-      <div class="aiContent">
-        <div v-if="tableData?.length > 0" class="aiContentSr">
+    <div class="myrecordsPage">
+      <div class="myrecordsContent">
+        <div v-if="tableData?.length > 0" class="myrecordsContentSr">
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column type="index" width="60" label="序号" align="center" />
             <el-table-column prop="diseaseName" label="疾病名称" />
@@ -86,7 +86,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss" scoped>
-.aiPage {
+.myrecordsPage {
   position: relative;
   overflow-x: hidden;
   min-height: calc(100vh - 88px);
@@ -96,14 +96,14 @@ onBeforeUnmount(() => {
     min-height: calc(100vh - 112px);
   }
 
-  .aiContent {
+  .myrecordsContent {
     position: relative;
     margin: 100px auto 0;
     padding: 1rem;
     width: 100%;
     max-width: 1400px;
 
-    .aiContentSr {
+    .myrecordsContentSr {
       // min-height: calc(100vh - 188px - 2rem);
       padding: 1rem;
       border-radius: 1rem;
