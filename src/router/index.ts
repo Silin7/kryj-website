@@ -99,6 +99,18 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/userinfo',
+    name: 'userinfo',
+    component: () => import('@/views/userinfo.vue'),
+    meta: {
+      title: '用户中心',
+      stcode: 'userinfo',
+      website: true,
+      hashead: true,
+      hasfoot: true,
+    },
+  },
+  {
     path: '/rpassword',
     name: 'rpassword',
     component: () => import('@/views/rpassword.vue'),
