@@ -24,10 +24,6 @@ const selectedTab = computed(() => {
 })
 
 function tabRouterPush(item: any) {
-  if (item.children && item.children.length > 0) {
-    item.expanded = !item.expanded
-    return
-  }
   pageJump(item.name)
   drawerVisible.value = false
 }
@@ -39,19 +35,6 @@ const menuList: any = ref([
   { title: '产品出售', path: '/', name: '' },
   { title: 'AI预测平台 ', path: '/ai', name: 'ai' },
 ])
-
-// menuChild show Mouseenter Mouseleave
-const menuChildShow: any = ref(false)
-
-function menuMouseenter(item: any) {
-  if (item.children.length > 0) {
-    menuChildShow.value = true
-  }
-}
-
-function menuMouseleave() {
-  menuChildShow.value = false
-}
 
 // 登陆后的用户信息
 const userInfo: any = ref(
@@ -82,7 +65,6 @@ function logoutFunction() {
             type: 'success',
             message: '退出成功',
           })
-          menuChildShow.value = false
           window.localStorage.removeItem('accessToken')
           window.localStorage.removeItem('refreshToken')
           window.localStorage.removeItem('expiresTime')
@@ -127,15 +109,14 @@ onBeforeUnmount(() => {
         <img v-else src="@/assets/logo/logo-16-9.png" alt="logo" class="headLogo" @click="pageJump('home')" />
         <template v-if="windowWidth > 1200">
           <div class="headNav">
-            <div v-for="(item, index) in menuList" :key="index" class="menuItem" @mouseenter="menuMouseenter(item)"
-              @mouseleave="menuMouseleave" @click="tabRouterPush(item)">
+            <div v-for="(item, index) in menuList" :key="index" class="menuItem" @click="tabRouterPush(item)">
               <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_bz2.png"
                 class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
               <img v-else src="@/assets/header/cb_lz2.png" class="menuYanhua"
                 :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
               <div class="menuTitle" :style="selectedTab === item.name ? 'opacity: 1;' : ''">
                 <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ item.title
-                }}</span>
+                  }}</span>
               </div>
               <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_by2.png"
                 class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
@@ -194,15 +175,15 @@ onBeforeUnmount(() => {
           :class="['collapseItem', selectedTab === item.name ? 'collapseActive' : '']" @click="tabRouterPush(item)">
           {{ item.title }}
         </div>
-        <button v-if="userInfo.mobile" @click="pageJump('myorder')" class="mobileBtns">
+        <button v-if="userInfo.mobile" @click="tabRouterPush({ name: 'myorder' })" class="mobileBtns">
           <i class="fa fa-navicon"></i>
           我的订单
         </button>
-        <button v-if="userInfo.mobile" @click="pageJump('rmobile')" class="mobileBtns">
+        <button v-if="userInfo.mobile" @click="tabRouterPush({ name: 'rmobile' })" class="mobileBtns">
           <i class="fa fa-phone"></i>
           修改手机号
         </button>
-        <button v-if="userInfo.mobile" @click="pageJump('rpassword')" class="mobileBtns">
+        <button v-if="userInfo.mobile" @click="tabRouterPush({ name: 'rpassword' })" class="mobileBtns">
           <i class="fa fa-edit"></i>
           修改密码
         </button>

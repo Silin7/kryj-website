@@ -258,8 +258,10 @@ onBeforeUnmount(() => {
               <i class="fa fa-search"></i>开始预测
             </button>
             <div v-if="notLogin" class="aiTimes">
-              新用户注册可免费体验3次，立即
-              <span @click="pageJump('login')">登录/注册</span>
+              <p>
+                新用户注册可免费体验3次，立即
+                <b @click="pageJump('login')">登录/注册</b>
+              </p>
             </div>
             <div v-else class="aiTimes">
               <p v-if="checkInfo.validDate">
@@ -447,6 +449,12 @@ onBeforeUnmount(() => {
       font-weight: 700;
       color: #1f3e85;
 
+      @media (max-width: 768px) {
+        margin-top: 1rem;
+        width: 100%;
+        text-align: center;
+      }
+
       &:hover {
         cursor: pointer;
         transform: scale(1.05);
@@ -528,23 +536,29 @@ onBeforeUnmount(() => {
             margin-top: 1rem;
           }
 
-          b {
-            margin: 0 0.25rem;
-            font-size: 1.25rem;
-            color: #1f3e85;
-
-            &:hover {
-              display: inline-block;
-              cursor: pointer;
-              transform: scale(1.05);
+          p {
+            @media (max-width: 768px) {
+              text-align: center;
             }
-          }
 
-          span {
-            margin: 0 0.25rem;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1f3e85;
+            b {
+              margin: 0 0.25rem;
+              font-size: 1.25rem;
+              color: #1f3e85;
+
+              &:hover {
+                display: inline-block;
+                cursor: pointer;
+                transform: scale(1.05);
+              }
+            }
+
+            span {
+              margin: 0 0.25rem;
+              font-size: 1rem;
+              font-weight: 700;
+              color: #1f3e85;
+            }
           }
         }
       }
