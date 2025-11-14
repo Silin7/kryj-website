@@ -49,7 +49,7 @@ onBeforeUnmount(() => {
 <template>
   <div>
     <div class="myrecordsPage">
-      <div class="myrecordsContent">
+      <div v-if="windowWidth > 768" class="myrecordsContent">
         <div v-if="tableData?.length > 0" class="myrecordsContentSr">
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column type="index" width="60" label="序号" align="center" />

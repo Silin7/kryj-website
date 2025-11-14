@@ -5,6 +5,7 @@ import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
 import {
+  zhaicheckApi,
   checkTimeApi,
   checkdiseaseApi,
   checkdrugsApi,
@@ -192,6 +193,9 @@ onMounted(() => {
   getCusedlist()
   getCheckdisease()
   getCheckdrugs('')
+  zhaicheckApi().then((res: any) => {
+    console.log('-------->', res)
+  })
 })
 
 onBeforeUnmount(() => {
