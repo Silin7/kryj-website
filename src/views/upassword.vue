@@ -74,7 +74,7 @@ function ceateAccount() {
   }).then(() => {
     ElMessage({
       type: 'success',
-      message: '密码重置成功',
+      message: '密码修改成功',
     })
     pageJump('login')
   })
@@ -108,7 +108,7 @@ onUnmounted(() => {
         <button v-else @click="getCode">获取验证码</button>
       </div>
       <button class="createAccount" @click="ceateAccount">
-        重新设置密码
+        修改密码
       </button>
       <!-- <div class="gologin">已记起密码？<span @click="pageJump('login')">立即登录</span></div> -->
     </div>
