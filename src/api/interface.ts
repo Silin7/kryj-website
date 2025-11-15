@@ -5,7 +5,7 @@ export function authcodeApi() {
   return api.get('/app-api/member/auth/code')
 }
 
-// 登录注册 - 验证码 参数 -- mobile: 手机号; scene: 2 修改手机号 3 修改密码 4 忘记密码 5 注册
+// 登录注册 - 验证码 参数 -- mobile: 手机号; scene: 2 修改手机号 3 重置密码 4 忘记密码 5 注册
 export function authsmscodeApi(data: any) {
   return api.post('/app-api/member/auth/send-sms-code', data)
 }
@@ -20,7 +20,7 @@ export function authloginApi(data: any) {
   return api.post('/app-api/member/auth/login', data)
 }
 
-// 登录注册 - 修改密码
+// 登录注册 - 重置密码
 export function updatepasswordApi(data: any) {
   return api.put('/app-api/member/user/update-password', data)
 }

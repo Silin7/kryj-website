@@ -1,13 +1,29 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
-import { orderpageApi } from '@/api/interface'
+import useDebounce from '@/utils/useDebounce'
 import formatCurrency from '@/hooks/formatCurrency'
+import { orderpageApi } from '@/api/interface'
 
 const windowWidth = ref(window.innerWidth)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
+}
+
+function handleScroll() {
+  if (windowWidth.value <= 768 && total.value > tableData.value.length) {
+    useDebounce().fn(() => {
+      pageNo.value += 1
+      orderpageApi({
+        pageNo: pageNo.value,
+        pageSize: pageSize.value,
+      }).then((res: any) => {
+        total.value = res.data.total
+        tableData.value = tableData.value.concat(res.data.list)
+      })
+    })
+  }
 }
 
 const pageNo: any = ref(1)
@@ -39,11 +55,13 @@ function handleSizeChange(val: number) {
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
+  window.addEventListener('scroll', handleScroll)
   getOrderpage()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateWindowWidth)
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 

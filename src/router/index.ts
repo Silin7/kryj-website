@@ -115,7 +115,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'rpassword',
     component: () => import('@/views/rpassword.vue'),
     meta: {
-      title: '修改密码',
+      title: '重置密码',
       stcode: 'rpassword',
       website: true,
       hashead: true,

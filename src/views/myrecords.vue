@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
+import useDebounce from '@/utils/useDebounce'
 import pageJump from '@/hooks/pageJump'
 import { checkrecordApi } from '@/api/interface'
 
@@ -10,10 +11,25 @@ function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
+function handleScroll() {
+  if (windowWidth.value <= 768 && total.value > tableData.value.length) {
+    useDebounce().fn(() => {
+      pageNo.value += 1
+      checkrecordApi({
+        pageNo: pageNo.value,
+        pageSize: pageSize.value,
+      }).then((res: any) => {
+        total.value = res.data.total
+        tableData.value = tableData.value.concat(res.data.list)
+      })
+    })
+  }
+}
+
 const pageNo: any = ref(1)
 const pageSize: any = ref(10)
 const total: any = ref(0)
-const tableData = ref([])
+const tableData: any = ref([])
 
 function getOrderpage() {
   checkrecordApi({
@@ -39,11 +55,13 @@ function handleSizeChange(val: number) {
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
+  window.addEventListener('scroll', handleScroll)
   getOrderpage()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateWindowWidth)
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -84,6 +102,38 @@ onBeforeUnmount(() => {
             <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="[10, 20]"
               size="default" background layout="sizes, prev, pager, next, total" prev-text="上一页" next-text="下一页"
               :total="total" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+          </div>
+        </div>
+        <img v-else src="@/assets/sys/zwsj01.png" alt="暂无数据" class="zwsjImg">
+      </div>
+      <div v-else class="myrecordsContent">
+        <div v-if="tableData?.length > 0">
+          <div v-for="(item, index) in tableData" :key="index" class="tableItem">
+            <div class="tableItemRow">
+              <div class="tableItemLabel">序号</div>
+              <div class="tableItemValue">{{ index + 1 }}</div>
+            </div>
+            <div class="tableItemRow">
+              <div class="tableItemLabel">疾病名称</div>
+              <div class="tableItemValue">{{ item.diseaseName }}</div>
+            </div>
+            <div class="tableItemRow">
+              <div class="tableItemLabel">化合物名称</div>
+              <div class="tableItemValue"> {{ item.diseaseNo }}-{{ item.drugName }}
+              </div>
+            </div>
+            <div class="tableItemRow">
+              <div class="tableItemLabel">状态</div>
+              <div class="tableItemValue">
+                <span v-if="item.status === 0" style="color: #1f3e85;">{{ item.message }}</span>
+                <span v-else-if="item.status === 1" style="color: #f56c6c;">{{ item.message }}</span>
+                <span v-else style="color: #909399;">{{ item.message }}</span>
+              </div>
+            </div>
+            <div class="tableItemRow">
+              <div class="tableItemLabel">检测时间</div>
+              <div class="tableItemValue">{{ dayjs(item.createTime).format('YYYY-MM-DD HH:mm:ss') }}</div>
+            </div>
           </div>
         </div>
         <img v-else src="@/assets/sys/zwsj01.png" alt="暂无数据" class="zwsjImg">
@@ -158,6 +208,34 @@ onBeforeUnmount(() => {
     @media (max-width: 768px) {
       margin: 8rem auto 0;
       width: 100%;
+    }
+  }
+
+  .tableItem {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    .tableItemRow {
+      height: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .tableItemLabel {
+        color: #646566;
+        font-size: 0.875rem;
+      }
+
+      .tableItemValue {
+        font-size: 0.875rem;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }
