@@ -166,15 +166,15 @@ onMounted(() => {
 
     .fromItem {
       margin-bottom: 20px;
-      padding: 0 18px;
+      padding: 0 1rem;
       height: 40px;
       background: #fff;
       border: 1px solid rgba(224, 224, 224, 1);
 
       img {
-        margin-right: 20px;
-        width: 16px;
-        height: 16px;
+        margin-right: 1rem;
+        width: 1rem;
+        height: 1rem;
         object-fit: fill;
       }
 
@@ -189,7 +189,7 @@ onMounted(() => {
         font-size: 16px;
         font-weight: 400;
         letter-spacing: 0px;
-        line-height: 16px;
+        line-height: 1rem;
         color: #1f3e85;
       }
     }

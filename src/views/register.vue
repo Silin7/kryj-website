@@ -100,10 +100,10 @@ function ceateAccount() {
     })
     return
   }
-  if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(password.value)) {
+  if (!/^(?![a-zA-Z]+$)(?![0-9]+$)(?![^a-zA-Z0-9]+$)[a-zA-Z0-9\W_]{8,16}$/.test(password.value)) {
     ElMessage({
       type: 'error',
-      message: '请输入8-20位密码（含字母和数字）',
+      message: '请输入8到16位，包含字母、数字、字符（至少两种）',
     })
     return
   }
@@ -187,8 +187,9 @@ onMounted(() => {
       </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" alt="" />
-        <el-input type="password" show-password v-model="password" placeholder="请输入8-20位密码（含字母和数字）" clearable />
+        <el-input type="password" show-password v-model="password" placeholder="请输入密码" clearable />
       </div>
+      <div class="pwdTips">8到16位，包含字母、数字、字符（至少两种）</div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd2.png" alt="" />
         <el-input type="password" show-password v-model="password2" placeholder="请再次输入密码" clearable />
@@ -313,16 +314,16 @@ onMounted(() => {
     }
 
     .fromItem {
-      margin-bottom: 20px;
-      padding: 0 18px;
+      margin-top: 20px;
+      padding: 0 1rem;
       height: 40px;
       background: #fff;
       border: 1px solid rgba(224, 224, 224, 1);
 
       img {
-        margin-right: 20px;
-        width: 16px;
-        height: 16px;
+        margin-right: 1rem;
+        width: 1rem;
+        height: 1rem;
         object-fit: fill;
       }
 
@@ -337,7 +338,7 @@ onMounted(() => {
         font-size: 16px;
         font-weight: 400;
         letter-spacing: 0px;
-        line-height: 16px;
+        line-height: 1rem;
         color: #1f3e85;
       }
 
@@ -345,6 +346,13 @@ onMounted(() => {
         font-size: 0.85rem;
         color: #4b5563;
       }
+    }
+
+    .pwdTips {
+      margin-top: 0.25rem;
+      padding-left: 3rem;
+      font-size: 0.875rem;
+      color: #a8abb2;
     }
 
     .yzmStyle {
@@ -355,6 +363,7 @@ onMounted(() => {
     }
 
     .stateMent {
+      margin-top: 20px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
