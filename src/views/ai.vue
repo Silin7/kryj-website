@@ -3,6 +3,8 @@ import dayjs from 'dayjs'
 import qrcode from 'qrcode'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
+import { useHead } from '@vueuse/head'
+import useDebounce from '@/utils/useDebounce'
 import pageJump from '@/hooks/pageJump'
 import {
   zhaicheckApi,
@@ -19,6 +21,24 @@ const windowWidth = ref(window.innerWidth)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
+}
+
+// 首页数据
+const aiData: any = ref({})
+
+function getZhhome() {
+  zhaicheckApi().then((res: any) => {
+    aiData.value = res.data.aiCheck
+    if (res.data.seo) {
+      useHead({
+        title: res.data.seo.categoryTitle,
+        meta: [
+          { name: 'description', content: res.data.seo.categoryDescrip },
+          { name: 'keywords', content: res.data.seo.categoryKeyword },
+        ],
+      })
+    }
+  })
 }
 
 // 免费体验剩余次数
@@ -69,7 +89,7 @@ function getCheckdrugs(english: any) {
   })
 }
 function drugRemoteMethod(e: any) {
-  debounce(getCheckdrugs(e))
+  useDebounce().fn(getCheckdrugs(e))
 }
 function drugChange(value: any) {
   const data = drugList.value.find((item: any) => {
@@ -180,24 +200,13 @@ function getpayvideostatus() {
   })
 }
 
-// 防抖函数（Debounce）
-function debounce(func: any, delay: any = 1000) {
-  let timer: any = null
-  return function () {
-    clearTimeout(timer)
-    timer = setTimeout(func, delay)
-  }
-}
-
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
+  getZhhome()
   getCheckTime()
   getCusedlist()
   getCheckdisease()
   getCheckdrugs('')
-  zhaicheckApi().then((res: any) => {
-    console.log('-------->', res)
-  })
 })
 
 onBeforeUnmount(() => {
@@ -224,16 +233,16 @@ onBeforeUnmount(() => {
         <img v-else src="@/assets/ai/banner-ai.jpg" alt="" />
         <div class="aibannerAbsolute">
           <div class="aibannerContent">
-            <div class="aibannerTitle">AI赋能医疗行业 开启智能建造新时代</div>
+            <div class="aibannerTitle">{{ aiData.contentShortTitle }}</div>
             <div class="aibannerSubtitle">
-              以DeepSeek、通义千问等为代表的国产大模型加速发展，推动AI深度融入医疗行业，实现创新应用，助力优化资源配置、提升生产效率，加速行业智能化转型与产业升级。
+              {{ aiData.contentDescription }}
             </div>
           </div>
         </div>
       </div>
       <div class="aiTbox">
         <div style="width: 7rem"></div>
-        <div class="aiTitle">AI预测基础版（精度约65%）</div>
+        <div class="aiTitle">{{ aiData.contentSource }}</div>
         <div class="myRecords" @click="pageJump('myrecords')">
           我的检测记录 <i class="fa fa-angle-right"></i>
         </div>
