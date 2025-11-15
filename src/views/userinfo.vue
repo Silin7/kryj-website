@@ -7,8 +7,7 @@ const userUnit: any = ref('')
 const userPost: any = ref('')
 const mobile: any = ref('')
 
-
-// 创建账号
+// 用户信息
 function getAuthinfo() {
   authinfoApi().then((res: any) => {
     console.log('-------->', res)

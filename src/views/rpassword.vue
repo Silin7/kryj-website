@@ -107,7 +107,7 @@ onUnmounted(() => {
       <div class="hyzc">重置密码</div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" />
-        <el-input v-model="password" style="width: 100%" placeholder="请输入手机号码" clearable />
+        <el-input v-model="mobile" style="width: 100%" placeholder="请输入手机号码" clearable />
       </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" />
