@@ -47,7 +47,7 @@ function countdownChange() {
   }, 1000)
 }
 
-// 创建账号
+// 密码重置
 function ceateAccount() {
   if (!code.value) {
     ElMessage({
@@ -130,7 +130,7 @@ onUnmounted(() => {
       <button class="createAccount" @click="ceateAccount">
         重新设置密码
       </button>
-      <div class="gologin">已记起密码？<span @click="pageJump('login')">立即登录</span></div>
+      <!-- <div class="gologin">已记起密码？<span @click="pageJump('login')">立即登录</span></div> -->
     </div>
   </div>
 </template>
