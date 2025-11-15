@@ -79,7 +79,7 @@ function diseaseChange(value: any) {
   searchForm.value.diseaseId = data.id
   searchForm.value.diseaseName = data.chinese
 }
-
+// 查询条件 - 化合物
 const drugList: any = ref([])
 function getCheckdrugs(english: any) {
   checkdrugsApi({
