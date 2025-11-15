@@ -10,7 +10,6 @@ const mobile: any = ref('')
 // 用户信息
 function getAuthinfo() {
   authinfoApi().then((res: any) => {
-    console.log('-------->', res)
     nickname.value = res.data.nickname
     userUnit.value = res.data.userUnit
     userPost.value = res.data.userPost

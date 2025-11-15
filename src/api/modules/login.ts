@@ -52,8 +52,3 @@ export function currentuserApi() {
 export function currentcompanyApi() {
   return api.get('/api/client/base/current-company')
 }
-
-// 重置密码（登录状态）
-export function updayepasswordApi(data: any) {
-  return api.post('/api/client/base/update-password', data)
-}

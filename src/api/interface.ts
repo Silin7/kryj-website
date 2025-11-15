@@ -21,6 +21,11 @@ export function authloginApi(data: any) {
 }
 
 // 登录注册 - 重置密码
+export function resetpasswordApi(data: any) {
+  return api.put('/app-api/member/user/reset-password', data)
+}
+
+// 登录注册 - 修改密码
 export function updatepasswordApi(data: any) {
   return api.put('/app-api/member/user/update-password', data)
 }

@@ -123,6 +123,18 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/upassword',
+    name: 'upassword',
+    component: () => import('@/views/upassword.vue'),
+    meta: {
+      title: '修改密码',
+      stcode: 'upassword',
+      website: true,
+      hashead: true,
+      hasfoot: true,
+    },
+  },
+  {
     path: '/rmobile',
     name: 'rmobile',
     component: () => import('@/views/rmobile.vue'),

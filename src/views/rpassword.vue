@@ -2,7 +2,7 @@
 import { onUnmounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import { authsmscodeApi, updatepasswordApi } from '@/api/interface'
+import { authsmscodeApi, resetpasswordApi } from '@/api/interface'
 
 const mobile: any = ref('')
 const password: any = ref('')
@@ -26,7 +26,7 @@ function getCode() {
   }
   authsmscodeApi({
     mobile: mobile.value,
-    scene: 3,
+    scene: 4,
   }).then(() => {
     countdownChange()
   })
@@ -49,6 +49,20 @@ function countdownChange() {
 
 // 密码重置
 function ceateAccount() {
+  if (!mobile.value) {
+    ElMessage({
+      type: 'error',
+      message: '请输入手机号',
+    })
+    return
+  }
+  if (!/^(?:(?:\+|00)86)?1\d{10}$/.test(mobile.value)) {
+    ElMessage({
+      type: 'error',
+      message: '手机号格式错误',
+    })
+    return
+  }
   if (!code.value) {
     ElMessage({
       type: 'error',
@@ -84,7 +98,8 @@ function ceateAccount() {
     })
     return
   }
-  updatepasswordApi({
+  resetpasswordApi({
+    mobile: mobile.value,
     password: password.value,
     code: code.value,
   }).then(() => {

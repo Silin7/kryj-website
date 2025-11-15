@@ -142,8 +142,8 @@ onBeforeUnmount(() => {
                 <div class="popoverItem" @click="pageJump('rmobile')">
                   <i class="fa fa-phone"></i>修改手机号
                 </div>
-                <div class="popoverItem" @click="pageJump('rpassword')">
-                  <i class="fa fa-edit"></i>重置密码
+                <div class="popoverItem" @click="pageJump('upassword')">
+                  <i class="fa fa-edit"></i>修改密码
                 </div>
                 <div class="popoverItem" @click="logoutFunction">
                   <i class="fa fa-sign-out"></i>退出登录
@@ -190,9 +190,9 @@ onBeforeUnmount(() => {
           <i class="fa fa-phone"></i>
           修改手机号
         </button>
-        <button v-if="userInfo.mobile" @click="tabRouterPush({ name: 'rpassword' })" class="mobileBtns">
+        <button v-if="userInfo.mobile" @click="tabRouterPush({ name: 'upassword' })" class="mobileBtns">
           <i class="fa fa-edit"></i>
-          重置密码
+          修改密码
         </button>
         <button v-if="userInfo.mobile" @click="logoutFunction" class="mobileBtns">
           <i class="fa fa-sign-out"></i>
