@@ -33,10 +33,10 @@ api.interceptors.response.use(
       window.localStorage.removeItem('refreshToken')
       window.localStorage.removeItem('expiresTime')
       window.localStorage.removeItem('userInfo')
-      ElMessage.error('登录信息失效，请重新登录')
-      router.push({
-        path: '/login',
-      })
+      // ElMessage.error('登录信息失效，请重新登录')
+      // router.push({
+      //   path: '/login',
+      // })
     }
     // 其他错误
     else if (response.data?.code !== 0 && response.data?.code !== 401) {
