@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import pageJump from '@/hooks/pageJump'
 import useDebounce from '@/utils/useDebounce'
 import formatCurrency from '@/hooks/formatCurrency'
 import { orderpageApi } from '@/api/interface'
@@ -36,6 +38,11 @@ function getOrderpage() {
     pageNo: pageNo.value,
     pageSize: pageSize.value,
   }).then((res: any) => {
+    if (res.code === 401) {
+      ElMessage.error('登录信息失效，请重新登录')
+      pageJump('login')
+      return
+    }
     total.value = res.data.total
     tableData.value = res.data.list
   })
