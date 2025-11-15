@@ -114,7 +114,8 @@ onBeforeUnmount(() => {
       </div>
       <div v-else class="myrecordsContent">
         <div v-if="tableData?.length > 0">
-          <div v-for="(item, index) in tableData" :key="index" class="tableItem">
+          <div v-for="(item, index) in tableData" :key="index" class="tableItem"
+            :style="index + 1 === tableData.length ? 'margin-bottom: 0;' : ''">
             <div class="tableItemRow">
               <div class="tableItemLabel">序号</div>
               <div class="tableItemValue">{{ index + 1 }}</div>

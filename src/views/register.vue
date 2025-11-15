@@ -356,7 +356,7 @@ onMounted(() => {
     }
 
     .yzmStyle {
-      margin-bottom: 20px;
+      margin-top: 20px;
       margin-left: 10px;
       width: 120px;
       height: 40px;
