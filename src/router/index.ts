@@ -160,12 +160,12 @@ router.beforeEach((to, from, next) => {
     window.localStorage.setItem('selectedName', to.path as string)
   }
 
-  // 登录路由重定向
-  if (to?.name === 'login' && from.name === 'ai') {
-    window.localStorage.setItem('redirectName', from.name as string)
-  } else {
-    window.localStorage.removeItem('redirectName')
-  }
+  // // 登录路由重定向
+  // if (to?.name === 'login' && from.name === 'ai') {
+  //   window.localStorage.setItem('redirectName', from.name as string)
+  // } else {
+  //   window.localStorage.removeItem('redirectName')
+  // }
 
   next()
 })

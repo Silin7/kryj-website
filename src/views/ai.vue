@@ -107,17 +107,19 @@ function ksycClick() {
   }
   const loading = ElLoading.service({
     lock: true,
-    text: 'Loading',
+    text: '正在检测中...',
     background: 'rgba(0, 0, 0, 0.7)',
   })
-  aicheckApi(searchForm.value)
-    .then((res: any) => {
-      searchResult.value = res.data
-      getCheckTime()
-    })
-    .finally(() => {
-      loading.close()
-    })
+  setTimeout(() => {
+    aicheckApi(searchForm.value)
+      .then((res: any) => {
+        searchResult.value = res.data
+        getCheckTime()
+      })
+      .finally(() => {
+        loading.close()
+      })
+  }, 1000)
 }
 
 // 套餐 pay dialog
@@ -273,7 +275,10 @@ onBeforeUnmount(() => {
                   @click="dialogVisible = true">立即续费</b>
               </p>
               <p v-else>
-                体验剩余<span>{{ checkInfo.checkTime }}</span>次，<b @click="dialogVisible = true">立即购买</b>
+                体验剩余<span>{{ checkInfo.checkTime }}</span>次，
+                <b @click="dialogVisible = true">
+                  {{ checkInfo.checkTime > 0 ? '立即续费' : '立即购买' }}
+                </b>
               </p>
             </div>
           </div>
@@ -299,7 +304,12 @@ onBeforeUnmount(() => {
         <div class="dialogLeft">
           <div class="dialogItem">
             <div class="dialogSubTitle">当前会员信息：</div>
-            <div class="dialogDqhyxx">{{ usedItem.comboName }}</div>
+            <div v-if="checkInfo.validDate" class="dialogDqhyxx">
+              有效期截止 <span>{{ dayjs(checkInfo.checkDate).format('YYYY年MM月DD日') }}</span>
+            </div>
+            <div v-if="!checkInfo.validDate" class="dialogDqhyxx">
+              体验剩余<span>{{ checkInfo.checkTime }}</span>次
+            </div>
           </div>
           <div class="dialogItem">
             <div class="dialogSubTitle">订阅方式：</div>
@@ -363,7 +373,10 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </div>
-          <img v-if="qrCodeData" :src="qrCodeData" class="qrCodeImg" />
+          <div v-if="qrCodeData">
+            <img :src="qrCodeData" class="qrCodeImg" />
+            <div style="text-align: center; margin-top: 0.5rem;">请使用微信扫码支付</div>
+          </div>
           <button v-else class="dialogQdfk" @click="payNowClick">确定付款</button>
         </div>
       </div>

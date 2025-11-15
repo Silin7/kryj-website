@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { authinfoApi } from '@/api/interface'
 
-const nickname:any = ref('')
+const nickname: any = ref('')
 const userUnit: any = ref('')
 const userPost: any = ref('')
 const mobile: any = ref('')
@@ -31,21 +31,33 @@ onMounted(() => {
       <div class="hyzc">
         用户信息
       </div>
-      <div class="fromItem frsc">
-        <img src="@/assets/register/nicheng.png" alt="" />
-        <el-input v-model="nickname" placeholder="请输入单位" readonly />
+      <div class="frsc">
+        <div class="fromTitle">昵称：</div>
+        <div class="fromItem frsc">
+          <img src="@/assets/register/nicheng.png" alt="" />
+          <el-input v-model="nickname" placeholder="" readonly />
+        </div>
       </div>
-      <div class="fromItem frsc">
-        <img src="@/assets/register/danwei.png" alt="" />
-        <el-input v-model="userUnit" placeholder="请输入单位" readonly />
+      <div class="frsc">
+        <div class="fromTitle">公司：</div>
+        <div class="fromItem frsc">
+          <img src="@/assets/register/danwei.png" alt="" />
+          <el-input v-model="userUnit" placeholder="" readonly />
+        </div>
       </div>
-      <div class="fromItem frsc">
-        <img src="@/assets/register/zhiwu.png" alt="" />
-        <el-input v-model="userPost" placeholder="请输入职务" readonly />
+      <div class="frsc">
+        <div class="fromTitle">职务：</div>
+        <div class="fromItem frsc">
+          <img src="@/assets/register/zhiwu.png" alt="" />
+          <el-input v-model="userPost" placeholder="" readonly />
+        </div>
       </div>
-      <div class="fromItem frsc">
-        <img src="@/assets/register/shoujihao.png" alt="" />
-        <el-input v-model="mobile" placeholder="请输入手机号" readonly />
+      <div class="frsc">
+        <div class="fromTitle">手机号：</div>
+        <div class="fromItem frsc">
+          <img src="@/assets/register/shoujihao.png" alt="" />
+          <el-input v-model="mobile" placeholder="请输入手机号" readonly />
+        </div>
       </div>
     </div>
   </div>
@@ -126,9 +138,18 @@ onMounted(() => {
       }
     }
 
+    .fromTitle {
+      width: 4rem;
+      margin-bottom: 20px;
+      height: 40px;
+      line-height: 40px;
+      color: #4b5563;
+    }
+
     .fromItem {
       margin-bottom: 20px;
       padding: 0 18px;
+      width: calc(100% - 4rem);
       height: 40px;
       background: #fff;
       border: 1px solid rgba(224, 224, 224, 1);

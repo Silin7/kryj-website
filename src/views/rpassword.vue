@@ -4,22 +4,32 @@ import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
 import { authsmscodeApi, updatepasswordApi } from '@/api/interface'
 
-const userInfo: any = ref()
+const mobile: any = ref('')
 const password: any = ref('')
 const password2: any = ref('')
 const code: any = ref('')
 
 function getCode() {
-  userInfo.value = window.localStorage.getItem('userInfo')
-  userInfo.value = JSON.parse(userInfo.value)
-  if (userInfo.value?.mobile) {
-    authsmscodeApi({
-      mobile: userInfo.value.mobile,
-      scene: 3,
-    }).then(() => {
-      countdownChange()
+  if (!mobile.value) {
+    ElMessage({
+      type: 'error',
+      message: '请输入手机号',
     })
+    return
   }
+  if (!/^(?:(?:\+|00)86)?1\d{10}$/.test(mobile.value)) {
+    ElMessage({
+      type: 'error',
+      message: '手机号格式错误',
+    })
+    return
+  }
+  authsmscodeApi({
+    mobile: mobile.value,
+    scene: 3,
+  }).then(() => {
+    countdownChange()
+  })
 }
 
 // 验证码倒计时
@@ -80,7 +90,7 @@ function ceateAccount() {
   }).then(() => {
     ElMessage({
       type: 'success',
-      message: '账号创建成功',
+      message: '密码重置成功',
     })
     pageJump('login')
   })
@@ -94,7 +104,11 @@ onUnmounted(() => {
 <template>
   <div class="rpasswordPage">
     <div class="registerbox">
-      <div class="hyzc">修改密码</div>
+      <div class="hyzc">重置密码</div>
+      <div class="fromItem frsc">
+        <img src="@/assets/register/pwd.png" />
+        <el-input v-model="password" style="width: 100%" placeholder="请输入手机号码" clearable />
+      </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" />
         <el-input type="password" show-password v-model="password" style="width: 100%" placeholder="请输入8-20位新密码（含字母和数字）"

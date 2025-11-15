@@ -53,6 +53,7 @@ onBeforeUnmount(() => {
       <div v-if="windowWidth > 768" class="myorderPageContent">
         <div v-if="tableData?.length > 0" class="myorderPageContentSr">
           <el-table :data="tableData" border style="width: 100%">
+            <el-table-column type="index" label="序号" width="60" align="center" />
             <el-table-column prop="id" label="订单编号" />
             <el-table-column prop="spuName" label="商品" />
             <el-table-column label="价格" header-align="left" align="right">

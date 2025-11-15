@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
+import pageJump from '@/hooks/pageJump'
 import { checkrecordApi } from '@/api/interface'
 
 const windowWidth = ref(window.innerWidth)
@@ -50,6 +51,12 @@ onBeforeUnmount(() => {
   <div>
     <div class="myrecordsPage">
       <div v-if="windowWidth > 768" class="myrecordsContent">
+        <div class="frbc">
+          <div></div>
+          <div class="goBack" @click="pageJump('ai')">
+            <i class="fa fa-angle-left"></i>返回
+          </div>
+        </div>
         <div v-if="tableData?.length > 0" class="myrecordsContentSr">
           <el-table :data="tableData" border style="width: 100%">
             <el-table-column type="index" width="60" label="序号" align="center" />
@@ -102,6 +109,24 @@ onBeforeUnmount(() => {
     padding: 1rem;
     width: 100%;
     max-width: 1400px;
+
+    .goBack {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: #1f3e85;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+
+      i {
+        margin-right: 0.5rem;
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
+    }
 
     .myrecordsContentSr {
       // min-height: calc(100vh - 188px - 2rem);

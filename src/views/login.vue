@@ -72,7 +72,7 @@ function getAuthinfo() {
       message: '登录成功',
     })
     window.localStorage.setItem('userInfo', JSON.stringify(res.data))
-    pageJump(window.localStorage.getItem('redirectName') || 'home')
+    pageJump('ai')
   })
 }
 
