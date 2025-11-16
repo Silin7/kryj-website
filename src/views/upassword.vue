@@ -33,13 +33,6 @@ function countdownChange() {
 
 // 密码重置
 function ceateAccount() {
-  if (!code.value) {
-    ElMessage({
-      type: 'error',
-      message: '请输入验证码',
-    })
-    return
-  }
   if (!password.value) {
     ElMessage({
       type: 'error',
@@ -65,6 +58,13 @@ function ceateAccount() {
     ElMessage({
       type: 'error',
       message: '两次密码输入不一致',
+    })
+    return
+  }
+  if (!code.value) {
+    ElMessage({
+      type: 'error',
+      message: '请输入验证码',
     })
     return
   }
