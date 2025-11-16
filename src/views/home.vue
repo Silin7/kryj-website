@@ -146,6 +146,10 @@ function getFlinktop() {
   })
 }
 
+function onVideoError(e: any) {
+  console.error('视频加载错误', e);
+}
+
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   window.addEventListener('scroll', handleScroll)
@@ -164,14 +168,17 @@ onBeforeUnmount(() => {
 <template>
   <div class="homePage">
     <!-- video -->
-    <video v-if="windowWidth > 768" loop muted preload="auto" autoplay :poster="homeData?.homeBanner?.contentImg"
-      data-setup="{}" style="width: 100vw; height: auto">
+    <video v-if="windowWidth > 768 && homeData?.homeBanner?.contentVideo" loop muted preload="auto" autoplay :poster="homeData?.homeBanner?.contentImg"
+      data-setup="{}" style="width: 100vw; height: auto" @error="onVideoError">
       <!-- <source src="http://www.silin7.cn/media/bsjx.mp4" type="video/mp4" /> -->
       <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
     </video>
-    <video v-else loop muted preload="auto" autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}"
+    <video v-else-if="windowWidth <= 768 && homeData?.homeBannerMobile?.contentVideo" loop muted preload="auto" autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}"
       style="width: 100vw; height: 100vh">
       <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
+    </video>
+    <video v-else :poster="homeData?.homeBanner?.contentImg">
+      <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
     </video>
 
     <!-- 公司简介 :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']" -->
