@@ -54,7 +54,7 @@ onMounted(() => {
         <div class="fromTitle">手机号：</div>
         <div class="fromItem frsc">
           <img src="@/assets/register/shoujihao.png" alt="" />
-          <el-input v-model="mobile" placeholder="请输入手机号" readonly />
+          <el-input type="tel" v-model="mobile" placeholder="请输入手机号" readonly />
         </div>
       </div>
     </div>

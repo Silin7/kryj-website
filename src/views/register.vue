@@ -183,7 +183,7 @@ onMounted(() => {
       </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/shoujihao.png" alt="" />
-        <el-input v-model="mobile" placeholder="请输入手机号" clearable />
+        <el-input type="tel" v-model="mobile" placeholder="请输入手机号" clearable />
       </div>
       <div class="fromItem frsc">
         <img src="@/assets/register/pwd.png" alt="" />
