@@ -75,24 +75,24 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login.vue'),
-    meta: {
-      title: '登录',
-      stcode: 'login',
-      website: true,
-      hashead: true,
-      hasfoot: true,
-    },
-  },
-  {
     path: '/register',
     name: 'register',
     component: () => import('@/views/register.vue'),
     meta: {
       title: '注册',
       stcode: 'register',
+      website: true,
+      hashead: true,
+      hasfoot: true,
+    },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login.vue'),
+    meta: {
+      title: '登录',
+      stcode: 'login',
       website: true,
       hashead: true,
       hasfoot: true,
