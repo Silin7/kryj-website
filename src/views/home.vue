@@ -571,7 +571,7 @@ onBeforeUnmount(() => {
     padding: 2.5rem;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
-    background-image: url('../assets/about00.jpg');
+    background-image: url('../assets/home/about00.jpg');
 
     @media (max-width: 768px) {
       padding: 2.5rem 0;

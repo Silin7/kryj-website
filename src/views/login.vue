@@ -120,7 +120,7 @@ onMounted(() => {
   padding: 1rem;
   width: 100vw;
   min-height: calc(100vh - 88px);
-  background-image: url('../assets/login-banner.jpg');
+  background-image: url('../assets/register/login-banner.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;

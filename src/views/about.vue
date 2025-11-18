@@ -250,7 +250,7 @@ onBeforeUnmount(() => {
       <div class="mediaBox">
         <div class="mediaTitle">毕业院校&从业经历</div>
         <div class="mediaHeng"></div>
-        <el-row :gutter="16" class="mediaRow">
+        <!-- <el-row :gutter="16" class="mediaRow">
           <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
             <img src="@/assets/renminnet.png" alt="" />
           </el-col>
@@ -263,7 +263,7 @@ onBeforeUnmount(() => {
           <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
             <img src="@/assets/zhejiangdaily.png" alt="" />
           </el-col>
-        </el-row>
+        </el-row> -->
         <!-- <div class="mediaCard">
           <p>
             "山东科睿易晶生物技术有限公司致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。核心团队由临床医学、合成化学、生物信息工程、人工智能大数据及算法等多领域专家组成。"
