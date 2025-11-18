@@ -7,7 +7,7 @@ import useDebounce from '@/utils/useDebounce'
 import formatCurrency from '@/hooks/formatCurrency'
 import { orderpageApi } from '@/api/interface'
 
-const windowWidth = ref(window.innerWidth)
+const windowWidth: any = ref(window.innerWidth)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth

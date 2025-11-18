@@ -5,8 +5,8 @@ import pageJump from '@/hooks/pageJump'
 import useHeaderStore from '@/store/modules/header'
 import { baselogoutdApi } from '@/api/interface'
 
-const windowWidth = ref(window.innerWidth)
-const windowScrollY = ref(window.scrollY)
+const windowWidth: any = ref(window.innerWidth)
+const windowScrollY : any = ref(window.scrollY)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth

@@ -4,7 +4,7 @@ import useHeaderStore from '@/store/modules/header'
 import { zhfooterApi } from '@/api/interface'
 
 // 可视窗口宽度
-const windowWidth = ref(window.innerWidth)
+const windowWidth: any = ref(window.innerWidth)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth

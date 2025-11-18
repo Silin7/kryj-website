@@ -7,7 +7,7 @@ import { upaywycyxApi, upayszcApi, upachildysxyApi } from '@/api/interface'
 const route = useRoute()
 
 // 可视窗口宽度
-const windowWidth = ref(window.innerWidth)
+const windowWidth: any = ref(window.innerWidth)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth

@@ -5,10 +5,11 @@ import pageJump from '@/hooks/pageJump'
 import backToTop from '@/hooks/backToTop'
 import windowOpen from '@/hooks/windowOpen'
 import { zhhomeApi, friendlinkApi } from '@/api/interface'
+import sideTop from '@/components/sideTop.vue'
 
 // 可视窗口宽度 + 滚动
-const windowWidth = ref(window.innerWidth)
-const windowScrollY = ref(window.scrollY)
+const windowWidth: any = ref(window.innerWidth)
+const windowScrollY: any = ref(window.scrollY)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
@@ -167,14 +168,18 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="homePage">
+    <!-- 返回顶部 -->
+    <component v-if="windowScrollY > 500" :is="sideTop" @click="backToTop" />
+
     <!-- video -->
-    <video v-if="windowWidth > 768 && homeData?.homeBanner?.contentVideo" loop muted preload="auto" autoplay :poster="homeData?.homeBanner?.contentImg"
-      data-setup="{}" style="width: 100vw; height: auto" @error="onVideoError">
+    <video v-if="windowWidth > 768 && homeData?.homeBanner?.contentVideo" loop muted preload="auto" autoplay
+      :poster="homeData?.homeBanner?.contentImg" data-setup="{}" style="width: 100vw; height: auto"
+      @error="onVideoError">
       <!-- <source src="http://www.silin7.cn/media/bsjx.mp4" type="video/mp4" /> -->
       <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
     </video>
-    <video v-else-if="windowWidth <= 768 && homeData?.homeBannerMobile?.contentVideo" loop muted preload="auto" autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}"
-      style="width: 100vw; height: 100vh">
+    <video v-else-if="windowWidth <= 768 && homeData?.homeBannerMobile?.contentVideo" loop muted preload="auto" autoplay
+      :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}" style="width: 100vw; height: 100vh">
       <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
     </video>
     <video v-else :poster="homeData?.homeBanner?.contentImg">
@@ -273,6 +278,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .homePage {
+  position: relative;
   background-color: #f9fafb;
   overflow-x: hidden;
 
