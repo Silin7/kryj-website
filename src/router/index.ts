@@ -19,7 +19,19 @@ const routes: Array<RouteRecordRaw> = [
     name: 'ai',
     component: () => import('@/views/ai.vue'),
     meta: {
-      title: 'AI赋能应用',
+      title: 'AI预测平台',
+      stcode: 'ai',
+      website: true,
+      hashead: true,
+      hasfoot: true,
+    },
+  },
+  {
+    path: '/ai/buy',
+    name: 'ai_buy',
+    component: () => import('@/views/ai_buy.vue'),
+    meta: {
+      title: 'AI预测平台',
       stcode: 'ai',
       website: true,
       hashead: true,
@@ -63,7 +75,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/article_detail',
+    path: '/article/detail',
     name: 'article_detail',
     component: () => import('@/views/article_detail.vue'),
     meta: {
