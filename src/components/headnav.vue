@@ -6,7 +6,7 @@ import useHeaderStore from '@/store/modules/header'
 import { baselogoutdApi } from '@/api/interface'
 
 const windowWidth: any = ref(window.innerWidth)
-const windowScrollY : any = ref(window.scrollY)
+const windowScrollY: any = ref(window.scrollY)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
@@ -30,7 +30,7 @@ function tabRouterPush(item: any) {
 
 const menuList: any = ref([
   { title: '系统首页', path: '/', name: 'home' },
-  { title: '公司信息', path: '/', name: '' },
+  { title: '公司介绍', path: '/', name: '' },
   { title: '委托开发', path: '/', name: '' },
   { title: '产品出售', path: '/', name: '' },
   { title: 'AI预测平台 ', path: '/ai', name: 'ai' },
@@ -116,7 +116,7 @@ onBeforeUnmount(() => {
                 :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
               <div class="menuTitle" :style="selectedTab === item.name ? 'opacity: 1;' : ''">
                 <span :style="selectedTab === 'home' && windowScrollY === 0 ? 'color: #fff;' : ''">{{ item.title
-                  }}</span>
+                }}</span>
               </div>
               <img v-if="selectedTab === 'home' && windowScrollY === 0" src="@/assets/header/cb_by2.png"
                 class="menuYanhua" :style="selectedTab === item.name ? 'opacity: 1;' : ''" />
@@ -156,7 +156,7 @@ onBeforeUnmount(() => {
           </button>
         </template>
         <div v-else class="drawerIcon" @click="drawerVisible = true">
-          <i class="fa fa-bars"></i>
+          <i class="fa fa-bars" :style="windowScrollY === 0 ? 'color: #fff' : 'color: #1f3e85;'"></i>
         </div>
       </div>
     </div>
@@ -290,7 +290,6 @@ onBeforeUnmount(() => {
 
     .drawerIcon {
       font-size: 1.875rem;
-      color: #1f3e85;
     }
   }
 }

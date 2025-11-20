@@ -9,6 +9,7 @@ import sideTop from '@/components/sideTop.vue'
 
 // 可视窗口宽度 + 滚动
 const windowWidth: any = ref(window.innerWidth)
+const windowHeight: any = ref(window.innerHeight)
 const windowScrollY: any = ref(window.scrollY)
 
 function updateWindowWidth() {
@@ -172,19 +173,30 @@ onBeforeUnmount(() => {
     <component v-if="windowScrollY > 500" :is="sideTop" @click="backToTop" />
 
     <!-- video -->
-    <video v-if="windowWidth > 768 && homeData?.homeBanner?.contentVideo" loop muted preload="auto" autoplay
-      :poster="homeData?.homeBanner?.contentImg" data-setup="{}" style="width: 100vw; height: auto"
-      @error="onVideoError">
-      <!-- <source src="http://www.silin7.cn/media/bsjx.mp4" type="video/mp4" /> -->
-      <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
-    </video>
-    <video v-else-if="windowWidth <= 768 && homeData?.homeBannerMobile?.contentVideo" loop muted preload="auto" autoplay
-      :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}" style="width: 100vw; height: 100vh">
-      <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
-    </video>
-    <video v-else :poster="homeData?.homeBanner?.contentImg">
-      <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
-    </video>
+    <div class="videoBox">
+      <video v-if="windowWidth > 768 && homeData?.homeBanner?.contentVideo" loop muted preload="auto" autoplay
+        :poster="homeData?.homeBanner?.contentImg" data-setup="{}" width="100%" :height="windowHeight"
+        style="object-fit: cover;" @error="onVideoError">
+        <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
+      </video>
+      <video v-else-if="windowWidth <= 768 && homeData?.homeBannerMobile?.contentVideo" loop muted preload="auto"
+        autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}" width="100%" :height="windowHeight"
+        style="object-fit: cover;">
+        <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
+      </video>
+      <video v-else :poster="homeData?.homeBanner?.contentImg" width=" 100%" :height="windowHeight"
+        style="object-fit: cover;">
+        <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
+      </video>
+      <div class="vbannerBox">
+        <div class="vbannerContent">
+          <div class="vbannerTitle">医学人工智能技术研发与应用</div>
+          <button class="vbannerBtn" @click="pageJump('ai')">
+            查看详情 <i class="fa fa-angle-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- 公司简介 :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']" -->
     <div class="featuresBox">
@@ -282,9 +294,61 @@ onBeforeUnmount(() => {
   background-color: #f9fafb;
   overflow-x: hidden;
 
-  video {
-    margin: 0;
-    padding: 0;
+  .videoBox {
+    position: relative;
+
+    video {
+      margin: 0;
+      padding: 0;
+    }
+
+    .vbannerBox {
+      width: 100%;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+
+      .vbannerContent {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1400px;
+        height: 100vh;
+      }
+
+      .vbannerTitle {
+        padding: 0 1rem;
+        margin-top: calc(40vh - 3rem);
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height: 3rem;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .vbannerBtn {
+        margin: 2rem auto 0;
+        width: 10rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 400;
+        text-align: center;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 3rem;
+
+        i {
+          margin-left: 0.5rem;
+        }
+
+        &:hover {
+          i {
+            margin-left: 0.75rem;
+          }
+        }
+      }
+    }
   }
 
   .featuresBox {
