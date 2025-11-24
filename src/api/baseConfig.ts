@@ -1,4 +1,4 @@
-const baseURL = 'http://192.168.133.8:48080'
+const baseURL = 'http://keruimed.com'
 const fileURL = 'http://xcadmin.duoqixin.com'
 
 export { baseURL, fileURL }
