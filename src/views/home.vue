@@ -83,7 +83,7 @@ onBeforeUnmount(() => {
         style="object-fit: cover;">
         <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
       </video>
-      <video v-else :poster="homeData?.homeBanner?.contentImg" width=" 100%" :height="windowHeight"
+      <video v-else :poster="homeData?.homeBanner?.contentImg" width="100%" :height="windowHeight"
         style="object-fit: cover;">
         <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
       </video>
@@ -95,6 +95,7 @@ onBeforeUnmount(() => {
           </button>
         </div>
       </div>
+      <img src="@/assets/home/downbtn.png" class="downbtn">
     </div>
 
     <!-- 公司简介 -->
@@ -181,7 +182,7 @@ onBeforeUnmount(() => {
         margin: 0 auto;
         width: 100%;
         max-width: 1400px;
-        height: 100vh;
+        // height: 100vh;
       }
 
       .vbannerTitle {
@@ -216,6 +217,16 @@ onBeforeUnmount(() => {
           }
         }
       }
+    }
+
+    .downbtn {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 324px;
+      height: 52px;
+      cursor: pointer;
     }
   }
 
