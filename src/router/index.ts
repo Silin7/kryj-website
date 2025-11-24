@@ -3,7 +3,7 @@ import useHeaderStore from '@/store/modules/header'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: () => import('@/views/home.vue'),
     meta: {
@@ -160,12 +160,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/home',
-  },
-  {
-    path: '/user/:pathMatch(.*)*',
-    redirect: '/user/index',
-  },
+    redirect: '/',
+  }
 ]
 
 const router = createRouter({
