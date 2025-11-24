@@ -38,107 +38,6 @@ function getZhhome() {
   })
 }
 
-// // 合作单位
-// const vippartners: any = ref([])
-
-// function getVippartners() {
-//   // vippartnersApi().then((res: any) => {
-//   //   vippartners.value = res
-//   // })
-//   vippartners.value = [
-//     {
-//       company_name: '中粮集团',
-//       logoimg: '/uploads/default/decc62b362c9440e856a726e2f94cc5e.png',
-//       istourl: false,
-//       url: null,
-//       description: null,
-//       remark: '',
-//       sort: 0,
-//       id: 7,
-//       created_at: '2025-08-20T22:02:19',
-//       updated_at: '2025-08-20T22:02:19',
-//     },
-//     {
-//       company_name: '沃尔玛公司',
-//       logoimg: '/uploads/default/45400411009740f8892e40610c704aea.png',
-//       istourl: false,
-//       url: null,
-//       description: null,
-//       remark: '',
-//       sort: 0,
-//       id: 6,
-//       created_at: '2025-08-20T22:01:08',
-//       updated_at: '2025-08-20T22:01:08',
-//     },
-//     {
-//       company_name: '三星电子',
-//       logoimg: '/uploads/default/aa5b299753694f03a97478a54a0ade2e.png',
-//       istourl: false,
-//       url: null,
-//       description: null,
-//       remark: '',
-//       sort: 0,
-//       id: 5,
-//       created_at: '2025-08-20T22:00:12',
-//       updated_at: '2025-08-20T22:00:12',
-//     },
-//     {
-//       company_name: '大众汽车',
-//       logoimg: '/uploads/default/99fa26b4247042dd88f003738a3024ff.png',
-//       istourl: true,
-//       url: 'https://www.vw.com.cn/',
-//       description: null,
-//       remark: '',
-//       sort: 2,
-//       id: 4,
-//       created_at: '2025-08-20T16:25:48',
-//       updated_at: '2025-08-20T16:27:37',
-//     },
-//     {
-//       company_name: '苹果公司',
-//       logoimg: '/uploads/default/70776a7a004149338907026d34922b90.png',
-//       istourl: true,
-//       url: 'https://www.apple.com.cn',
-//       description: null,
-//       remark: '',
-//       sort: 2,
-//       id: 3,
-//       created_at: '2025-08-20T16:25:18',
-//       updated_at: '2025-08-20T16:27:55',
-//     },
-//     {
-//       company_name: '阿里巴巴集团',
-//       logoimg: '/uploads/default/8c6afe3c96d8428997f827ee80ba3f81.jpg',
-//       istourl: false,
-//       url: null,
-//       description:
-//         '阿里巴巴集团控股有限公司（Alibaba Group Holding Limited）， 成立于1999年6月28日，总部位于中国浙江杭州。',
-//       remark: '',
-//       sort: 2,
-//       id: 2,
-//       created_at: '2025-08-18T12:34:51',
-//       updated_at: '2025-08-20T16:24:31',
-//     },
-//   ]
-// }
-
-// // 产品中心
-// const businessAi: any = ref([])
-
-// function getAllaiapp() {
-//   // allaiappApi().then((res: any) => {
-//   //   businessAi.value = []
-//   // })
-//   businessAi.value = [
-//     { icon: 'fa fa-github-alt', title: 'AI 驱动药物靶点发现数据库' },
-//     { icon: 'fa fa-medkit', title: '小分子创新药研发' },
-//     { icon: 'fa fa-heartbeat', title: '老药新用筛选平台' },
-//     { icon: 'fa fa-subscript', title: '生物制剂研发辅助系统' },
-//     { icon: 'fa fa-contao', title: '药物晶型预测与筛选系统' },
-//     { icon: 'fa fa-h-square', title: '类器官多组学数据 AI 整合分析工具' },
-//   ]
-// }
-
 // 友情链接
 const flinktop: any = ref([])
 
@@ -198,8 +97,8 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- 公司简介 :class="['featuresBox', windowScrollY > 600 ? 'animate__animated animate__flipInX' : '']" -->
-    <div class="featuresBox">
+    <!-- 公司简介 -->
+    <div :class="['featuresBox', windowScrollY > 100 ? 'animate__animated animate__backInUp' : '']">
       <img src="@/assets/home/gongsi.jpg" class="featuresGsImg" />
       <div class="featuresRounded">
         <div class="featuresRoundedTitle">{{ homeData?.homeCompany?.contentTitle }}</div>
@@ -210,7 +109,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 产品轮播 -->
-    <div class="platformsBox">
+    <div :class="['platformsBox', windowScrollY > 700 ? 'animate__animated animate__backInUp' : '']">
       <el-carousel :interval="2000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
         :height="windowWidth > 768 ? '34rem' : '38rem'">
         <el-carousel-item v-for="(item, index) in homeData?.companyProduct" :key="index">
@@ -226,7 +125,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 委托开发 AI预测平台  -->
-    <div class="wtkfaiBox">
+    <div :class="['wtkfaiBox', windowScrollY > 900 ? 'animate__animated animate__backInUp' : '']">
       <div class="wtkfaiItem animate__animated">
         <div class="wtkfaiTitle">委托开发</div>
         <img src="@/assets/home/wtkf.png" alt="" class="wtkfaiPicture" />
@@ -241,39 +140,8 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- 产品中心 -->
-    <!-- <div class="cpzxBox">
-      <div class="cpzxContent">
-        <div class="cpzxTitle">产品中心</div>
-        <div class="cpzxHeng"></div>
-        <div class="cpzxClassbox">
-          <div class="cpzxClassitem" v-for="(item, index) in businessAi" :key="index">
-            <div class="cpzxClassitemfa frcc">
-              <i :class="item.icon"></i>
-            </div>
-            <div class="cpzxClassitemtext">{{ item.title }}</div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- 合作单位  -->
-    <!-- <div class="mxBox">
-      <div class="mxContent">
-        <div class="mxTitle">合作单位</div>
-        <div class="mxHeng"></div>
-        <div class="mxInfo">感谢以下单位对本平台的大力支持与合作</div>
-        <div class="mxClassbox">
-          <div v-for="(item, index) in vippartners" :key="index" class="mxClassitem" @click="windowOpen(item.url)">
-            <img :src="fileURL + item.logoimg" alt="" class="mxClassitemfa" />
-            <div class="mxClassitemtext">{{ item.company_name }}</div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
     <!-- 友情链接  -->
-    <div class="pyBox">
+    <div :class="['pyBox', windowScrollY > 1200 ? 'animate__animated animate__backInUp' : '']">
       <div class="pyTitle">友情链接</div>
       <div class="pyHeng"></div>
       <div class="pyClassbox">
