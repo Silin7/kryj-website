@@ -20,6 +20,13 @@ function handleScroll() {
   windowScrollY.value = window.scrollY
 }
 
+function pageScroll() {
+  window.scrollTo({
+    top: windowHeight.value,
+    behavior: 'smooth',
+  })
+}
+
 // 首页数据
 const homeData: any = ref({})
 
@@ -95,7 +102,7 @@ onBeforeUnmount(() => {
           </button>
         </div>
       </div>
-      <img src="@/assets/home/downbtn.png" class="downbtn">
+      <img src="@/assets/home/downbtn.png" class="downbtnStyle" @click="pageScroll">
     </div>
 
     <!-- 公司简介 -->
@@ -219,14 +226,19 @@ onBeforeUnmount(() => {
       }
     }
 
-    .downbtn {
+    .downbtnStyle {
       position: absolute;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 324px;
       height: 52px;
-      cursor: pointer;
+
+      &:hover {
+        cursor: pointer;
+        transform: translateX(-50%) translateY(-2px);
+        transition: all ease 0.3s;
+      }
     }
   }
 

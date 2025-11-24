@@ -21,6 +21,11 @@
     cursor: pointer;
   }
 
+  @media (max-width: 768px) {
+    right: 0.5rem;
+    bottom: 2rem;
+  }
+
   .gtBox {
     width: 4rem;
     height: 4rem;
