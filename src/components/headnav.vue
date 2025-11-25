@@ -30,7 +30,7 @@ function tabRouterPush(item: any) {
 
 const menuList: any = ref([
   { title: '系统首页', path: '/', name: 'home' },
-  { title: '公司介绍', path: '/', name: '' },
+  { title: '公司介绍', path: '/about', name: 'about' },
   { title: '委托开发', path: '/', name: '' },
   { title: '产品出售', path: '/', name: '' },
   { title: 'AI预测平台 ', path: '/ai', name: 'ai' },

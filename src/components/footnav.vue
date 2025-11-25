@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import useHeaderStore from '@/store/modules/header'
 import { zhfooterApi } from '@/api/interface'
+import windowOpen from '@/hooks/windowOpen'
 
-// 可视窗口宽度
-const windowWidth: any = ref(window.innerWidth)
+const headerStore = useHeaderStore()
 
-function updateWindowWidth() {
-  windowWidth.value = window.innerWidth
-}
+const selectedTab = computed(() => {
+  return headerStore.selectedTab
+})
 
 // 用户端-获取所有有效系统信息（如系统名称、版权信息等，按Key排序）
 const sysInfos: any = ref({})
@@ -17,29 +17,10 @@ function getSysinfosApi() {
   zhfooterApi().then((res: any) => {
     sysInfos.value = res.data.footer
   })
-  // sysInfos.value = {
-  //   sys_address: '山东省济南市高新区春兰路1177号银丰生物城3号地块4号楼504',
-  //   sys_tel: '15668313535',
-  //   sys_email: '15668313535@163.com',
-  //   sys_worktime: '周一至周五 9:00-18:00',
-  //   sys_company: '© 2025 山东科睿易晶生物技术有限公司. 保留所有权利.',
-  //   sys_filing:  '鲁ICP备12345678号-1'
-  // }
 }
 
-const headerStore = useHeaderStore()
-
-const selectedTab = computed(() => {
-  return headerStore.selectedTab
-})
-
 onMounted(() => {
-  window.addEventListener('resize', updateWindowWidth)
   getSysinfosApi()
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateWindowWidth)
 })
 </script>
 
@@ -66,11 +47,13 @@ onBeforeUnmount(() => {
           <div class="contacttext">{{ sysInfos.contentAuthor }}</div>
         </div>
       </div>
-      <img :src="sysInfos.contentImg" alt="">
+      <img :src="sysInfos.contentImg" alt="" />
     </div>
     <div class="footBottom" :style="selectedTab !== 'home' ? 'margin-top: 0;' : ''">
       <div class="footInfo">{{ sysInfos.contentKeyword }}</div>
-      <div class="footInfo">{{ sysInfos.contentDescription }}</div>
+      <div class="footInfo" @click="windowOpen('https://beian.miit.gov.cn/#/Integrated/recordQuery', true)">
+        {{ sysInfos.contentDescription }}
+      </div>
     </div>
   </div>
 </template>
@@ -158,6 +141,11 @@ onBeforeUnmount(() => {
 
     .footInfo:last-child {
       margin-top: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
