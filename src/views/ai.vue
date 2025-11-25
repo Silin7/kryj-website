@@ -144,7 +144,7 @@ function ksycClick() {
 // 查询支付状态
 const verificationTimer: any = ref(null)
 
-function getpayvideostatus(orderId: any) {
+function getpaystatus(orderId: any) {
   orderstatusApi(orderId).then((res: any) => {
     if (res.data) {
       getCheckTime()
@@ -160,7 +160,7 @@ onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   if (route.params?.orderId) {
     verificationTimer.value = setInterval(() => {
-      getpayvideostatus(route.params.orderId)
+      getpaystatus(route.params.orderId)
     }, 3000)
   }
   getZhhome()

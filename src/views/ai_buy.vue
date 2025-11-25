@@ -5,7 +5,7 @@ import router from '@/router'
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import pageJump from '@/hooks/pageJump'
-import { checkTimeApi, cusedlistApi, ordercreateApi } from '@/api/interface'
+import { checkTimeApi, cusedlistApi, ordercreateApi, orderstatusApi } from '@/api/interface'
 
 const windowWidth: any = ref(window.innerWidth)
 
@@ -54,10 +54,13 @@ function payNowClick() {
     spuId: usedId.value,
     channelCode: 'wx_native',
     displayMode: 'qr_code',
-    returnUrl: 'http://localhost:3005/ai',
+    returnUrl: 'https://keruimed.com/ai/buy',
   }).then(async (res: any) => {
     orderId.value = res.data.orderId
     qrCodeData.value = await qrcode.toDataURL(res.data.displayContent, { scale: 4 })
+    verificationTimer.value = setInterval(() => {
+      getpaystatus(orderId.value)
+    }, 3000)
   })
 }
 
@@ -71,6 +74,19 @@ function paidback() {
   })
 }
 
+// 查询支付状态
+const dialogVisible: any = ref(false)
+const verificationTimer: any = ref(null)
+
+function getpaystatus(orderId: any) {
+  orderstatusApi(orderId).then((res: any) => {
+    if (res.data) {
+      dialogVisible.value = true
+      clearInterval(verificationTimer.value)
+    }
+  })
+}
+
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
   getCheckTime()
@@ -79,7 +95,9 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateWindowWidth)
+  clearInterval(verificationTimer.value)
 })
+
 </script>
 
 <template>
@@ -168,7 +186,8 @@ onBeforeUnmount(() => {
               </div>
               <div v-if="qrCodeData">
                 <img :src="qrCodeData" class="qrCodeImg" />
-                <div v-if="windowWidth > 768" style="text-align: center; margin-top: 0.5rem; color: #1f3e85;">请使用微信扫码支付</div>
+                <div v-if="windowWidth > 768" style="text-align: center; margin-top: 0.5rem; color: #1f3e85;">请使用微信扫码支付
+                </div>
                 <div v-else style="text-align: center; margin-top: 0.5rem; color: #1f3e85;">长按识别二维码支付</div>
                 <button class="dialogQdfk" @click="paidback">已支付，立即返回</button>
               </div>
@@ -178,6 +197,20 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
+    <el-dialog title="" v-model="dialogVisible" width="800">
+      <div class="dialogSuccess">
+        <img src="@/assets/ai/successpay.png" />
+        <div>
+          <p style="text-align: center; font-size: 1.25rem; font-weight: 700; color: #1f3e85;">
+            支付成功！
+          </p>
+          <p style="text-align: center; margin-top: 1rem; color: #4b5563;">
+            感谢您的支持，您的会员权益已生效，快去使用吧！
+          </p>
+        </div>
+        <button @click="paidback">立即查看</button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -444,6 +477,27 @@ onBeforeUnmount(() => {
         }
       }
     }
+  }
+}
+
+.dialogSuccess {
+
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    margin-bottom: 2dvw;
+  }
+
+  button {
+    display: block;
+    margin: 2rem auto 1rem;
+    width: 10rem;
+    height: 40px;
+    font-weight: 700;
+    color: #fff;
+    background-image: linear-gradient(90deg, #4ba6ff 0%, #0477ff 100%);
+    border-radius: 0.5rem;
   }
 }
 </style>
