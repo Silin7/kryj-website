@@ -6,14 +6,35 @@ import windowOpen from '@/hooks/windowOpen'
 
 // 可视窗口宽度
 const windowWidth: any = ref(window.innerWidth)
-const windowScrollY: any = ref(window.scrollY)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
+// 可视窗口高度
+const windowScrollY: any = ref(window.scrollY)
+const domShow01: any = ref(false)
+const domShow02: any = ref(false)
+const domShow03: any = ref(false)
+const domShow04: any = ref(false)
+const domShow05: any = ref(false)
 function handleScroll() {
   windowScrollY.value = window.scrollY
+  if (window.scrollY >= 0) {
+    domShow01.value = true
+  }
+  if (window.scrollY > 400) {
+    domShow02.value = true
+  }
+  if (window.scrollY > 800) {
+    domShow03.value = true
+  }
+  if (window.scrollY > 1200) {
+    domShow04.value = true
+  }
+  if (window.scrollY > 1600) {
+    domShow05.value = true
+  }
 }
 
 onMounted(() => {
@@ -44,8 +65,20 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <main class="aboutContent">
+      <!-- 公司简介 -->
+      <section class="py-16 md:py-24 companyInfo animate__animated animate__backInUp">
+        <img src="@/assets/about/company-img.png">
+        <p class="companyInfoText">
+          公司致力于医学人工智能技术研发与应用，以提高药物研发效率及准确度为目标，加速创新药研发智能化。
+          自研AI算法及超算模型，不做单纯数据库整合，而是将药物机制，疾病机制，药物代谢，副产物代谢，有效作用，有效副作用，分子对接，靶点预测，化合物性质优化，多肽及蛋白质设计等信息充分喂养并训练，使AI具备完备的药物及疾病相关理解，快速筛选并设计优化化合物。
+          人工专家团队则进一步降低假阳性率，提高预测精准度，同时确保成药性及市场情况。
+          最后，将AI与类器官技术深度绑定，创新性地构建了"AI-人工降噪-类器官"多位一体的智能药物研发体系，确保筛选结果在人体应用的有效性，彻底排除物种隔离引起的偏倚，解决III期临床通过率低的致命问题。
+          以药物有效结果为导向，以市场需求为前提，反推作用机制，有效解决创新药发现难、时间长、花费高及成功率低的问题，提供高效、精准、一站式新药物研发解决方案。
+        </p>
+      </section>
+
       <!-- 公司使命 -->
-      <section :class="['py-16 md:py-24 bg-white', windowScrollY === 0 ? 'animate__animated animate__backInUp' : '']">
+      <section class="py-16 md:py-24 bg-white animate__animated animate__backInUp">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-4xl mx-auto">
             <div class="text-center mb-16">
@@ -95,7 +128,7 @@ onBeforeUnmount(() => {
       </section>
 
       <!-- 核心技术体系 -->
-      <section :class="['py-16 md:py-24 bg-gray-50', windowScrollY > 100 ? 'animate__animated animate__backInUp' : '']">
+      <section :class="['py-16 md:py-24 bg-gray-50', domShow02 ? 'animate__animated animate__backInUp' : '']">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">核心技术体系</h2>
@@ -222,7 +255,8 @@ onBeforeUnmount(() => {
       </section>
 
       <!-- 核心价值 -->
-      <section :class="['py-16 md:py-24 bg-gradient-primary text-white', windowScrollY > 800 ? 'animate__animated animate__backInUp' : '']">
+      <section
+        :class="['py-16 md:py-24 bg-gradient-primary text-white', domShow04 ? 'animate__animated animate__backInUp' : '']">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-6">核心价值主张</h2>
@@ -266,7 +300,7 @@ onBeforeUnmount(() => {
       </section>
 
       <!-- 行业痛点解决方案 -->
-      <section :class="['py-16 md:py-24 bg-white', windowScrollY > 1200 ? 'animate__animated animate__backInUp' : '']" >
+      <section :class="['py-16 md:py-24 bg-white', domShow05 ? 'animate__animated animate__backInUp' : '']">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
@@ -395,6 +429,44 @@ onBeforeUnmount(() => {
     margin: 0 auto;
     width: 100%;
     max-width: 1400px;
+
+    .companyInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        width: 40%;
+        height: 312px;
+        border-radius: 0.5rem;
+      }
+
+      .companyInfoText {
+        padding: 1rem 2rem;
+        width: calc(60% - 1rem);
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: #374151;
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+
+        img {
+          margin: 0 1rem 1rem;
+          width: calc(100% - 2rem);
+          height: auto;
+        }
+
+        .companyInfoText {
+          margin: 0 1rem;
+          padding: 1rem;
+          width: calc(100% - 2rem);
+        }
+      }
+    }
   }
 }
 </style>
