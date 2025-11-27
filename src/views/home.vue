@@ -16,8 +16,28 @@ function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
+const domShow01: any = ref(false)
+const domShow02: any = ref(false)
+const domShow03: any = ref(false)
+const domShow04: any = ref(false)
+const domShow05: any = ref(false)
 function handleScroll() {
   windowScrollY.value = window.scrollY
+  if (window.scrollY >= 0) {
+    domShow01.value = true
+  }
+  if (window.scrollY > 400) {
+    domShow02.value = true
+  }
+  if (window.scrollY > 800) {
+    domShow03.value = true
+  }
+  if (window.scrollY > 1200) {
+    domShow04.value = true
+  }
+  if (window.scrollY > 1600) {
+    domShow05.value = true
+  }
 }
 
 function pageScroll() {
@@ -81,17 +101,17 @@ onBeforeUnmount(() => {
     <!-- video -->
     <div class="videoBox">
       <video v-if="windowWidth > 768 && homeData?.homeBanner?.contentVideo" loop muted preload="auto" autoplay
-        :poster="homeData?.homeBanner?.contentImg" data-setup="{}" width="100%" :height="windowHeight"
-        style="object-fit: cover;" @error="onVideoError">
+        :poster="homeData?.homeBanner?.contentImg" data-setup="{}"
+        :style="`object-fit: cover; width: 100%; height: ${windowHeight}px;`" @error="onVideoError">
         <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
       </video>
       <video v-else-if="windowWidth <= 768 && homeData?.homeBannerMobile?.contentVideo" loop muted preload="auto"
-        autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}" width="100%" :height="windowHeight"
-        style="object-fit: cover;">
+        autoplay :poster="homeData?.homeBannerMobile?.contentImg" data-setup="{}"
+        :style="`object-fit: cover; width: 100%; height: ${windowHeight}px;`">
         <source :src="homeData?.homeBannerMobile?.contentVideo" type="video/mp4" />
       </video>
-      <video v-else :poster="homeData?.homeBanner?.contentImg" width="100%" :height="windowHeight"
-        style="object-fit: cover;">
+      <video v-else :poster="homeData?.homeBanner?.contentImg"
+        :style="`object-fit: cover; width: 100%; height: ${windowHeight}px;`">
         <source :src="homeData?.homeBanner?.contentVideo" type="video/mp4" />
       </video>
       <div class="vbannerBox">
@@ -106,7 +126,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 公司简介 -->
-    <div :class="['featuresBox', windowScrollY > 100 ? 'animate__animated animate__backInUp' : '']">
+    <div :class="['featuresBox', domShow01 ? 'animate__animated animate__backInUp' : '']">
       <img src="@/assets/home/gongsi.jpg" class="featuresGsImg" />
       <div class="featuresRounded">
         <div class="featuresRoundedTitle">{{ homeData?.homeCompany?.contentTitle }}</div>
@@ -117,7 +137,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 产品轮播 -->
-    <div :class="['platformsBox', windowScrollY > 700 ? 'animate__animated animate__backInUp' : '']">
+    <div :class="['platformsBox', domShow02 ? 'animate__animated animate__backInUp' : '']">
       <el-carousel :interval="2000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
         :height="windowWidth > 768 ? '34rem' : '38rem'">
         <el-carousel-item v-for="(item, index) in homeData?.companyProduct" :key="index">
@@ -133,7 +153,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 委托开发 AI预测平台  -->
-    <div :class="['wtkfaiBox', windowScrollY > 900 ? 'animate__animated animate__backInUp' : '']">
+    <div :class="['wtkfaiBox', domShow03 ? 'animate__animated animate__backInUp' : '']">
       <div class="wtkfaiItem animate__animated">
         <div class="wtkfaiTitle">委托开发</div>
         <img src="@/assets/home/wtkf.png" alt="" class="wtkfaiPicture" />
@@ -149,7 +169,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 友情链接  -->
-    <div :class="['pyBox', windowScrollY > 1200 ? 'animate__animated animate__backInUp' : '']">
+    <div :class="['pyBox', domShow04 ? 'animate__animated animate__backInUp' : '']">
       <div class="pyTitle">友情链接</div>
       <div class="pyHeng"></div>
       <div class="pyClassbox">

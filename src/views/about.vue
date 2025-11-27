@@ -4,15 +4,14 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import pageJump from '@/hooks/pageJump'
 import windowOpen from '@/hooks/windowOpen'
 
-// 可视窗口宽度
+// 可视窗口宽度 + 滚动
 const windowWidth: any = ref(window.innerWidth)
+const windowScrollY: any = ref(window.scrollY)
 
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
-// 可视窗口高度
-const windowScrollY: any = ref(window.scrollY)
 const domShow01: any = ref(false)
 const domShow02: any = ref(false)
 const domShow03: any = ref(false)
@@ -47,7 +46,6 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 </script>
-
 <template>
   <div class="aboutPage">
     <!-- BANNER -->
@@ -379,6 +377,9 @@ onBeforeUnmount(() => {
     </main>
   </div>
 </template>
+
+<style lang="scss" scoped>
+</style>
 
 <style lang="scss" scoped>
 .aboutPage {
