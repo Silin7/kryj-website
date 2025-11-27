@@ -3,6 +3,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import pageJump from '@/hooks/pageJump'
 import windowOpen from '@/hooks/windowOpen'
+import '@/assets/tailwindcss.js'
 
 // 可视窗口宽度 + 滚动
 const windowWidth: any = ref(window.innerWidth)
