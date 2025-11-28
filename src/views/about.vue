@@ -391,11 +391,11 @@ onBeforeUnmount(() => {
   .abbannerBox {
     position: relative;
     padding-top: 100px;
-    width: 100vw;
+    width: 100%;
     height: 500px;
 
     img {
-      width: 100vw;
+      width: 100%;
       height: 400px;
     }
 
@@ -404,7 +404,7 @@ onBeforeUnmount(() => {
       top: 100px;
       left: 0;
       z-index: 2;
-      width: 100vw;
+      width: 100%;
 
       .abbannerContent {
         margin: 0 auto;
