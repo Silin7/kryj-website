@@ -117,7 +117,7 @@ onBeforeUnmount(() => {
                   有效期截止 <span>{{ dayjs(checkInfo.checkDate).format('YYYY年MM月DD日') }}</span>
                 </div>
                 <div v-if="!checkInfo.validDate" class="dialogDqhyxx">
-                  体验剩余<span>{{ checkInfo.checkTime }}</span>次
+                  剩余<span>{{ checkInfo.checkTime }}</span>次
                 </div>
               </div>
               <div class="dialogItem">
