@@ -253,11 +253,13 @@ onBeforeUnmount(() => {
       transform: translateX(-50%);
       width: 324px;
       height: 52px;
+      opacity: 0.2;
 
       &:hover {
         cursor: pointer;
         transform: translateX(-50%) translateY(-2px);
         transition: all ease 0.3s;
+        opacity: 1;
       }
     }
   }
