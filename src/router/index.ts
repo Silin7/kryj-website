@@ -67,7 +67,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'about',
     component: () => import('@/views/about.vue'),
     meta: {
-      title: '关于科睿易晶',
+      title: '公司介绍',
       stcode: 'about',
       website: true,
       hashead: true,
@@ -171,7 +171,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // 根据路由元信息设置文档标题
-  window.document.title = (to.meta.title as string) || ''
+  window.document.title = `科睿易晶官方网站${to.meta.title ? '-' + to.meta.title : ''}`
 
   if (useHeaderStore) {
     const headerStore = useHeaderStore()

@@ -30,7 +30,6 @@ function getZhhome() {
     aiData.value = res.data.aiCheck
     if (res.data.seo) {
       useHead({
-        title: res.data.seo.categoryTitle,
         meta: [
           { name: 'description', content: res.data.seo.categoryDescrip },
           { name: 'keywords', content: res.data.seo.categoryKeyword },
