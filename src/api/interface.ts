@@ -50,6 +50,16 @@ export function zhhomeApi() {
   return api.post('/app-api/cms/content/zh/home')
 }
 
+// 关于我们 - banner
+export function zhabouseoApi() {
+  return api.post('/app-api/cms/content/diy_seo/zh/about')
+}
+
+// 关于我们 - 数据
+export function zhaboutcontentApi() {
+  return api.post('/app-api/cms/content/diy_content/zh/about')
+}
+
 // 页脚
 export function zhfooterApi() {
   return api.post('/app-api/cms/content/zh/footer')
