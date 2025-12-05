@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, nextTick } from 'vue'
 import { useHead } from '@vueuse/head'
 import pageJump from '@/hooks/pageJump'
 import backToTop from '@/hooks/backToTop'
@@ -20,23 +20,39 @@ const domShow01: any = ref(false)
 const domShow02: any = ref(false)
 const domShow03: any = ref(false)
 const domShow04: any = ref(false)
-const domShow05: any = ref(false)
+
+// 元素引用
+const featuresBoxRef: any = ref(null)
+const platformsBoxRef: any = ref(null)
+const wtkfaiBoxRef: any = ref(null)
+const pyBoxRef: any = ref(null)
+
+// 计算元素是否应该显示
+function checkElementVisibility(element: HTMLElement | null, offset: number = 100): boolean {
+  if (!element) return false
+
+  const rect = element.getBoundingClientRect()
+  const windowHeight = window.innerHeight
+  // 当元素顶部距离视口顶部的距离小于 (视口高度 - offset) 时显示
+  // offset 表示提前显示的偏移量，默认100px，使元素在完全进入视口前就开始显示动画
+  return rect.top < windowHeight - offset && rect.bottom > 0
+}
+
 function handleScroll() {
   windowScrollY.value = window.scrollY
-  if (window.scrollY >= 0) {
+
+  // 检查每个元素是否应该显示
+  if (!domShow01.value && checkElementVisibility(featuresBoxRef.value)) {
     domShow01.value = true
   }
-  if (window.scrollY > 400) {
+  if (!domShow02.value && checkElementVisibility(platformsBoxRef.value)) {
     domShow02.value = true
   }
-  if (window.scrollY > 800) {
+  if (!domShow03.value && checkElementVisibility(wtkfaiBoxRef.value)) {
     domShow03.value = true
   }
-  if (window.scrollY > 1200) {
+  if (!domShow04.value && checkElementVisibility(pyBoxRef.value)) {
     domShow04.value = true
-  }
-  if (window.scrollY > 1600) {
-    domShow05.value = true
   }
 }
 
@@ -84,6 +100,14 @@ onMounted(() => {
   getFlinktop()
   // getVippartners()
   // getAllaiapp()
+
+  // 等待 DOM 渲染完成后初始化检查
+  nextTick(() => {
+    // 延迟执行以确保所有元素都已渲染
+    setTimeout(() => {
+      handleScroll()
+    }, 100)
+  })
 })
 
 onBeforeUnmount(() => {
@@ -125,7 +149,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 公司简介 -->
-    <div :class="['featuresBox', domShow01 ? 'animate__animated animate__backInUp' : '']">
+    <div ref="featuresBoxRef" :class="['featuresBox', domShow01 ? 'animate__animated animate__backInUp' : '']">
       <img src="@/assets/home/gongsi.jpg" class="featuresGsImg" />
       <div class="featuresRounded">
         <div class="featuresRoundedTitle">{{ homeData?.homeCompany?.contentTitle }}</div>
@@ -136,7 +160,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 产品轮播 -->
-    <div :class="['platformsBox', domShow02 ? 'animate__animated animate__backInUp' : '']">
+    <div ref="platformsBoxRef" :class="['platformsBox', domShow02 ? 'animate__animated animate__backInUp' : '']">
       <el-carousel :interval="2000" :type="windowWidth > 768 ? 'card' : ''" :pause-on-hover="false"
         :height="windowWidth > 768 ? '34rem' : '38rem'">
         <el-carousel-item v-for="(item, index) in homeData?.companyProduct" :key="index">
@@ -152,7 +176,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 委托开发 AI预测平台  -->
-    <div :class="['wtkfaiBox', domShow03 ? 'animate__animated animate__backInUp' : '']">
+    <div ref="wtkfaiBoxRef" :class="['wtkfaiBox', domShow03 ? 'animate__animated animate__backInUp' : '']">
       <div class="wtkfaiItem animate__animated">
         <div class="wtkfaiTitle">委托开发</div>
         <img src="@/assets/home/wtkf.png" alt="" class="wtkfaiPicture" />
@@ -168,7 +192,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 友情链接  -->
-    <div :class="['pyBox', domShow04 ? 'animate__animated animate__backInUp' : '']">
+    <div ref="pyBoxRef" :class="['pyBox', domShow04 ? 'animate__animated animate__backInUp' : '']">
       <div class="pyTitle">友情链接</div>
       <div class="pyHeng"></div>
       <div class="pyClassbox">

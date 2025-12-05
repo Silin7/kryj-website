@@ -2,8 +2,6 @@
 import { Icon } from '@iconify/vue';
 import { useHead } from '@vueuse/head'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import pageJump from '@/hooks/pageJump'
-import windowOpen from '@/hooks/windowOpen'
 import '@/assets/tailwindcss.js'
 import { zhabouseoApi, zhaboutcontentApi } from '@/api/interface'
 
@@ -42,40 +40,86 @@ function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
-const domShow01: any = ref(false)
+// resize事件处理函数
+function handleResize() {
+  updateWindowWidth()
+  // 窗口大小变化时重新计算元素位置
+  setTimeout(() => {
+    calculateElementPositions()
+  }, 100)
+}
+
 const domShow02: any = ref(false)
-const domShow03: any = ref(false)
 const domShow04: any = ref(false)
 const domShow05: any = ref(false)
 
+// 元素引用
+const section02Ref: any = ref(null)
+const section04Ref: any = ref(null)
+const section05Ref: any = ref(null)
+
+// 元素距离顶部的距离
+const section02Top: any = ref(0)
+const section04Top: any = ref(0)
+const section05Top: any = ref(0)
+
+// 计算元素距离顶部的距离
+function calculateElementPositions() {
+  const windowHeight = window.innerHeight
+
+  if (section02Ref.value) {
+    const rect = section02Ref.value.getBoundingClientRect()
+    section02Top.value = rect.top + window.scrollY
+  }
+
+  if (section04Ref.value) {
+    const rect = section04Ref.value.getBoundingClientRect()
+    section04Top.value = rect.top + window.scrollY
+  }
+
+  if (section05Ref.value) {
+    const rect = section05Ref.value.getBoundingClientRect()
+    section05Top.value = rect.top + window.scrollY
+  }
+}
+
 function handleScroll() {
   windowScrollY.value = window.scrollY
-  if (window.scrollY >= 0) {
-    domShow01.value = true
-  }
-  if (window.scrollY > 400) {
+  const scrollY = window.scrollY
+  const windowHeight = window.innerHeight
+
+  // 当滚动位置 + 视口高度的80%超过元素顶部时显示
+  const triggerOffset = windowHeight * 0.8
+
+  if (section02Top.value > 0 && scrollY + triggerOffset >= section02Top.value) {
     domShow02.value = true
   }
-  if (window.scrollY > 800) {
-    domShow03.value = true
-  }
-  if (window.scrollY > 1200) {
+
+  if (section04Top.value > 0 && scrollY + triggerOffset >= section04Top.value) {
     domShow04.value = true
   }
-  if (window.scrollY > 1600) {
+
+  if (section05Top.value > 0 && scrollY + triggerOffset >= section05Top.value) {
     domShow05.value = true
   }
 }
 
 onMounted(() => {
-  window.addEventListener('resize', updateWindowWidth)
+  window.addEventListener('resize', handleResize)
   window.addEventListener('scroll', handleScroll)
   getzhabouSeo()
   getZhaboutContent()
+
+  // 等待DOM渲染完成后计算元素位置
+  setTimeout(() => {
+    calculateElementPositions()
+    // 初始检查一次，防止元素已经在视口内
+    handleScroll()
+  }, 300)
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateWindowWidth)
+  window.removeEventListener('resize', handleResize)
   window.removeEventListener('scroll', handleScroll)
 })
 </script>
@@ -144,7 +188,8 @@ onBeforeUnmount(() => {
       </section>
 
       <!-- 核心技术体系 -->
-      <section :class="['py-16 md:py-24 bg-gray-50', domShow02 ? 'animate__animated animate__backInUp' : '']">
+      <section ref="section02Ref"
+        :class="['py-16 md:py-24 bg-gray-50', domShow02 ? 'animate__animated animate__backInUp' : '']">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
@@ -177,7 +222,7 @@ onBeforeUnmount(() => {
                     <div class="md:w-1/2 md:pl-12 hidden md:block">
                       <div class="bg-white p-4 rounded-lg shadow-md">
                         <ul class="text-gray-600 space-y-2">
-                          <li v-for="item2 in item.contentTags.split(',')">
+                          <li v-for="(item2, idx) in item.contentTags.split(',')" :key="idx">
                             <i class="fa fa-check text-secondary mr-2"></i>{{ item2 }}
                           </li>
                         </ul>
@@ -186,7 +231,7 @@ onBeforeUnmount(() => {
                   </div>
                   <div class="md:hidden mt-4 bg-white p-4 rounded-lg shadow-md">
                     <ul class="text-gray-600 space-y-2">
-                      <li v-for="item2 in item.contentTags.split(',')">
+                      <li v-for="(item2, idx) in item.contentTags.split(',')" :key="idx">
                         <i class="fa fa-check text-secondary mr-2"></i>{{ item2 }}
                       </li>
                     </ul>
@@ -198,7 +243,7 @@ onBeforeUnmount(() => {
                     <div class="md:w-1/2 md:pr-12 hidden md:block">
                       <div class="bg-white p-4 rounded-lg shadow-md">
                         <ul class="text-gray-600 space-y-2">
-                          <li v-for="item2 in item.contentTags.split(',')">
+                          <li v-for="(item2, idx) in item.contentTags.split(',')" :key="idx">
                             <i class="fa fa-check text-secondary mr-2"></i>{{ item2 }}
                           </li>
                         </ul>
@@ -218,7 +263,7 @@ onBeforeUnmount(() => {
                   </div>
                   <div class="md:hidden mt-4 bg-white p-4 rounded-lg shadow-md">
                     <ul class="text-gray-600 space-y-2">
-                      <li v-for="item2 in item.contentTags.split(',')">
+                      <li v-for="(item2, idx) in item.contentTags.split(',')" :key="idx">
                         <i class="fa fa-check text-secondary mr-2"></i>{{ item2 }}
                       </li>
                     </ul>
@@ -231,7 +276,7 @@ onBeforeUnmount(() => {
       </section>
 
       <!-- 核心价值 -->
-      <section
+      <section ref="section04Ref"
         :class="['py-16 md:py-24 bg-gradient-primary text-white', domShow04 ? 'animate__animated animate__backInUp' : '']">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-4xl mx-auto text-center">
@@ -257,7 +302,8 @@ onBeforeUnmount(() => {
       </section>
 
       <!-- 行业痛点解决方案 -->
-      <section :class="['py-16 md:py-24 bg-white', domShow05 ? 'animate__animated animate__backInUp' : '']">
+      <section ref="section05Ref"
+        :class="['py-16 md:py-24 bg-white', domShow05 ? 'animate__animated animate__backInUp' : '']">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
